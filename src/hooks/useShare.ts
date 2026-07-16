@@ -27,7 +27,7 @@ export function useShare() {
       // Try Web Share API (Mobile native sharing)
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
-          title: 'Vidas Masculina',
+          title: 'Vidas Masculinas',
           text: 'O peso da mortalidade masculina no Brasil.',
           files: [file],
         });

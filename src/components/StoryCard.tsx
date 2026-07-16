@@ -56,7 +56,7 @@ export function StoryCard({ deaths }: StoryCardProps) {
 
       <div className="absolute bottom-32 w-full flex justify-center opacity-50">
         <p className="text-[2.2rem] font-mono tracking-widest text-zinc-400 border border-zinc-700 px-10 py-5 rounded-md">
-          vidasmasculina.com.br
+          vidasmasculinas.com.br
         </p>
       </div>
     </div>

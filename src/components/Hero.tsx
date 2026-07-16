@@ -148,7 +148,7 @@ export function Hero() {
       {/* Top Left Header (Logo) */}
       <div className="absolute top-8 left-8 z-20 select-none pointer-events-none">
         <span className="font-mono text-xs uppercase tracking-[0.35em] font-bold text-slate-800 dark:text-ash-100">
-          Vidas Masculina
+          Vidas Masculinas
         </span>
       </div>
 
