@@ -104,8 +104,8 @@
 }
 
 .dark .filament-glow {
-  stroke: #f59e0b; /* amber-500 */
-  filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.8));
+  stroke: #ffffff; /* branco (luz fria/branca) */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85));
   animation: flicker-filament 6s infinite;
 }
 

@@ -42,7 +42,7 @@ export function useCounter(): UseCounterReturn {
       const now = Date.now();
       localStorage.setItem(STORAGE_KEY, now.toString());
       return now;
-    } catch (e) {
+    } catch {
       // Fallback para abas anônimas se localStorage falhar
       return Date.now();
     }

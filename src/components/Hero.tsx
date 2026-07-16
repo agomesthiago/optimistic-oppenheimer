@@ -29,9 +29,9 @@ function formatSessionTime(totalSeconds: number): string {
 }
 
 function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTick: boolean; isClockMode: boolean }) {
-  // Bulb wire, glass outlines are visible in both modes, but it swings and glows/flickers *only in dark mode*
+  // Bulb is completely hidden in light mode (no rendering/no animation) and active only in dark mode
   return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0">
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0 hidden dark:block">
       <div className="h-full flex flex-col items-center origin-top animate-pendulum">
         {/* Wire */}
         <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
@@ -72,13 +72,13 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
           
           {/* Radial Light Glow behind the bulb - hidden on light mode, shown in dark mode */}
           <div 
-            className="absolute top-10 w-[500px] h-[500px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
+            className="absolute top-10 w-[650px] h-[650px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
             style={{
               background: isClockMode
-                ? 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 40%, transparent 70%)'
-                : 'radial-gradient(circle, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.04) 45%, transparent 70%)',
+                ? 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, transparent 80%)'
+                : 'radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 50%, transparent 80%)',
               transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.15 : 1})`,
-              filter: 'blur(15px)',
+              filter: 'blur(24px)',
               opacity: active ? 1 : 0.2,
               transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
               animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
