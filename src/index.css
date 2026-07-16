@@ -113,4 +113,20 @@
   animation: scroll-line 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
+/* Random blink for share button — subtle opacity pulse with irregular timing */
+@keyframes blink-random {
+  0%, 100% { opacity: 1; }
+  4% { opacity: 0.4; }
+  5% { opacity: 1; }
+  35% { opacity: 1; }
+  36% { opacity: 0.3; }
+  37% { opacity: 0.8; }
+  38% { opacity: 1; }
+  70% { opacity: 1; }
+  71% { opacity: 0.5; }
+  72% { opacity: 1; }
+}
 
+.animate-blink-random {
+  animation: blink-random 8s ease-in-out infinite;
+}

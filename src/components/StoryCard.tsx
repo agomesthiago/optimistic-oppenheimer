@@ -44,7 +44,7 @@ export function StoryCard({ deaths }: StoryCardProps) {
 
         <div 
           className="font-mono font-bold text-zinc-100 mb-20"
-          style={{ fontSize: '15rem', lineHeight: '1', textShadow: '0 0 80px rgba(239,68,68,0.4)' }}
+          style={{ fontSize: '11rem', lineHeight: '1', textShadow: '0 0 80px rgba(239,68,68,0.4)' }}
         >
           {formatDeathCount(deaths)}
         </div>

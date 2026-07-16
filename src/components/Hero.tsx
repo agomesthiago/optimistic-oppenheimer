@@ -204,30 +204,33 @@ export function Hero() {
         </p>
       </div>
 
-      {/* Grid of stats */}
-      <div className="mt-16 flex flex-col sm:flex-row items-center gap-8 sm:gap-12 relative z-10 select-none">
-        <Stat label={`em ${YEAR_LABEL}`} value={formatDeathCount(deaths)} sublabel="estimativa" />
-        <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
-        <Stat label="média anual" value={TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} sublabel="todas as causas" />
-        <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
-        <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="mortes" />
-      </div>
+      {/* Stats + Share wrapper: on mobile share comes first (above stats) */}
+      <div className="relative z-10 flex flex-col items-center">
+        {/* Share button - order-first on mobile, order-last on sm+ */}
+        <button
+          onClick={() => shareToStories('story-card-export')}
+          disabled={isSharing}
+          className="order-first sm:order-last mt-10 sm:mt-14 mb-8 sm:mb-0 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed animate-blink-random"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          {isSharing ? 'Preparando imagem...' : 'Compartilhar'}
+        </button>
 
-      {/* Share button below stats */}
-      <button
-        onClick={() => shareToStories('story-card-export')}
-        disabled={isSharing}
-        className={`mt-14 relative z-10 flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed`}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="18" cy="5" r="3"></circle>
-          <circle cx="6" cy="12" r="3"></circle>
-          <circle cx="18" cy="19" r="3"></circle>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-        </svg>
-        {isSharing ? 'Preparando imagem...' : 'Compartilhar'}
-      </button>
+        {/* Grid of stats */}
+        <div className="order-last sm:order-first mt-0 sm:mt-16 flex flex-col sm:flex-row items-center gap-8 sm:gap-12 select-none">
+          <Stat label={`em ${YEAR_LABEL}`} value={formatDeathCount(deaths)} sublabel="estimativa" />
+          <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
+          <Stat label="média anual" value={TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} sublabel="todas as causas" />
+          <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
+          <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="mortes" />
+        </div>
+      </div>
 
       {/* Bottom Left Corner (Page indicator & Session elapsed timer) */}
       <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
