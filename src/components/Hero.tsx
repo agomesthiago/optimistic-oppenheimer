@@ -195,7 +195,7 @@ export function Hero() {
             </>
           ) : (
             <>
-              <span className="font-bold text-slate-950 dark:text-ash-50 tabular-nums">
+              <span className="font-bold text-slate-950 dark:text-ash-100 tabular-nums">
                 {sessionCount === 0 ? '—' : sessionCount}
               </span>{' '}
               {sessionCount === 1 ? 'homem morreu' : 'homens morreram'} no Brasil desde o seu primeiro acesso.
