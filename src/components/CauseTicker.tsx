@@ -1,17 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
-import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount } from '../utils/mortality';
-
-interface CauseTickerProps {
-  yearSeconds: number;
-}
+import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, getSecondsSinceYearStart } from '../utils/mortality';
 
 const ROTATE_MS = 5_500;
 const FADE_MS = 350;
 
-export function CauseTicker({ yearSeconds }: CauseTickerProps) {
+export function CauseTicker() {
+  const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(true);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const id = setInterval(() => setYearSeconds(getSecondsSinceYearStart()), 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const advance = (nextIndex: number) => {
     if (timerRef.current) clearTimeout(timerRef.current);

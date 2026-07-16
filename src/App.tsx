@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Hero } from './components/Hero';
 import { CauseTicker } from './components/CauseTicker';
 import { ContextSection } from './components/ContextSection';
@@ -6,16 +5,8 @@ import { MethodologySection } from './components/MethodologySection';
 import { ResourcesSection } from './components/ResourcesSection';
 import { DataFooter } from './components/DataFooter';
 import { ThemeToggle } from './components/ThemeToggle';
-import { getSecondsSinceYearStart } from './utils/mortality';
 
 export default function App() {
-  const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
-
-  useEffect(() => {
-    const id = setInterval(() => setYearSeconds(getSecondsSinceYearStart()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <main id="main-content" className="relative min-h-dvh">
       {/* Subtle noise texture overlay */}
@@ -42,7 +33,7 @@ export default function App() {
             <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa
             </h2>
-            <CauseTicker yearSeconds={yearSeconds} />
+            <CauseTicker />
           </div>
         </section>
 

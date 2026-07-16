@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { toPng } from 'html-to-image';
 
 export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
@@ -10,6 +9,10 @@ export function useShare() {
 
     try {
       setIsSharing(true);
+      
+      // Dynamic import to reduce initial bundle size (html-to-image is only loaded when user shares)
+      const { toPng } = await import('html-to-image');
+      
       // Generate PNG
       const dataUrl = await toPng(node, {
         quality: 0.95,
