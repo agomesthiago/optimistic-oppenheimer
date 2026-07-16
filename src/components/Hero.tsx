@@ -29,64 +29,62 @@ function formatSessionTime(totalSeconds: number): string {
 }
 
 function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTick: boolean; isClockMode: boolean }) {
-  // Bulb is constantly active, but has a dramatic crimson-amber glow in death counter mode, and a calmer amber glow in clock mode
+  // Bulb wire, glass outlines are visible in both modes, but it swings and glows/flickers *only in dark mode*
   return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0 flex flex-col items-center">
-      {/* Wire */}
-      <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
-      
-      {/* Bulb Wrapper */}
-      <div className="relative -mt-1 flex flex-col items-center">
-        {/* Edison Bulb SVG */}
-        <svg 
-          width="36" 
-          height="64" 
-          viewBox="0 0 40 70" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-zinc-400 dark:text-carbon-700 transition-colors duration-300"
-        >
-          {/* Socket */}
-          <path d="M14 2H26V10H14V2Z" fill="currentColor" />
-          <path d="M16 10H24V14H16V10Z" fill="currentColor" opacity="0.8" />
-          {/* Glass Envelope */}
-          <path 
-            d="M20 14C11.5 14 8 23.5 11 37.5C12.5 44 16.5 53 16.5 61.5H23.5C23.5 53 27.5 44 29 37.5C32 23.5 28.5 14 20 14Z" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-          />
-          {/* Filament support */}
-          <path d="M17 48L18.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-          <path d="M23 48L21.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-          {/* Glowing Filament (Edison spiral) */}
-          <path 
-            d="M18.5 35C18.5 32 19.5 30 20 30C20.5 30 21.5 32 21.5 35" 
-            stroke={active ? '#f59e0b' : 'currentColor'} 
-            strokeWidth="1.8" 
-            strokeLinecap="round"
-            className={`transition-colors duration-300 ${active ? 'animate-flicker-filament' : ''}`}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0">
+      <div className="h-full flex flex-col items-center origin-top animate-pendulum">
+        {/* Wire */}
+        <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
+        
+        {/* Bulb Wrapper */}
+        <div className="relative -mt-1 flex flex-col items-center">
+          {/* Edison Bulb SVG */}
+          <svg 
+            width="36" 
+            height="64" 
+            viewBox="0 0 40 70" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-zinc-400 dark:text-carbon-700 transition-colors duration-300"
+          >
+            {/* Socket */}
+            <path d="M14 2H26V10H14V2Z" fill="currentColor" />
+            <path d="M16 10H24V14H16V10Z" fill="currentColor" opacity="0.8" />
+            {/* Glass Envelope */}
+            <path 
+              d="M20 14C11.5 14 8 23.5 11 37.5C12.5 44 16.5 53 16.5 61.5H23.5C23.5 53 27.5 44 29 37.5C32 23.5 28.5 14 20 14Z" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+            />
+            {/* Filament support */}
+            <path d="M17 48L18.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+            <path d="M23 48L21.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+            {/* Glowing Filament (Edison spiral) - Styled and animated via CSS only in dark mode */}
+            <path 
+              d="M18.5 35C18.5 32 19.5 30 20 30C20.5 30 21.5 32 21.5 35" 
+              strokeWidth="1.8" 
+              strokeLinecap="round"
+              className="filament-glow transition-colors duration-300"
+            />
+          </svg>
+          
+          {/* Radial Light Glow behind the bulb - hidden on light mode, shown in dark mode */}
+          <div 
+            className="absolute top-10 w-[500px] h-[500px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
             style={{
-              filter: active ? 'drop-shadow(0 0 3px rgba(245, 158, 11, 0.8))' : 'none'
+              background: isClockMode
+                ? 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 40%, transparent 70%)'
+                : 'radial-gradient(circle, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.04) 45%, transparent 70%)',
+              transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.15 : 1})`,
+              filter: 'blur(15px)',
+              opacity: active ? 1 : 0.2,
+              transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
+              animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
             }}
           />
-        </svg>
-        
-        {/* Radial Light Glow behind the bulb */}
-        <div 
-          className="absolute top-10 w-[500px] h-[500px] -translate-y-1/2 rounded-full pointer-events-none"
-          style={{
-            background: isClockMode
-              ? 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 40%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.04) 45%, transparent 70%)',
-            transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.15 : 1})`,
-            filter: 'blur(15px)',
-            opacity: active ? 1 : 0.2,
-            transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
-            animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
-          }}
-        />
+        </div>
       </div>
     </div>
   );
@@ -150,7 +148,7 @@ export function Hero() {
       {/* Top Left Header (Logo) */}
       <div className="absolute top-8 left-8 z-20 select-none pointer-events-none">
         <span className="font-mono text-xs uppercase tracking-[0.35em] font-bold text-slate-800 dark:text-ash-100">
-          Contando Vidas
+          Vidas Masculina
         </span>
       </div>
 

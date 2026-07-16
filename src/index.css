@@ -83,11 +83,34 @@
   }
 }
 
-.animate-flicker-filament {
+@keyframes swing {
+  0% {
+    transform: rotate(-7deg);
+  }
+  100% {
+    transform: rotate(7deg);
+  }
+}
+
+/* Pendulo apenas no modo escuro */
+.dark .animate-pendulum {
+  animation: swing 4.5s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+
+.filament-glow {
+  stroke: #a1a1aa; /* zinc-400 */
+  filter: none;
+}
+
+.dark .filament-glow {
+  stroke: #f59e0b; /* amber-500 */
+  filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.8));
   animation: flicker-filament 6s infinite;
 }
 
 .animate-scroll-line {
   animation: scroll-line 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
+
 
