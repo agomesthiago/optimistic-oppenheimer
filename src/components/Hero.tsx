@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import gsap from 'gsap';
 import { useCounter } from '../hooks/useCounter';
 import { useAutoToggle } from '../hooks/useAutoToggle';
@@ -10,6 +10,17 @@ import {
   DEATHS_PER_SECOND,
   getCounterStartDate,
 } from '../utils/mortality';
+
+const SHARE_COPY = [
+  'Compartilhe este dado',
+  'Mostre para alguém',
+  'Quebre o silêncio',
+  'Leve essa informação',
+  'Espalhe consciência',
+  'Não ignore os números',
+  'Faça esse dado circular',
+  'Alguém precisa ver isso',
+];
 
 const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
 const YEAR_LABEL = new Date().getFullYear().toString();
@@ -72,14 +83,14 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
           
           {/* Radial Light Glow behind the bulb - hidden on light mode, shown in dark mode */}
           <div 
-            className="absolute top-10 w-[650px] h-[650px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
+            className="absolute top-10 w-[900px] h-[900px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
             style={{
               background: isClockMode
-                ? 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, transparent 80%)'
-                : 'radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 50%, transparent 80%)',
-              transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.15 : 1})`,
-              filter: 'blur(24px)',
-              opacity: active ? 1 : 0.2,
+                ? 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 40%, transparent 75%)'
+                : 'radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.03) 60%, transparent 80%)',
+              transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.12 : 1})`,
+              filter: 'blur(30px)',
+              opacity: active ? 1 : 0.25,
               transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
               animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
             }}
@@ -97,6 +108,9 @@ export function Hero() {
   const prevIntegerRef = useRef(0);
   const [didTick, setDidTick] = useState(false);
   const [now, setNow] = useState(() => new Date());
+
+  // Random persuasive share copy — picks one on mount
+  const shareCopy = useMemo(() => SHARE_COPY[Math.floor(Math.random() * SHARE_COPY.length)], []);
   
   const textContainerRef = useRef<HTMLSpanElement>(null);
 
@@ -219,7 +233,7 @@ export function Hero() {
             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
           </svg>
-          {isSharing ? 'Preparando imagem...' : 'Compartilhar'}
+          {isSharing ? 'Preparando imagem...' : shareCopy}
         </button>
 
         {/* Grid of stats */}
@@ -255,8 +269,8 @@ export function Hero() {
 
 function Stat({ label, value, sublabel }: { label: string; value: string; sublabel: string }) {
   return (
-    <div className="flex flex-col items-center gap-1.5">
-      <span className="text-3xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums">{value}</span>
+    <div className="group flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-zinc-100/60 dark:hover:bg-carbon-800/60 hover:scale-105 cursor-default">
+      <span className="text-3xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums transition-colors group-hover:text-crimson-500 dark:group-hover:text-crimson-400">{value}</span>
       <span className="text-sm font-mono uppercase tracking-wider text-slate-500 dark:text-ash-400">{label}</span>
       <span className="text-xs text-slate-400 dark:text-ash-600 font-mono">{sublabel}</span>
     </div>

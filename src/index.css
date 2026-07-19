@@ -113,18 +113,18 @@
   animation: scroll-line 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
-/* Random blink for share button — subtle opacity pulse with irregular timing */
+/* Random colored blink for share button — subtle color pulse with irregular timing */
 @keyframes blink-random {
-  0%, 100% { opacity: 1; }
-  4% { opacity: 0.4; }
-  5% { opacity: 1; }
-  35% { opacity: 1; }
-  36% { opacity: 0.3; }
-  37% { opacity: 0.8; }
-  38% { opacity: 1; }
-  70% { opacity: 1; }
-  71% { opacity: 0.5; }
-  72% { opacity: 1; }
+  0%, 100% { opacity: 1; border-color: inherit; box-shadow: none; }
+  4% { opacity: 0.6; border-color: #ef4444; box-shadow: 0 0 12px rgba(239,68,68,0.3); }
+  5% { opacity: 1; border-color: inherit; box-shadow: none; }
+  35% { opacity: 1; border-color: inherit; box-shadow: none; }
+  36% { opacity: 0.5; border-color: #ef4444; box-shadow: 0 0 16px rgba(239,68,68,0.4); }
+  37.5% { opacity: 0.9; border-color: #dc2626; box-shadow: 0 0 8px rgba(220,38,38,0.2); }
+  38.5% { opacity: 1; border-color: inherit; box-shadow: none; }
+  70% { opacity: 1; border-color: inherit; box-shadow: none; }
+  71% { opacity: 0.7; border-color: #ef4444; box-shadow: 0 0 14px rgba(239,68,68,0.35); }
+  72% { opacity: 1; border-color: inherit; box-shadow: none; }
 }
 
 .animate-blink-random {
