@@ -74,7 +74,7 @@ function initWidget() {
     <div class="vm-widget-title">Vidas Masculinas Perdidas este ano</div>
     <div class="vm-widget-counter" id="vm-counter-val">0</div>
     <div class="vm-widget-subtext">Taxa estimada: ${getRateDescription()}</div>
-    <a href="https://vidasmasculinas.com.br" target="_blank" rel="noopener noreferrer" class="vm-widget-link">
+    <a href="https://vidasmasculinas.netlify.app" target="_blank" rel="noopener noreferrer" class="vm-widget-link">
       Acesse o painel completo →
     </a>
   `;

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vidasmasculinas.com.br/sitemap.xml
+Sitemap: https://vidasmasculinas.netlify.app/sitemap.xml
