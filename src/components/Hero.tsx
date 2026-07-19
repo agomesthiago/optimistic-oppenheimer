@@ -19,6 +19,34 @@ const SHARE_COPY = [
   'Alguém precisa ver isso',
 ];
 
+const COUNTER_PHRASES = [
+  (deaths: React.ReactNode, date: string) => (
+    <>
+      Até aqui, {deaths} homens morreram no Brasil desde {date} por causas diversas.
+    </>
+  ),
+  (deaths: React.ReactNode, date: string) => (
+    <>
+      O silêncio engoliu {deaths} vidas masculinas no Brasil desde {date} por causas diversas.
+    </>
+  ),
+  (deaths: React.ReactNode, date: string) => (
+    <>
+      Desde {date}, {deaths} homens tiveram suas histórias e sonhos interrompidos por causas diversas.
+    </>
+  ),
+  (deaths: React.ReactNode, date: string) => (
+    <>
+      Já se foram {deaths} pais, filhos e irmãos no Brasil desde {date} por causas diversas.
+    </>
+  ),
+  (deaths: React.ReactNode, date: string) => (
+    <>
+      A triste marca de {deaths} vidas masculinas ceifadas foi alcançada desde {date} por causas diversas.
+    </>
+  ),
+];
+
 const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
   day: '2-digit',
   month: '2-digit',
@@ -112,6 +140,9 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
 
   // Random persuasive share copy — picks one on mount
   const shareCopy = useMemo(() => SHARE_COPY[Math.floor(Math.random() * SHARE_COPY.length)], []);
+
+  // Stable random selection of melancholic phrase
+  const phraseIndex = useMemo(() => Math.floor(Math.random() * COUNTER_PHRASES.length), []);
   
   const textContainerRef = useRef<HTMLSpanElement>(null);
 
@@ -201,9 +232,12 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
 
         <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600 dark:text-ash-300 font-medium">
           {isClockMode ? (
-            <>
-              Hoje, <span className="font-bold text-slate-900 dark:text-ash-100 tabular-nums">{formatDeathCount(deaths)}</span> homens morreram no Brasil desde {EPOCH_LABEL}.
-            </>
+            COUNTER_PHRASES[phraseIndex](
+              <span className="font-bold text-slate-900 dark:text-ash-100 tabular-nums">
+                {formatDeathCount(deaths)}
+              </span>,
+              EPOCH_LABEL
+            )
           ) : (
             <>
               <span className="font-bold text-slate-950 dark:text-ash-100 tabular-nums">
