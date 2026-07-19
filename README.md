@@ -51,37 +51,27 @@ O cálculo em tempo real é obtido a partir da média histórica anualizada de �
 
 ---
 
-## Como Rodar o Projeto Localmente
+## Integração via Widgets
 
-### Pré-requisitos
+O **Vidas Masculinas** foi projetado para ser facilmente incorporado a portais de notícias, blogs, sites de ONGs e páginas institucionais por meio de widgets responsivos e leves.
 
-Você precisará do [Node.js](https://nodejs.org/) instalado em sua máquina.
+### Como Incorporar o Contador em seu Site
 
-### Execução
+Para exibir o contador de mortes acumuladas em tempo real em seu site, adicione o seguinte código HTML no local desejado:
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/vidasmasculinas.git
-   cd vidasmasculinas
-   ```
+```html
+<iframe 
+  src="https://vidasmasculinas.com.br/widget/contador" 
+  width="100%" 
+  height="420" 
+  frameborder="0" 
+  scrolling="no" 
+  style="border: none; max-width: 480px; overflow: hidden;"
+  title="Contador Vidas Masculinas">
+</iframe>
+```
 
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-
-3. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-
-4. Acesse o endereço exibido no terminal (geralmente `http://localhost:5173`).
-
-### Outros Scripts Disponíveis
-
-* **Compilar para produção**: `npm run build`
-* **Validar código com Linter**: `npm run lint`
-* **Visualizar versão compilada**: `npm run preview`
+Caso queira integrar outros formatos de cards ou gráficos, consulte as opções de embeds no painel principal ou entre em contato com os mantenedores.
 
 ---
 
