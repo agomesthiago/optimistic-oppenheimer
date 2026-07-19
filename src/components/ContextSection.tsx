@@ -18,19 +18,15 @@ export function ContextSection() {
     <section
       id="contexto"
       aria-labelledby="contexto-heading"
-      className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
+      className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center gap-4 mb-12 select-none">
-          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.05</span>
-          <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
-          <h2
-            id="contexto-heading"
-            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400"
-          >
-            Contexto
-          </h2>
-        </div>
+        <h2
+          id="contexto-heading"
+          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12"
+        >
+          Contexto
+        </h2>
 
         <p className="text-slate-600 dark:text-ash-300 text-base leading-relaxed mb-12">
           Os dados apresentados baseiam-se em estatísticas consolidadas de órgãos oficiais, como o{' '}
@@ -67,6 +63,11 @@ export function ContextSection() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Bottom Left Corner (Page indicator) */}
+      <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
+        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.05</span>
       </div>
     </section>
   );

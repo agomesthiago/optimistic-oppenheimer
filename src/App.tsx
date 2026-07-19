@@ -70,18 +70,19 @@ export default function App() {
         </div>
         
         {/* Dedicated Causes Section */}
-        <section className="reveal-on-scroll py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
+        <section className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
           <div className="max-w-2xl mx-auto">
-            <div className="flex items-center gap-4 mb-12 select-none">
-              <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.04</span>
-              <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
-              <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400">
-                Detalhes por causa
-              </h2>
-            </div>
+            <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
+              Detalhes por causa
+            </h2>
             <div className="w-full flex justify-center">
               <CauseTicker />
             </div>
+          </div>
+
+          {/* Bottom Left Corner (Page indicator) */}
+          <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
+            <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.04</span>
           </div>
         </section>
 

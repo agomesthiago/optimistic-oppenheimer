@@ -30,16 +30,12 @@ export function ResourcesSection() {
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center gap-4 mb-12 select-none">
-          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.03</span>
-          <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
-          <h2
-            id="recursos-heading"
-            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400"
-          >
-            Ajuda
-          </h2>
-        </div>
+        <h2
+          id="recursos-heading"
+          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12"
+        >
+          Ajuda
+        </h2>
 
         <p className="text-slate-600 dark:text-ash-300 text-base mb-12 leading-relaxed">
           Se você ou alguém precisa de ajuda: cada indicador nesta página representa uma história interrompida. Se a visualização destes dados 
@@ -69,6 +65,11 @@ export function ResourcesSection() {
             </a>
           ))}
         </div>
+      </div>
+
+      {/* Bottom Left Corner (Page indicator) */}
+      <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
+        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.03</span>
       </div>
     </section>
   );

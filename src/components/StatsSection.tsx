@@ -13,17 +13,12 @@ export function StatsSection({ deaths }: StatsSectionProps) {
   return (
     <section
       id="estatisticas"
-      className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
+      className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <div className="max-w-2xl mx-auto">
-        {/* Header aligned on the left */}
-        <div className="flex items-center gap-4 mb-16 select-none">
-          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.02</span>
-          <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
-          <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400">
-            Estatísticas
-          </h2>
-        </div>
+        <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-16">
+          Estatísticas
+        </h2>
 
         {/* Stats Grid */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-6 select-none w-full">
@@ -33,6 +28,11 @@ export function StatsSection({ deaths }: StatsSectionProps) {
           <div className="w-12 h-px sm:w-px sm:h-12 bg-zinc-250 dark:bg-carbon-800" />
           <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="mortes" />
         </div>
+      </div>
+      
+      {/* Bottom Left Corner (Page indicator) */}
+      <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
+        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.02</span>
       </div>
     </section>
   );
