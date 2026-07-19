@@ -30,15 +30,18 @@ export function ResourcesSection() {
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <div className="max-w-2xl mx-auto">
-        <h2
-          id="recursos-heading"
-          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-6"
-        >
-          Se você ou alguém precisa de ajuda
-        </h2>
+        <div className="flex flex-col items-center mb-12 select-none">
+          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2">.02</span>
+          <h2
+            id="recursos-heading"
+            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 text-center"
+          >
+            Ajuda
+          </h2>
+        </div>
 
-        <p className="text-slate-600 dark:text-ash-300 text-base mb-12 leading-relaxed">
-          Cada indicador nesta página representa uma história interrompida. Se a visualização destes dados 
+        <p className="text-slate-600 dark:text-ash-300 text-base mb-12 leading-relaxed text-center">
+          Se você ou alguém precisa de ajuda: cada indicador nesta página representa uma história interrompida. Se a visualização destes dados 
           te afetou de alguma forma, saiba que há suporte disponível. O acolhimento é sigiloso, humanizado e gratuito.
         </p>
 

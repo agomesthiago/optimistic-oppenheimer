@@ -33,12 +33,15 @@ export function MethodologySection() {
       className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900"
     >
       <div className="max-w-2xl mx-auto">
-        <h2
-          id="metodologia-heading"
-          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12 text-center"
-        >
-          Metodologia
-        </h2>
+        <div className="flex flex-col items-center mb-12 select-none">
+          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2">.05</span>
+          <h2
+            id="metodologia-heading"
+            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 text-center"
+          >
+            Metodologia
+          </h2>
+        </div>
 
         <div className="divide-y divide-zinc-200 dark:divide-carbon-700 border border-zinc-200 dark:border-carbon-700 bg-white dark:bg-carbon-950">
           {STEPS.map((item) => (

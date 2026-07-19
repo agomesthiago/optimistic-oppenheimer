@@ -237,11 +237,11 @@ export function Hero() {
         </button>
 
         {/* Grid of stats */}
-        <div className="order-last sm:order-first mt-0 sm:mt-16 flex flex-col sm:flex-row items-center gap-8 sm:gap-12 select-none">
+        <div className="order-last sm:order-first mt-0 sm:mt-16 flex flex-col sm:flex-row items-center gap-6 sm:gap-12 select-none w-full max-w-sm sm:max-w-none border-t border-zinc-200/60 dark:border-carbon-800/80 pt-8 sm:pt-0 sm:border-t-0">
           <Stat label={`em ${YEAR_LABEL}`} value={formatDeathCount(deaths)} sublabel="estimativa" />
-          <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
+          <div className="w-12 h-px sm:w-px sm:h-12 bg-zinc-200 dark:bg-carbon-800" />
           <Stat label="média anual" value={TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} sublabel="todas as causas" />
-          <div className="hidden sm:block w-px h-12 bg-zinc-300 dark:bg-carbon-700" />
+          <div className="w-12 h-px sm:w-px sm:h-12 bg-zinc-200 dark:bg-carbon-800" />
           <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="mortes" />
         </div>
       </div>

@@ -21,12 +21,15 @@ export function ContextSection() {
       className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <div className="max-w-2xl mx-auto">
-        <h2
-          id="contexto-heading"
-          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12 text-center"
-        >
-          Contexto
-        </h2>
+        <div className="flex flex-col items-center mb-12 select-none">
+          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2">.04</span>
+          <h2
+            id="contexto-heading"
+            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 text-center"
+          >
+            Contexto
+          </h2>
+        </div>
 
         <p className="text-slate-600 dark:text-ash-300 text-base leading-relaxed mb-12 text-center max-w-xl mx-auto">
           Os dados apresentados baseiam-se em estatísticas consolidadas de órgãos oficiais, como o{' '}

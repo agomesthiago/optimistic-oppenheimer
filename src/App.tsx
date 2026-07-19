@@ -55,6 +55,7 @@ export default function App() {
         {/* Dedicated Causes Section */}
         <section className="reveal-on-scroll py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
           <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+            <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2 select-none">.03</span>
             <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa
             </h2>
