@@ -1,0 +1,70 @@
+{
+  "project": "Vidas Masculinas",
+  "country": "Brasil",
+  "year": 2026,
+  "description": "Dados estatísticos oficiais e projeções de mortalidade masculina baseados no DATASUS/SIM e IBGE.",
+  "annual_metrics": {
+    "total_deaths_per_year": 780667,
+    "deaths_per_second": 0.024739502,
+    "seconds_per_death": 40.4211846
+  },
+  "cause_breakdown": [
+    {
+      "id": "cardiovascular",
+      "label": "doenças cardiovasculares",
+      "proportion": 0.254,
+      "annual_estimate": 210181,
+      "source": "IBGE / SBC — CID-10 I00-I99 (2022)"
+    },
+    {
+      "id": "cancer",
+      "label": "câncer",
+      "proportion": 0.157,
+      "annual_estimate": 130000,
+      "source": "INCA / SIM — CID-10 C00-D48 (2022)"
+    },
+    {
+      "id": "respiratory",
+      "label": "doenças respiratórias",
+      "proportion": 0.095,
+      "annual_estimate": 79000,
+      "source": "SIM/DATASUS — CID-10 J00-J99 (2022)"
+    },
+    {
+      "id": "digestive",
+      "label": "doenças digestivas",
+      "proportion": 0.059,
+      "annual_estimate": 49000,
+      "source": "SIM/DATASUS — CID-10 K00-K93 (2022)"
+    },
+    {
+      "id": "diabetes",
+      "label": "diabetes",
+      "proportion": 0.052,
+      "annual_estimate": 43000,
+      "source": "SIM/DATASUS — CID-10 E10-E14 (2022)"
+    },
+    {
+      "id": "homicide",
+      "label": "homicídio",
+      "proportion": 0.050,
+      "annual_estimate": 41744,
+      "source": "IPEA — Atlas da Violência 2024 — CID-10 X85-Y09"
+    },
+    {
+      "id": "traffic",
+      "label": "acidentes de trânsito",
+      "proportion": 0.034,
+      "annual_estimate": 28471,
+      "source": "SIM/DATASUS + IPEA 2024 — CID-10 V01-V99"
+    },
+    {
+      "id": "suicide",
+      "label": "suicídio",
+      "proportion": 0.016,
+      "annual_estimate": 13356,
+      "source": "Ministério da Saúde / SIM — CID-10 X60-X84 (~2022)"
+    }
+  ],
+  "update_frequency": "Estático. Calculado dinamicamente com base nas médias anuais."
+}
