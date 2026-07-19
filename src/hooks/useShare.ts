@@ -25,7 +25,8 @@ export function useShare() {
       const file = new File([blob], 'vidas-ceifadas.png', { type: blob.type });
 
       // Build dynamic share URL containing current death count for crawlable preview metadata
-      const shareUrl = deaths ? `https://vidasmasculinas.com.br/share/${Math.floor(deaths)}` : 'https://vidasmasculinas.com.br';
+      const origin = window.location.origin;
+      const shareUrl = deaths ? `${origin}/share/${Math.floor(deaths)}` : origin;
 
       // Try Web Share API (Mobile native sharing)
       if (navigator.canShare && navigator.canShare({ files: [file] })) {

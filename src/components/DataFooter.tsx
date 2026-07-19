@@ -65,21 +65,40 @@ export function DataFooter() {
         <div className="flex flex-col items-center gap-6 border-t border-zinc-200 dark:border-carbon-700 pt-8">
           
           {/* Contra o Esquecimento */}
-          <div className="text-center space-y-2">
-            <p className="text-xs font-mono text-slate-500 dark:text-ash-500">
-              projeto pessoal · parte da iniciativa
-            </p>
-            <a
-              href="https://obrasprimas.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-sm font-mono font-semibold text-slate-700 dark:text-ash-300 hover:text-crimson-500 dark:hover:text-crimson-400 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-crimson-500 transition-colors"
-            >
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-500">
               Contra o Esquecimento
-            </a>
-            <p className="text-xs font-mono text-slate-400 dark:text-ash-600 italic max-w-sm mx-auto">
-              A história da beleza registrada em forma, cor e pedra.
-            </p>
+            </span>
+            <div className="flex items-center gap-5">
+              <a
+                href="https://www.instagram.com/contraoesquecimento/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Instagram — Contra o Esquecimento"
+                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-250"
+                aria-label="Instagram Contra o Esquecimento"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a
+                href="https://obrasprimas.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Website — Contra o Esquecimento"
+                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-250"
+                aria-label="Website Contra o Esquecimento"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </a>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">

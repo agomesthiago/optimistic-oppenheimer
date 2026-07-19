@@ -19,7 +19,7 @@
   status = 200
 
 [[edge_functions]]
-  path = "/share/*"
+  path = "/*"
   function = "og-injector"
 
 
