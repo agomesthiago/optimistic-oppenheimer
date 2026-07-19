@@ -53,11 +53,60 @@ O cálculo em tempo real é obtido a partir da média histórica anualizada de �
 
 ## Integração via Widgets
 
-O **Vidas Masculinas** foi projetado para ser facilmente incorporado a portais de notícias, blogs, sites de ONGs e páginas institucionais por meio de widgets responsivos e leves.
+O **Vidas Masculinas** foi projetado para ser facilmente incorporado a portais de notícias, blogs, sites de ONGs e páginas institucionais por meio de formatos de integração nativos e leves.
 
-### Como Incorporar o Contador em seu Site
+---
 
-Para exibir o contador de mortes acumuladas em tempo real em seu site, adicione o seguinte código HTML no local desejado:
+### Opção A: Script de Embed Dinâmico
+Insere o widget dinamicamente no seu HTML. Herda a fonte e cores do site hospedeiro, oferecendo integração visual nativa.
+
+#### Exemplo de Uso
+```html
+<div id="vidas-masculinas-widget" data-border="true"></div>
+<script type="module" src="https://cdn.jsdelivr.net/gh/agomesthiago/optimistic-oppenheimer@latest/dist/widgets/embed.js" defer></script>
+```
+
+#### Pré-visualização
+<p align="center">
+  <img src="./public/images/widget-embed.png" alt="Preview Embed Widget" width="400">
+</p>
+
+---
+
+### Opção B: Web Component Nativo
+Utiliza Custom Elements para integração limpa e moderna. Herda os estilos globais do site hospedeiro de forma flexível.
+
+#### Exemplo de Uso
+```html
+<!-- Exemplo em Tema Escuro -->
+<vidas-masculinas-counter border="true"></vidas-masculinas-counter>
+
+<!-- Exemplo em Tema Claro -->
+<div style="background-color: white; color: black; padding: 1rem;">
+  <vidas-masculinas-counter border="true"></vidas-masculinas-counter>
+</div>
+
+<script type="module" src="https://cdn.jsdelivr.net/gh/agomesthiago/optimistic-oppenheimer@latest/dist/widgets/web-component.js" defer></script>
+```
+
+#### Pré-visualização
+<p align="center">
+  <img src="./public/images/widget-dark.png" alt="Preview Web Component Dark" width="400">
+  <br>
+  <img src="./public/images/widget-light.png" alt="Preview Web Component Light" width="400">
+</p>
+
+---
+
+### Opção C: API de Dados (JSON Bruto)
+Se você deseja construir seu próprio layout, pode ler diretamente as taxas oficiais de mortalidade projetadas por segundo a partir da nossa API estática hospedada via CDN gratuita:
+
+* **Endpoint JSON**: `https://raw.githubusercontent.com/agomesthiago/optimistic-oppenheimer/master/public/data/mortality-stats.json`
+
+---
+
+### Opção D: Incorporação Simples via Iframe
+Caso não queira rodar scripts JavaScript na sua página, pode utilizar a incorporação clássica por iframe:
 
 ```html
 <iframe 
@@ -70,8 +119,6 @@ Para exibir o contador de mortes acumuladas em tempo real em seu site, adicione 
   title="Contador Vidas Masculinas">
 </iframe>
 ```
-
-Caso queira integrar outros formatos de cards ou gráficos, consulte as opções de embeds no painel principal ou entre em contato com os mantenedores.
 
 ---
 
