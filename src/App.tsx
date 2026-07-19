@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Hero } from './components/Hero';
 import { CauseTicker } from './components/CauseTicker';
 import { ContextSection } from './components/ContextSection';
@@ -7,6 +8,28 @@ import { DataFooter } from './components/DataFooter';
 import { ThemeToggle } from './components/ThemeToggle';
 
 export default function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -80px 0px',
+      }
+    );
+
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main id="main-content" className="relative min-h-dvh">
       {/* Subtle noise texture overlay */}
@@ -25,10 +48,12 @@ export default function App() {
       <div className="relative z-10">
         <Hero />
         
-        <ResourcesSection />
+        <div className="reveal-on-scroll">
+          <ResourcesSection />
+        </div>
         
         {/* Dedicated Causes Section */}
-        <section className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
+        <section className="reveal-on-scroll py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
           <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
             <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa
@@ -37,9 +62,17 @@ export default function App() {
           </div>
         </section>
 
-        <ContextSection />
-        <MethodologySection />
-        <DataFooter />
+        <div className="reveal-on-scroll">
+          <ContextSection />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <MethodologySection />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <DataFooter />
+        </div>
       </div>
     </main>
   );
