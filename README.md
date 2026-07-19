@@ -1,32 +1,96 @@
-# React + TypeScript + Vite
+# Vidas Masculinas — Painel de Conscientização e Dados
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<p align="center">
+  <strong>Uma visualização de dados em tempo real sobre a urgência da mortalidade masculina no Brasil.</strong>
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+  <a href="#sobre-o-projeto">Sobre</a> •
+  <a href="#tecnologias">Tecnologias</a> •
+  <a href="#metodologia">Metodologia</a> •
+  <a href="#como-rodar">Como Rodar</a> •
+  <a href="#licença">Licença</a>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Sobre o Projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Mais de **780.000 homens** morrem por ano no Brasil por diversas causas, muitas delas evitáveis. O **Vidas Masculinas** é uma iniciativa independente e de código aberto projetada com foco em dispositivos móveis (*mobile-first*) para sensibilizar, informar e educar a sociedade sobre a gravidade da mortalidade masculina em território nacional.
 
-## Expanding the Oxlint configuration
+A aplicação apresenta:
+* **Contador em Tempo Real**: Estimativa baseada em taxas oficiais de mortes de homens no Brasil ao longo do ano corrente e da sessão do usuário.
+* **Detalhamento por Causa**: Estatísticas dinâmicas sobre homicídios, acidentes de trânsito, suicídios e patologias prevalentes.
+* **Histórias e Contexto**: Abordagem humana além dos frios dados numéricos, visando gerar empatia e ação.
+* **Recursos de Apoio**: Atalhos de conscientização e canais de ajuda em saúde mental e prevenção.
+* **Design Premium**: Interface minimalista com tema dinâmico (escuro/claro), animações fluidas via GSAP e suporte de acessibilidade.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Tecnologias
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+O projeto utiliza uma pilha tecnológica moderna e otimizada para web rápida:
+
+* **React 19** & **TypeScript**: Construção de componentes tipados e reativos.
+* **Vite**: Bundler ultra-rápido para o ambiente de desenvolvimento e build.
+* **Tailwind CSS**: Estilização responsiva e ágil com foco em performance visual.
+* **GSAP (GreenSock Animation Platform)**: Micro-animações e transições de interface elegantes.
+* **Oxlint**: Linter de altíssima performance para garantir a qualidade estática do código.
+
+---
+
+## Metodologia de Dados
+
+Os dados exibidos na aplicação são projetados com base em informações consolidadas de órgãos públicos federais de saúde e estatística do Brasil:
+1. **DATASUS (Sistema de Informações sobre Mortalidade - SIM)** do Ministério da Saúde.
+2. **IBGE (Instituto Brasileiro de Geografia e Estatística)**.
+
+O cálculo em tempo real é obtido a partir da média histórica anualizada de óbitos masculinos, convertida para uma taxa fracionada por segundo, permitindo estimar o impacto acumulado ao longo do dia, do ano e do tempo de navegação do usuário.
+
+*Para ler a metodologia completa, consulte a seção dedicada na própria aplicação ou navegue pelo arquivo de utilitários de mortalidade em `src/utils/mortality.ts`.*
+
+---
+
+## Como Rodar o Projeto Localmente
+
+### Pré-requisitos
+
+Você precisará do [Node.js](https://nodejs.org/) instalado em sua máquina.
+
+### Execução
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/vidasmasculinas.git
+   cd vidasmasculinas
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+4. Acesse o endereço exibido no terminal (geralmente `http://localhost:5173`).
+
+### Outros Scripts Disponíveis
+
+* **Compilar para produção**: `npm run build`
+* **Validar código com Linter**: `npm run lint`
+* **Visualizar versão compilada**: `npm run preview`
+
+---
+
+## Licença
+
+Este projeto está sob a licença [MIT](./LICENSE). Sinta-se livre para usar, modificar e distribuir, desde que mantenha os créditos originais.
+
+---
+
+<p align="center">
+  <em>Desenvolvido com o propósito de quebrar o silêncio e salvar vidas.</em>
+</p>
