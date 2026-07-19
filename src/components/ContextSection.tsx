@@ -49,7 +49,7 @@ export function ContextSection() {
               className="group relative bg-zinc-50/50 dark:bg-carbon-900/40 p-8 flex flex-col gap-3 rounded-2xl border border-zinc-200/60 dark:border-carbon-800 hover:border-zinc-300 dark:hover:border-carbon-700 hover:bg-white dark:hover:bg-carbon-800/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.02)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)]"
             >
               <span
-                className="font-mono font-bold text-crimson-500 dark:text-crimson-400 leading-none transition-colors duration-300 group-hover:text-crimson-600 dark:group-hover:text-crimson-300"
+                className="font-mono font-bold text-slate-900 dark:text-ash-100 leading-none transition-colors duration-300 group-hover:text-crimson-500 dark:group-hover:text-crimson-400"
                 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)' }}
               >
                 {fact.number}
