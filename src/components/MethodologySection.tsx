@@ -33,11 +33,12 @@ export function MethodologySection() {
       className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900"
     >
       <div className="max-w-2xl mx-auto">
-        <div className="flex flex-col items-center mb-12 select-none">
-          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2">.05</span>
+        <div className="flex items-center gap-4 mb-12 select-none">
+          <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.06</span>
+          <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
           <h2
             id="metodologia-heading"
-            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 text-center"
+            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400"
           >
             Metodologia
           </h2>

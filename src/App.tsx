@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { useCounter } from './hooks/useCounter';
 import { Hero } from './components/Hero';
+import { StatsSection } from './components/StatsSection';
 import { CauseTicker } from './components/CauseTicker';
 import { ContextSection } from './components/ContextSection';
 import { MethodologySection } from './components/MethodologySection';
@@ -8,6 +10,12 @@ import { DataFooter } from './components/DataFooter';
 import { ThemeToggle } from './components/ThemeToggle';
 
 export default function App() {
+  const { deaths, sessionDeaths, sessionSeconds, isRunning, start } = useCounter();
+
+  useEffect(() => {
+    start();
+  }, [start]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -46,20 +54,34 @@ export default function App() {
       <ThemeToggle />
 
       <div className="relative z-10">
-        <Hero />
+        <Hero 
+          deaths={deaths} 
+          sessionDeaths={sessionDeaths} 
+          sessionSeconds={sessionSeconds} 
+          isRunning={isRunning} 
+        />
         
+        <div className="reveal-on-scroll">
+          <StatsSection deaths={deaths} />
+        </div>
+
         <div className="reveal-on-scroll">
           <ResourcesSection />
         </div>
         
         {/* Dedicated Causes Section */}
         <section className="reveal-on-scroll py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
-          <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-            <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600 mb-2 select-none">.03</span>
-            <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
-              Detalhes por causa
-            </h2>
-            <CauseTicker />
+          <div className="max-w-2xl mx-auto">
+            <div className="flex items-center gap-4 mb-12 select-none">
+              <span className="text-sm font-mono font-bold text-slate-400 dark:text-ash-600">.04</span>
+              <div className="h-px w-8 bg-zinc-200 dark:bg-carbon-800" />
+              <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400">
+                Detalhes por causa
+              </h2>
+            </div>
+            <div className="w-full flex justify-center">
+              <CauseTicker />
+            </div>
           </div>
         </section>
 

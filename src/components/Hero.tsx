@@ -1,13 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import gsap from 'gsap';
-import { useCounter } from '../hooks/useCounter';
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
 import { StoryCard } from './StoryCard';
 import {
   formatDeathCount,
-  TOTAL_MALE_DEATHS_PER_YEAR,
-  DEATHS_PER_SECOND,
   getCounterStartDate,
 } from '../utils/mortality';
 
@@ -22,8 +19,6 @@ const SHARE_COPY = [
   'Alguém precisa ver isso',
 ];
 
-const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
-const YEAR_LABEL = new Date().getFullYear().toString();
 const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
   day: '2-digit',
   month: '2-digit',
@@ -101,8 +96,14 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
   );
 }
 
-export function Hero() {
-  const { deaths, sessionDeaths, sessionSeconds, isRunning, start } = useCounter();
+interface HeroProps {
+  deaths: number;
+  sessionDeaths: number;
+  sessionSeconds: number;
+  isRunning: boolean;
+}
+
+export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroProps) {
   const { isClockMode, toggleMode } = useAutoToggle();
   const { isSharing, shareToStories } = useShare();
   const prevIntegerRef = useRef(0);
@@ -113,11 +114,6 @@ export function Hero() {
   const shareCopy = useMemo(() => SHARE_COPY[Math.floor(Math.random() * SHARE_COPY.length)], []);
   
   const textContainerRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    start();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (!isClockMode) return;
@@ -168,6 +164,7 @@ export function Hero() {
 
       {/* Top Right Navigation Links */}
       <nav className="absolute top-8 right-24 z-20 hidden md:flex items-center gap-8 text-[11px] font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500">
+        <a href="#estatisticas" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Stats</a>
         <a href="#recursos" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Ajuda</a>
         <a href="#contexto" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Dados</a>
         <a href="#metodologia" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Método</a>
@@ -218,13 +215,12 @@ export function Hero() {
         </p>
       </div>
 
-      {/* Stats + Share wrapper: on mobile share comes first (above stats) */}
       <div className="relative z-10 flex flex-col items-center">
-        {/* Share button - order-first on mobile, order-last on sm+ */}
+        {/* Share button */}
         <button
           onClick={() => shareToStories('story-card-export', deaths)}
           disabled={isSharing}
-          className="order-first sm:order-last mt-10 sm:mt-14 mb-8 sm:mb-0 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed animate-blink-random"
+          className="mt-10 mb-8 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed animate-blink-random"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="18" cy="5" r="3"></circle>
@@ -235,15 +231,6 @@ export function Hero() {
           </svg>
           {isSharing ? 'Preparando imagem...' : shareCopy}
         </button>
-
-        {/* Grid of stats */}
-        <div className="order-last sm:order-first mt-0 sm:mt-16 flex flex-col sm:flex-row items-center gap-6 sm:gap-12 select-none w-full max-w-sm sm:max-w-none border-t border-zinc-200/60 dark:border-carbon-800/80 pt-8 sm:pt-0 sm:border-t-0">
-          <Stat label={`em ${YEAR_LABEL}`} value={formatDeathCount(deaths)} sublabel="estimativa" />
-          <div className="w-12 h-px sm:w-px sm:h-12 bg-zinc-200 dark:bg-carbon-800" />
-          <Stat label="média anual" value={TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} sublabel="todas as causas" />
-          <div className="w-12 h-px sm:w-px sm:h-12 bg-zinc-200 dark:bg-carbon-800" />
-          <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="mortes" />
-        </div>
       </div>
 
       {/* Bottom Left Corner (Page indicator & Session elapsed timer) */}
@@ -264,16 +251,6 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Stat({ label, value, sublabel }: { label: string; value: string; sublabel: string }) {
-  return (
-    <div className="group flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-zinc-100/60 dark:hover:bg-carbon-800/60 hover:scale-105 cursor-default">
-      <span className="text-3xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums transition-colors group-hover:text-crimson-500 dark:group-hover:text-crimson-400">{value}</span>
-      <span className="text-sm font-mono uppercase tracking-wider text-slate-500 dark:text-ash-400">{label}</span>
-      <span className="text-xs text-slate-400 dark:text-ash-600 font-mono">{sublabel}</span>
-    </div>
   );
 }
 
