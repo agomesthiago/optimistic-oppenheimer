@@ -15,7 +15,7 @@ export default async (request: Request, context: Context) => {
     let modifiedHtml = html;
     
     // Dynamically replace the domain in metadata to match the current origin (essential for working preview images)
-    modifiedHtml = modifiedHtml.replace(/https:\/\/vidasmasculinas\.com\.br/g, origin);
+    modifiedHtml = modifiedHtml.replace(/https:\/\/vidasmasculinas\.netlify\.app/g, origin);
     
     // Intercept paths like: /share/424586
     const match = url.pathname.match(/^\/share\/(\d+)$/);
@@ -32,25 +32,25 @@ export default async (request: Request, context: Context) => {
       
       // Replace og:title
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="og:title" content=".*?" \/>/,
+        /<meta property="og:title" content=".*?"\s*\/?>/,
         `<meta property="og:title" content="${title}" />`
       );
       
       // Replace og:description
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="og:description" content=".*?" \/>/,
+        /<meta property="og:description" content=".*?"\s*\/?>/,
         `<meta property="og:description" content="${desc}" />`
       );
       
       // Replace twitter:title
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="twitter:title" content=".*?" \/>/,
+        /<meta property="twitter:title" content=".*?"\s*\/?>/,
         `<meta property="twitter:title" content="${title}" />`
       );
       
       // Replace twitter:description
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="twitter:description" content=".*?" \/>/,
+        /<meta property="twitter:description" content=".*?"\s*\/?>/,
         `<meta property="twitter:description" content="${desc}" />`
       );
     }
