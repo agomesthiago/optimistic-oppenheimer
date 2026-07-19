@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 
-const TARGET_URL = 'http://localhost:5174';
+const TARGET_URL = 'http://localhost:5173'; // Updated port to default 5173
 
 (async () => {
   console.log('🚀 Iniciando simulação visual...');
@@ -22,7 +22,7 @@ const TARGET_URL = 'http://localhost:5174';
     await page.click('#main-counter-toggle'); // This is the main counter area
     
     await page.waitForTimeout(3000);
-
+ 
     console.log('📸 Testando botão de Compartilhar (que deverá disparar o download no Desktop)...');
     
     const [download] = await Promise.all([
