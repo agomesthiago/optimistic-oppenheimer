@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
 
-  const shareToStories = useCallback(async (elementId: string) => {
+  const shareToStories = useCallback(async (elementId: string, deaths?: number) => {
     const node = document.getElementById(elementId);
     if (!node) return;
 
@@ -24,11 +24,15 @@ export function useShare() {
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], 'vidas-ceifadas.png', { type: blob.type });
 
+      // Build dynamic share URL containing current death count for crawlable preview metadata
+      const shareUrl = deaths ? `https://vidasmasculinas.com.br/share/${Math.floor(deaths)}` : 'https://vidasmasculinas.com.br';
+
       // Try Web Share API (Mobile native sharing)
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: 'Vidas Masculinas',
           text: 'O peso da mortalidade masculina no Brasil.',
+          url: shareUrl,
           files: [file],
         });
       } else {

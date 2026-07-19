@@ -222,7 +222,7 @@ export function Hero() {
       <div className="relative z-10 flex flex-col items-center">
         {/* Share button - order-first on mobile, order-last on sm+ */}
         <button
-          onClick={() => shareToStories('story-card-export')}
+          onClick={() => shareToStories('story-card-export', deaths)}
           disabled={isSharing}
           className="order-first sm:order-last mt-10 sm:mt-14 mb-8 sm:mb-0 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed animate-blink-random"
         >
