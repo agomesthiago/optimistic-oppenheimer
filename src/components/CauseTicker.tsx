@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, getSecondsSinceYearStart } from '../utils/mortality';
+import { CauseStoryCard } from './CauseStoryCard';
+import { useShare } from '../hooks/useShare';
 
 const AUTO_SLIDE_MS = 7_000;
 
@@ -8,6 +10,8 @@ export function CauseTicker() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const { isSharing, shareToStories } = useShare();
 
   useEffect(() => {
     const id = setInterval(() => setYearSeconds(getSecondsSinceYearStart()), 1000);
@@ -41,6 +45,14 @@ export function CauseTicker() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Hidden Export Card for currently active cause */}
+      <CauseStoryCard
+        cause={active}
+        count={count}
+        currentIndex={currentIndex}
+        totalCauses={CAUSE_BREAKDOWN.length}
+      />
+
       {/* Large Featured Slide Card */}
       <div
         role="region"
@@ -67,16 +79,37 @@ export function CauseTicker() {
             </span>
           </div>
 
-          <span className="text-xs font-mono text-crimson-600 dark:text-crimson-400 font-bold bg-crimson-50 dark:bg-crimson-950/40 px-3 py-1 rounded-full border border-crimson-200 dark:border-crimson-900/60 self-start sm:self-auto">
-            {(active.proportion * 100).toFixed(1).replace('.', ',')}% das mortes masculinas
-          </span>
+          <div className="flex items-center gap-3 self-start sm:self-auto">
+            <span className="text-xs font-mono text-crimson-600 dark:text-crimson-400 font-bold bg-crimson-50 dark:bg-crimson-950/40 px-3 py-1 rounded-full border border-crimson-200 dark:border-crimson-900/60">
+              {(active.proportion * 100).toFixed(1).replace('.', ',')}% das mortes masculinas
+            </span>
+          </div>
         </div>
 
         {/* Slide Main Content (Large Counter & Title) */}
         <div className="my-8 flex flex-col gap-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-ash-100 capitalize tracking-tight">
-            {active.label}
-          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-ash-100 capitalize tracking-tight">
+              {active.label}
+            </h3>
+
+            {/* Share Cause Button */}
+            <button
+              onClick={() => shareToStories('cause-story-card-export', count)}
+              disabled={isSharing}
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900 text-xs font-mono text-slate-700 dark:text-ash-300 hover:bg-zinc-100 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 cursor-pointer self-start sm:self-auto disabled:opacity-50"
+              title={`Compartilhar estatísticas da causa ${active.label}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              {isSharing ? 'Gerando...' : 'Compartilhar esta causa'}
+            </button>
+          </div>
 
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-4">
             <span
@@ -86,7 +119,7 @@ export function CauseTicker() {
               {formatDeathCount(count)}
             </span>
             <span className="text-sm font-mono text-slate-500 dark:text-ash-400">
-              óbitos masculinos estimados desde 01/01/2026
+              óbitos masculinos estimados por {active.label.toLowerCase()} desde 01/01/2026
             </span>
           </div>
         </div>
