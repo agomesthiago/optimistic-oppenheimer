@@ -1,5 +1,20 @@
 {
+  "rewrites": [
+    {
+      "source": "/((?!assets/|widgets/|data/|public/|favicon.ico|vite.svg).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
+    {
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

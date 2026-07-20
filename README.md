@@ -13,6 +13,10 @@
 </p>
 
 <p align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fagomesthiago%2Foptimistic-oppenheimer">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+  </a>
+  &nbsp;&nbsp;
   <a href="https://www.netlify.com">
     <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
   </a>
