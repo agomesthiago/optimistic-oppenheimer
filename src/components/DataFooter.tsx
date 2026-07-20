@@ -1,4 +1,4 @@
-import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND } from '../utils/mortality';
+import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, MALE_MORTALITY_RATE_PER_100K, LIFE_EXPECTANCY_DATA, SUICIDE_DATA } from '../utils/mortality';
 
 const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
 
@@ -7,22 +7,45 @@ export function DataFooter() {
     <footer id="footer" className="border-t border-zinc-200 dark:border-carbon-700 py-16 px-6 bg-zinc-100 dark:bg-carbon-900/30" role="contentinfo">
       <div className="max-w-2xl mx-auto space-y-10">
 
-        {/* Formula */}
+        {/* Formulas */}
         <div>
-          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fórmula</p>
-          <div className="font-mono text-sm text-slate-600 dark:text-ash-400 bg-white dark:bg-carbon-800 border border-zinc-200 dark:border-carbon-700 p-6 leading-relaxed overflow-x-auto shadow-sm">
-            <p className="text-slate-800 dark:text-ash-200">
-              taxa = {TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} / 31.557.600 s
-            </p>
-            <p className="text-slate-500 dark:text-ash-600 mt-2">
-              ≈ {(DEATHS_PER_SECOND).toFixed(5)} mortes/segundo · ~{DEATHS_PER_DAY.toLocaleString('pt-BR')}/dia
-            </p>
+          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fórmulas & Indicadores</p>
+          <div className="font-mono text-sm text-slate-600 dark:text-ash-400 bg-white dark:bg-carbon-800 border border-zinc-200 dark:border-carbon-700 p-6 leading-relaxed overflow-x-auto space-y-4 shadow-sm">
+            <div>
+              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">1. Estimativa Temporal Acumulada</p>
+              <p className="text-slate-800 dark:text-ash-200">
+                taxa = {TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} / 31.557.600 s
+              </p>
+              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
+                ≈ {(DEATHS_PER_SECOND).toFixed(5)} mortes/segundo · ~{DEATHS_PER_DAY.toLocaleString('pt-BR')} mortes masculinas/dia
+              </p>
+            </div>
+
+            <div className="pt-3 border-t border-zinc-200/60 dark:border-carbon-700/60">
+              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">2. Taxa Bruta de Mortalidade Masculina</p>
+              <p className="text-slate-800 dark:text-ash-200">
+                taxa_100k = ({TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} / ~105.700.000 homens) × 100.000
+              </p>
+              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
+                ≈ {MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens (SIM / IBGE)
+              </p>
+            </div>
+
+            <div className="pt-3 border-t border-zinc-200/60 dark:border-carbon-700/60">
+              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">3. Razão de Mortalidade por Suicídio</p>
+              <p className="text-slate-800 dark:text-ash-200">
+                razão = {SUICIDE_DATA.male2021.toLocaleString('pt-BR')} (H) / {SUICIDE_DATA.female2021.toLocaleString('pt-BR')} (M) = {SUICIDE_DATA.ratioMaleToFemale.toString().replace('.', ',')} : 1
+              </p>
+              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
+                {SUICIDE_DATA.malePercentage}% das vítimas no Brasil · Taxa H: {SUICIDE_DATA.maleRatePer100k.toString().replace('.', ',')}/100k vs M: {SUICIDE_DATA.femaleRatePer100k.toString().replace('.', ',')}/100k
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Sources */}
         <div>
-          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fontes</p>
+          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fontes Oficiais</p>
           <ul className="space-y-3" role="list">
             {MORTALITY_SOURCES.map((src) => (
               <li key={src.id} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
@@ -40,6 +63,34 @@ export function DataFooter() {
                 </span>
               </li>
             ))}
+            <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+              <a
+                href={LIFE_EXPECTANCY_DATA.sourceUrl}
+                id="source-ibge-life-expectancy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-mono text-slate-700 dark:text-ash-400 hover:text-slate-900 dark:hover:text-ash-200 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-slate-500 dark:hover:decoration-ash-400 transition-colors"
+              >
+                IBGE
+              </a>
+              <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
+                Tábuas Completas de Mortalidade — {LIFE_EXPECTANCY_DATA.year} · Expectativa: H {LIFE_EXPECTANCY_DATA.male.toFixed(1).replace('.', ',')}a / M {LIFE_EXPECTANCY_DATA.female.toFixed(1).replace('.', ',')}a
+              </span>
+            </li>
+            <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+              <a
+                href={SUICIDE_DATA.sourceUrl}
+                id="source-ms-suicide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-mono text-slate-700 dark:text-ash-400 hover:text-slate-900 dark:hover:text-ash-200 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-slate-500 dark:hover:decoration-ash-400 transition-colors"
+              >
+                Ministério da Saúde / SIM
+              </a>
+              <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
+                Boletim Epidemiológico Suicídios — {SUICIDE_DATA.year} · {SUICIDE_DATA.malePercentage}% das vítimas eram homens
+              </span>
+            </li>
           </ul>
         </div>
 

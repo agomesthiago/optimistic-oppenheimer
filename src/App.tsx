@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useCounter } from './hooks/useCounter';
 import { Hero } from './components/Hero';
 import { StatsSection } from './components/StatsSection';
+import { LifeExpectancySection } from './components/LifeExpectancySection';
+import { SuicideSection } from './components/SuicideSection';
 import { CauseTicker } from './components/CauseTicker';
 import { ContextSection } from './components/ContextSection';
 import { MethodologySection } from './components/MethodologySection';
@@ -66,11 +68,15 @@ export default function App() {
         </div>
 
         <div className="reveal-on-scroll">
-          <ResourcesSection />
+          <LifeExpectancySection />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <SuicideSection />
         </div>
         
         {/* Dedicated Causes Section */}
-        <section className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
+        <section id="causas" className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa
@@ -82,12 +88,16 @@ export default function App() {
 
           {/* Bottom Left Corner (Page indicator) */}
           <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-            <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.04</span>
+            <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.05</span>
           </div>
         </section>
 
         <div className="reveal-on-scroll">
           <ContextSection />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <ResourcesSection />
         </div>
 
         <div className="reveal-on-scroll">

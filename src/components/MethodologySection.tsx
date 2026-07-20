@@ -1,27 +1,32 @@
-import { TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, SECONDS_PER_DEATH } from '../utils/mortality';
+import { TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, SECONDS_PER_DEATH, MALE_MORTALITY_RATE_PER_100K, SUICIDE_DATA, LIFE_EXPECTANCY_DATA } from '../utils/mortality';
 
 const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
 
 const STEPS = [
   {
     step: '01',
-    title: 'Fonte dos dados',
-    body: 'SIM/DATASUS (Ministério da Saúde) e IBGE Registro Civil. Múltiplas fontes com média aritmética para reduzir viés de um único levantamento.',
+    title: 'Fontes de Dados Oficiais',
+    body: 'Sistema de Informações sobre Mortalidade (SIM/DATASUS - Ministério da Saúde) e Tábuas Completas de Mortalidade do IBGE. Utiliza-se a média ponderada de anos consolidados recentes para mitigar anomalias pontuais.',
   },
   {
     step: '02',
-    title: 'Cálculo',
+    title: 'Estimativa Temporal em Tempo Real',
     body: `~${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} óbitos masculinos/ano ÷ 31.557.600 s/ano = 1 morte a cada ~${Math.round(SECONDS_PER_DEATH)} segundos (~${DEATHS_PER_DAY.toLocaleString('pt-BR')}/dia).`,
   },
   {
     step: '03',
-    title: 'Âncora',
-    body: `01 jan ${new Date().getFullYear()} 00:00 BRT. Dinâmica — atualiza a cada virada de ano sem alteração de código.`,
+    title: 'Taxas Populacionais & Comparação por Sexo',
+    body: `Taxa bruta de mortalidade masculina: ~${MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens. Mortalidade por suicídio: ${SUICIDE_DATA.maleRatePer100k.toString().replace('.', ',')} por 100k homens (vs ${SUICIDE_DATA.femaleRatePer100k.toString().replace('.', ',')} por 100k mulheres, razão ${SUICIDE_DATA.ratioMaleToFemale.toString().replace('.', ',')}:1). Longevidade ao nascer: ${LIFE_EXPECTANCY_DATA.male.toFixed(1).replace('.', ',')} anos (H) vs ${LIFE_EXPECTANCY_DATA.female.toFixed(1).replace('.', ',')} anos (M).`,
   },
   {
     step: '04',
-    title: 'Limitações',
-    body: 'Estimativa baseada em média histórica. Não reflete mortes em tempo real. Dados têm latência de 1–3 anos.',
+    title: 'Âncora Temporal',
+    body: `01 jan ${new Date().getFullYear()} 00:00 BRT. O contador reinicia dinamicamente a cada virada de ano sem necessidade de intervenção manual no código.`,
+  },
+  {
+    step: '05',
+    title: 'Limitações & Transparência',
+    body: 'Trata-se de uma projeção matemática baseada na média histórica consolidada dos órgãos governamentais. Os microdados oficiais têm latência de publicação de 1 a 2 anos.',
   },
 ];
 
@@ -55,7 +60,7 @@ export function MethodologySection() {
 
       {/* Bottom Left Corner (Page indicator) */}
       <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.06</span>
+        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.08</span>
       </div>
     </section>
   );

@@ -35,6 +35,57 @@ export interface CauseBreakdown {
   source: string;
 }
 
+export interface LifeExpectancyData {
+  male: number;
+  female: number;
+  gap: number;
+  year: number;
+  source: string;
+  sourceUrl: string;
+}
+
+export interface SuicideData {
+  total2021: number;
+  male2021: number;
+  female2021: number;
+  malePercentage: number;
+  femalePercentage: number;
+  maleRatePer100k: number;
+  femaleRatePer100k: number;
+  ratioMaleToFemale: number;
+  year: number;
+  source: string;
+  sourceUrl: string;
+}
+
+// ─── Dados Nacionais Validados ────────────────────────────────────────────────
+
+export const LIFE_EXPECTANCY_DATA: LifeExpectancyData = {
+  male: 72.0,
+  female: 79.0,
+  gap: 7.0,
+  year: 2022,
+  source: 'IBGE — Tábuas Completas de Mortalidade (2022)',
+  sourceUrl: 'https://www.ibge.gov.br/estatisticas/sociais/populacao/9126-tabuas-completas-de-mortalidade.html',
+};
+
+export const SUICIDE_DATA: SuicideData = {
+  total2021: 15_507,
+  male2021: 12_064,
+  female2021: 3_443,
+  malePercentage: 77.8,
+  femalePercentage: 22.2,
+  maleRatePer100k: 11.8,
+  femaleRatePer100k: 3.2,
+  ratioMaleToFemale: 3.5,
+  year: 2021,
+  source: 'Ministério da Saúde / SIM / Boletim Epidemiológico (2010–2021)',
+  sourceUrl: 'https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/boletins/boletins-epidemiologicos',
+};
+
+/** Taxa bruta estimada de óbitos masculinos por 100 mil homens no Brasil. */
+export const MALE_MORTALITY_RATE_PER_100K = 757;
+
 // ─── Fontes Oficiais ──────────────────────────────────────────────────────────
 
 /**

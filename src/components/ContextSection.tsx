@@ -67,7 +67,7 @@ export function ContextSection() {
 
       {/* Bottom Left Corner (Page indicator) */}
       <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.05</span>
+        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.06</span>
       </div>
     </section>
   );

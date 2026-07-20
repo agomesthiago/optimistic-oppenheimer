@@ -194,10 +194,12 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
       </div>
 
       {/* Top Right Navigation Links */}
-      <nav className="absolute top-8 right-24 z-20 hidden md:flex items-center gap-8 text-[11px] font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500">
+      <nav className="absolute top-8 right-24 z-20 hidden lg:flex items-center gap-6 text-[11px] font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500">
         <a href="#estatisticas" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Stats</a>
+        <a href="#expectativa-vida" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Longevidade</a>
+        <a href="#suicidios" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Suicídio</a>
+        <a href="#causas" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Causas</a>
         <a href="#recursos" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Ajuda</a>
-        <a href="#contexto" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Dados</a>
         <a href="#metodologia" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Método</a>
       </nav>
 
