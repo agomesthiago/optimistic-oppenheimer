@@ -1,10 +1,10 @@
-import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND } from '../utils/mortality';
+import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, LIFE_EXPECTANCY_DATA } from '../utils/mortality';
 
 const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
 
 const FACTS = [
   { id: 'proportion', number: '~55%', label: 'dos óbitos totais no Brasil', source: 'IBGE RC 2023' },
-  { id: 'life-expectancy', number: '−6,6', label: 'anos de expectativa de vida vs. mulheres', source: 'IBGE Tábua 2024' },
+  { id: 'life-expectancy', number: `−${LIFE_EXPECTANCY_DATA.gap.toFixed(1).replace('.', ',')}`, label: 'anos de expectativa de vida vs. mulheres', source: 'IBGE Tábua 2022' },
   { id: 'external', number: '~85%', label: 'das mortes por causas externas', source: 'SIM/DATASUS 2022' },
   { id: 'young', number: '4,1×', label: 'mais mortes na faixa 20–24 anos vs. mulheres', source: 'IBGE Tábua 2024' },
 ];
