@@ -100,9 +100,19 @@ export function DataFooter() {
             <span className="text-xs font-mono text-slate-500 dark:text-ash-600 text-center sm:text-left">
               média calculada · não representa mortes em tempo real
             </span>
-            <span className="text-xs font-mono text-slate-500 dark:text-ash-600">
-              CVV <strong className="text-slate-700 dark:text-ash-400">188</strong>
-            </span>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.netlify.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 hover:text-slate-600 dark:hover:text-ash-400 transition-colors"
+              >
+                Deploys by Netlify
+              </a>
+              <span className="text-xs font-mono text-slate-500 dark:text-ash-600">
+                CVV <strong className="text-slate-700 dark:text-ash-400">188</strong>
+              </span>
+            </div>
           </div>
         </div>
 
