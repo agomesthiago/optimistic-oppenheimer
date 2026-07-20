@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { useCounter } from './hooks/useCounter';
 import { Hero } from './components/Hero';
 import { StatsSection } from './components/StatsSection';
@@ -108,6 +109,8 @@ export default function App() {
           <DataFooter />
         </div>
       </div>
+      
+      <SpeedInsights />
     </main>
   );
 }
