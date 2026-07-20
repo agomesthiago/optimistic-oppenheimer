@@ -19,11 +19,16 @@ export function useAutoToggle() {
     });
   }, []);
 
+  const setModeExplicit = useCallback((newMode: CounterMode) => {
+    setMode(newMode);
+  }, []);
+
   return {
     mode,
     isClockMode: mode === 'clock',
     isSuicideMode: mode === 'suicide',
     isDeathsMode: mode === 'deaths',
     toggleMode,
+    setModeExplicit,
   };
 }

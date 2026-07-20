@@ -125,7 +125,7 @@ interface HeroProps {
 }
 
 export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroProps) {
-  const { mode, isClockMode, isSuicideMode, toggleMode } = useAutoToggle();
+  const { mode, isClockMode, isSuicideMode, isDeathsMode, toggleMode, setModeExplicit } = useAutoToggle();
   const { isSharing, shareToStories } = useShare();
   const prevIntegerRef = useRef(0);
   const [didTick, setDidTick] = useState(false);
@@ -221,7 +221,41 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
 
       {/* Center content wrapper */}
       <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto">
-        <h1 className="mb-8 text-sm md:text-base font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-500 select-none">
+        {/* Mode Selector Tabs */}
+        <div className="mb-6 flex items-center justify-center gap-1.5 p-1 rounded-full bg-zinc-200/60 dark:bg-carbon-800/80 border border-zinc-300/60 dark:border-carbon-700 font-mono text-[10px] sm:text-[11px] uppercase tracking-wider select-none">
+          <button
+            onClick={() => setModeExplicit('deaths')}
+            className={`px-3 py-1 rounded-full transition-all duration-200 cursor-pointer ${
+              isDeathsMode
+                ? 'bg-white dark:bg-carbon-950 text-slate-900 dark:text-ash-100 shadow-sm font-bold'
+                : 'text-slate-500 dark:text-ash-500 hover:text-slate-800 dark:hover:text-ash-300'
+            }`}
+          >
+            Óbitos Gerais
+          </button>
+          <button
+            onClick={() => setModeExplicit('clock')}
+            className={`px-3 py-1 rounded-full transition-all duration-200 cursor-pointer ${
+              isClockMode
+                ? 'bg-white dark:bg-carbon-950 text-slate-900 dark:text-ash-100 shadow-sm font-bold'
+                : 'text-slate-500 dark:text-ash-500 hover:text-slate-800 dark:hover:text-ash-300'
+            }`}
+          >
+            Horário Local
+          </button>
+          <button
+            onClick={() => setModeExplicit('suicide')}
+            className={`px-3 py-1 rounded-full transition-all duration-200 cursor-pointer ${
+              isSuicideMode
+                ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-sm font-bold'
+                : 'text-slate-500 dark:text-ash-500 hover:text-slate-800 dark:hover:text-ash-300'
+            }`}
+          >
+            Suicídios
+          </button>
+        </div>
+
+        <h1 className="mb-8 text-xs md:text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-500 select-none">
           {displayHeader}
         </h1>
 
@@ -229,7 +263,7 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
           id="main-counter-toggle"
           onClick={toggleMode}
           aria-live="polite"
-          title="Clique para alternar: Óbitos Gerais → Horário Local → Suicídios"
+          title="Clique para alternar o modo de exibição"
           aria-label={`Alternar modo. Atual: ${displayHeader}`}
           className={`relative font-mono font-bold leading-none select-none transition-colors duration-500 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50 rounded-3xl hover:opacity-90 ${
             isSuicideMode
