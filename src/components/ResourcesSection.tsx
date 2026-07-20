@@ -2,16 +2,16 @@ const RESOURCES = [
   {
     id: 'cvv',
     name: 'CVV — Centro de Valorização da Vida',
-    description: 'Apoio emocional e prevenção do suicídio. Atendimento gratuito, confidencial e disponível 24h por dia por telefone ou chat.',
-    action: 'Ligue 188',
-    href: 'https://www.cvv.org.br',
+    description: 'Apoio emocional e prevenção do suicídio. Atendimento gratuito, confidencial e disponível 24h por dia por telefone ou chat online.',
+    action: 'Acessar Chat 24h',
+    href: 'https://cvv.org.br/chat/',
   },
   {
     id: 'caps',
     name: 'CAPS — Centro de Atenção Psicossocial',
     description: 'Rede pública do SUS que oferece acolhimento especializado em saúde mental de forma gratuita e sem necessidade de agendamento.',
-    action: 'Encontrar CAPS',
-    href: 'https://locatorsus.saude.gov.br/',
+    action: 'Buscar CAPS no Google',
+    href: 'https://www.google.com/search?q=CAPS+Centros+de+Aten%C3%A7%C3%A3o+Psicossocial+mais+pr%C3%B3ximo',
   },
   {
     id: 'atlas',

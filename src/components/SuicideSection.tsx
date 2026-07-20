@@ -117,9 +117,14 @@ export function SuicideSection() {
         {/* Prevention Notice */}
         <div className="p-5 bg-zinc-100/70 dark:bg-carbon-800/40 rounded-xl border border-zinc-200/80 dark:border-carbon-700/60 mb-8 flex items-center justify-between gap-4 text-xs font-mono text-slate-600 dark:text-ash-300">
           <span>Se você ou alguém que você conhece precisa de apoio emocional:</span>
-          <span className="shrink-0 px-3 py-1 bg-white dark:bg-carbon-900 border border-zinc-300 dark:border-carbon-600 rounded font-bold text-slate-900 dark:text-ash-100">
-            CVV 188
-          </span>
+          <a
+            href="https://cvv.org.br/chat/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 px-3 py-1 bg-white dark:bg-carbon-900 border border-zinc-300 dark:border-carbon-600 rounded font-bold text-slate-900 dark:text-ash-100 hover:border-slate-400 dark:hover:border-ash-400 transition-colors"
+          >
+            CVV 188 / Chat →
+          </a>
         </div>
 
         {/* Footer note */}
