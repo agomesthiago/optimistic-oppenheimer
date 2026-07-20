@@ -22,14 +22,14 @@
 
 ## Sobre o Projeto
 
-Mais de **780.000 homens** morrem por ano no Brasil por diversas causas, muitas delas evitáveis. O **Vidas Masculinas** é uma iniciativa independente e de código aberto projetada com foco em dispositivos móveis (*mobile-first*) para sensibilizar, informar e educar a sociedade sobre a gravidade da mortalidade masculina em território nacional.
+Mais de **800.000 homens** morrem por ano no Brasil por diversas causas, representando cerca de 55% de todos os óbitos do país. O **Vidas Masculinas** é uma iniciativa independente e de código aberto (*open-source*), desenvolvida com abordagem *mobile-first* para conscientizar a sociedade, fomentar o debate público e fornecer ferramentas de dados sobre a mortalidade masculina e saúde mental no Brasil.
 
-A aplicação apresenta:
-* **Contador em Tempo Real**: Estimativa baseada em taxas oficiais de mortes de homens no Brasil ao longo do ano corrente e da sessão do usuário.
-* **Detalhamento por Causa**: Estatísticas dinâmicas sobre homicídios, acidentes de trânsito, suicídios e patologias prevalentes.
-* **Histórias e Contexto**: Abordagem humana além dos frios dados numéricos, visando gerar empatia e ação.
-* **Recursos de Apoio**: Atalhos de conscientização e canais de ajuda em saúde mental e prevenção.
-* **Design Premium**: Interface minimalista com tema dinâmico (escuro/claro), animações fluidas via GSAP e suporte de acessibilidade.
+### Eixos Centrais de Atuação:
+* **Mortalidade por Suicídio & Prevenção**: No Brasil, **77,8% das vítimas de suicídio são homens** (com uma razão de 3,5 mortes masculinas para cada feminina). O projeto dedica uma seção exclusiva e um modo de contador em tempo real para dar visibilidade a essa epidemia silenciosa, promovendo o acolhimento gratuito e sigiloso do **CVV 188** e da rede **CAPS/SUS**.
+* **Desigualdade na Expectativa de Vida**: Exibição da disparidade de longevidade ao nascer entre homens (**72,0 anos**) e mulheres (**79,0 anos**), registrando um fosso de **7,0 anos a menos para a população masculina** no país (IBGE 2022).
+* **Contador em Tempo Real**: Projeção matemática em tempo real com alternância entre óbitos por todas as causas, horário local e suicídios masculinos.
+* **Ecossistema de Widgets Incorporáveis**: Distribuição livre de widgets leves (Web Components nativos, Scripts de Embed e API JSON estática) para que portais de notícias, blogs, ONGs e sites institucionais possam incorporar os contadores em suas próprias páginas.
+* **Design Premium & Acessibilidade**: Interface minimalista com tema dinâmico (escuro/claro), animações fluidas via GSAP e suporte de acessibilidade.
 
 ---
 
