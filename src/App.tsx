@@ -77,11 +77,11 @@ export default function App() {
         
         {/* Dedicated Causes Section */}
         <section id="causas" className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa
             </h2>
-            <div className="w-full flex justify-center">
+            <div className="w-full">
               <CauseTicker />
             </div>
           </div>
