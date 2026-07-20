@@ -28,6 +28,13 @@
 
 Mais de **800.000 homens** morrem por ano no Brasil por diversas causas, representando cerca de 55% de todos os óbitos do país. O **Vidas Masculinas** é uma iniciativa independente e de código aberto (*open-source*), desenvolvida com abordagem *mobile-first* para conscientizar a sociedade, fomentar o debate público e fornecer ferramentas de dados sobre a mortalidade masculina e saúde mental no Brasil.
 
+### 🌐 Hospedagem & Status dos Domínios
+
+| Provedor | Domínio / URL | Status | Observações |
+|---|---|---|---|
+| **Vercel** *(Principal)* | **[vidasmasculinas.vercel.app](https://vidasmasculinas.vercel.app/)** | 🟢 **Ativo (Produção)** | Provedor principal e ativo com Vercel Analytics & Speed Insights. |
+| **Netlify** *(Legado)* | `vidasmasculinas.netlify.app` | 🔴 **Descontinuado (Deprecated)** | Descontinuado devido a limitações de cota gratuita de compilação (*Build Minutes Credit Limits*). |
+
 ### Eixos Centrais de Atuação:
 * **Mortalidade por Suicídio & Prevenção**: No Brasil, **77,8% das vítimas de suicídio são homens** (com uma razão de 3,5 mortes masculinas para cada feminina). O projeto dedica uma seção exclusiva e um modo de contador em tempo real para dar visibilidade a essa epidemia silenciosa, promovendo o acolhimento gratuito e sigiloso do **CVV 188** e da rede **CAPS/SUS**.
 * **Desigualdade na Expectativa de Vida**: Exibição da disparidade de longevidade ao nascer entre homens (**72,0 anos**) e mulheres (**79,0 anos**), registrando um fosso de **7,0 anos a menos para a população masculina** no país (IBGE 2022).

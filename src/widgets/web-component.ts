@@ -71,7 +71,7 @@ class VidasMasculinasCounter extends HTMLElement {
         <div class="vm-wc-title">Vidas Masculinas Perdidas este ano</div>
         <div class="vm-wc-counter" id="vm-wc-val">0</div>
         <div class="vm-wc-subtext">Taxa estimada: ${getRateDescription()}</div>
-        <a href="https://vidasmasculinas.netlify.app" target="_blank" rel="noopener noreferrer" class="vm-wc-link">
+        <a href="https://vidasmasculinas.vercel.app" target="_blank" rel="noopener noreferrer" class="vm-wc-link">
           Acesse o painel completo →
         </a>
       </div>

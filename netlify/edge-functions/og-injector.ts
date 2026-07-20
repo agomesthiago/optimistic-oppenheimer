@@ -15,7 +15,7 @@ export default async (request: Request, context: Context) => {
     let modifiedHtml = html;
     
     // Dynamically replace the domain in metadata to match the current origin (essential for working preview images)
-    modifiedHtml = modifiedHtml.replace(/https:\/\/vidasmasculinas\.netlify\.app/g, origin);
+    modifiedHtml = modifiedHtml.replace(/https:\/\/vidasmasculinas\.vercel\.app/g, origin);
     
     // Intercept paths like: /share/424586
     const match = url.pathname.match(/^\/share\/(\d+)$/);
