@@ -256,6 +256,14 @@ export function formatDeathCount(count: number): string {
   return Math.floor(count).toLocaleString('pt-BR');
 }
 
+/** Taxa de suicídios masculinos por segundo. */
+export const SUICIDE_DEATHS_PER_SECOND = SUICIDE_DATA.male2021 / SECONDS_PER_YEAR;
+
+/** Suicídios masculinos acumulados num dado número de segundos. */
+export function getAccumulatedSuicides(seconds: number): number {
+  return seconds * SUICIDE_DEATHS_PER_SECOND;
+}
+
 /** Descrição legível da taxa. Ex: "1 a cada ~37 segundos" */
 export function getRateDescription(): string {
   const s = Math.round(SECONDS_PER_DEATH);

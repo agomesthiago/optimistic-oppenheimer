@@ -6,6 +6,8 @@ import { StoryCard } from './StoryCard';
 import {
   formatDeathCount,
   getCounterStartDate,
+  getSecondsSinceYearStart,
+  getAccumulatedSuicides,
 } from '../utils/mortality';
 
 const SHARE_COPY = [
@@ -63,16 +65,12 @@ function formatSessionTime(totalSeconds: number): string {
 }
 
 function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTick: boolean; isClockMode: boolean }) {
-  // Bulb is completely hidden in light mode (no rendering/no animation) and active only in dark mode
   return (
     <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0 hidden dark:block">
       <div className="h-full flex flex-col items-center origin-top animate-pendulum">
-        {/* Wire */}
         <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
         
-        {/* Bulb Wrapper */}
         <div className="relative -mt-1 flex flex-col items-center">
-          {/* Edison Bulb SVG */}
           <svg 
             width="36" 
             height="64" 
@@ -81,10 +79,8 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
             xmlns="http://www.w3.org/2000/svg"
             className="text-zinc-400 dark:text-carbon-700 transition-colors duration-300"
           >
-            {/* Socket */}
             <path d="M14 2H26V10H14V2Z" fill="currentColor" />
             <path d="M16 10H24V14H16V10Z" fill="currentColor" opacity="0.8" />
-            {/* Glass Envelope */}
             <path 
               d="M20 14C11.5 14 8 23.5 11 37.5C12.5 44 16.5 53 16.5 61.5H23.5C23.5 53 27.5 44 29 37.5C32 23.5 28.5 14 20 14Z" 
               stroke="currentColor" 
@@ -92,10 +88,8 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
               strokeLinecap="round" 
               strokeLinejoin="round" 
             />
-            {/* Filament support */}
             <path d="M17 48L18.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
             <path d="M23 48L21.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-            {/* Glowing Filament (Edison spiral) - Styled and animated via CSS only in dark mode */}
             <path 
               d="M18.5 35C18.5 32 19.5 30 20 30C20.5 30 21.5 32 21.5 35" 
               strokeWidth="1.8" 
@@ -104,7 +98,6 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
             />
           </svg>
           
-          {/* Radial Light Glow behind the bulb - hidden on light mode, shown in dark mode */}
           <div 
             className="absolute top-10 w-[900px] h-[900px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
             style={{
@@ -132,11 +125,22 @@ interface HeroProps {
 }
 
 export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroProps) {
-  const { isClockMode, toggleMode } = useAutoToggle();
+  const { mode, isClockMode, isSuicideMode, toggleMode } = useAutoToggle();
   const { isSharing, shareToStories } = useShare();
   const prevIntegerRef = useRef(0);
   const [didTick, setDidTick] = useState(false);
   const [now, setNow] = useState(() => new Date());
+  const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setNow(new Date());
+      setYearSeconds(getSecondsSinceYearStart());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const suicideDeaths = getAccumulatedSuicides(yearSeconds);
 
   // Random persuasive share copy — picks one on mount
   const shareCopy = useMemo(() => SHARE_COPY[Math.floor(Math.random() * SHARE_COPY.length)], []);
@@ -145,12 +149,6 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
   const phraseIndex = useMemo(() => Math.floor(Math.random() * COUNTER_PHRASES.length), []);
   
   const textContainerRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (!isClockMode) return;
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, [isClockMode]);
 
   // GSAP Animation when mode changes
   useEffect(() => {
@@ -161,22 +159,40 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
         { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: 'back.out(1.5)' }
       );
     }
-  }, [isClockMode]);
+  }, [mode]);
 
   useEffect(() => {
     const current = Math.floor(deaths);
     if (current !== prevIntegerRef.current) {
       prevIntegerRef.current = current;
-      if (!isClockMode) {
+      if (mode === 'deaths') {
         setDidTick(true);
         const id = setTimeout(() => setDidTick(false), 150);
         return () => clearTimeout(id);
       }
     }
-  }, [deaths, isClockMode]);
+  }, [deaths, mode]);
 
   const sessionCount = Math.floor(sessionDeaths);
   const timeString = now.toLocaleTimeString('pt-BR');
+
+  const displayHeader = isClockMode
+    ? 'horário local'
+    : isSuicideMode
+    ? 'estimativa em tempo real — suicídios masculinos'
+    : 'estimativa em tempo real — todas as causas';
+
+  const displayValue = isClockMode
+    ? timeString
+    : isSuicideMode
+    ? formatDeathCount(suicideDeaths)
+    : formatDeathCount(deaths);
+
+  const displayTagline = isClockMode
+    ? '— o tempo passa'
+    : isSuicideMode
+    ? '— suicídios masculinos (77,8% do total)'
+    : '— vidas interrompidas';
 
   return (
     <section
@@ -206,17 +222,21 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
       {/* Center content wrapper */}
       <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto">
         <h1 className="mb-8 text-sm md:text-base font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-500 select-none">
-          {isClockMode ? 'horário local' : 'estimativa em tempo real'}
+          {displayHeader}
         </h1>
 
         <button
           id="main-counter-toggle"
           onClick={toggleMode}
           aria-live="polite"
-          title="Clique para alternar a exibição"
-          aria-label={isClockMode ? `Horário atual: ${timeString}` : `${formatDeathCount(deaths)} mortes masculinas desde ${EPOCH_LABEL}`}
+          title="Clique para alternar: Óbitos Gerais → Horário Local → Suicídios"
+          aria-label={`Alternar modo. Atual: ${displayHeader}`}
           className={`relative font-mono font-bold leading-none select-none transition-colors duration-500 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50 rounded-3xl hover:opacity-90 ${
-            isRunning && !isClockMode ? 'text-slate-900 dark:text-ash-100 dark:counter-glow-active' : 'text-slate-700 dark:text-ash-300'
+            isSuicideMode
+              ? 'text-crimson-600 dark:text-crimson-400'
+              : isRunning && !isClockMode
+              ? 'text-slate-900 dark:text-ash-100 dark:counter-glow-active'
+              : 'text-slate-700 dark:text-ash-300'
           }`}
           style={{ fontSize: 'clamp(4rem, 15vw, 10.5rem)' }}
         >
@@ -224,12 +244,12 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
             ref={textContainerRef}
             className={`inline-block ${didTick && !isClockMode ? 'animate-count-up' : ''}`}
           >
-            {isClockMode ? timeString : formatDeathCount(deaths)}
+            {displayValue}
           </span>
         </button>
 
         <p className="mt-6 text-sm font-mono uppercase tracking-widest text-slate-500 dark:text-ash-500 select-none">
-          {isClockMode ? '— o tempo passa' : '— vidas interrompidas'}
+          {displayTagline}
         </p>
 
         <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600 dark:text-ash-300 font-medium">
@@ -240,6 +260,14 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
               </span>,
               EPOCH_LABEL
             )
+          ) : isSuicideMode ? (
+            <>
+              Até agora, cerca de{' '}
+              <span className="font-bold text-crimson-600 dark:text-crimson-400 tabular-nums">
+                {formatDeathCount(suicideDeaths)}
+              </span>{' '}
+              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} (~33 por dia).
+            </>
           ) : (
             <>
               <span className="font-bold text-slate-950 dark:text-ash-100 tabular-nums">
@@ -289,4 +317,3 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
     </section>
   );
 }
-

@@ -131,15 +131,19 @@
   animation: blink-random 8s ease-in-out infinite;
 }
 
-/* Reveal on Scroll */
+/* Reveal on Scroll — Lazy Smooth Entry */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(24px);
-  will-change: opacity, transform;
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(36px) scale(0.985);
+  filter: blur(5px);
+  will-change: opacity, transform, filter;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-on-scroll.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
 }

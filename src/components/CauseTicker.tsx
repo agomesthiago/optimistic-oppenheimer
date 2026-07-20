@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, getSecondsSinceYearStart } from '../utils/mortality';
 
-const ROTATE_MS = 5_500;
-const FADE_MS = 350;
+const ROTATE_MS = 6_000;
 
 export function CauseTicker() {
   const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
   const [activeIndex, setActiveIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -15,57 +14,97 @@ export function CauseTicker() {
     return () => clearInterval(id);
   }, []);
 
-  const advance = (nextIndex: number) => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setVisible(false);
-    setTimeout(() => {
-      setActiveIndex(nextIndex);
-      setVisible(true);
-    }, FADE_MS);
-  };
-
   useEffect(() => {
+    if (isPaused) return;
     timerRef.current = setTimeout(() => {
-      advance((activeIndex + 1) % CAUSE_BREAKDOWN.length);
+      setActiveIndex((prev) => (prev + 1) % CAUSE_BREAKDOWN.length);
     }, ROTATE_MS);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [activeIndex]);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [activeIndex, isPaused]);
 
-  const cause = CAUSE_BREAKDOWN[activeIndex];
-  const count = getCauseDeaths(cause, yearSeconds);
+  const activeCause = CAUSE_BREAKDOWN[activeIndex];
+  const activeCount = getCauseDeaths(activeCause, yearSeconds);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-lg">
+    <div
+      className="w-full max-w-2xl mx-auto flex flex-col gap-8"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Featured Active Cause Display */}
       <div
         role="status"
         aria-live="polite"
-        aria-label={`${formatDeathCount(count)} homens ${cause.tickerVerb} neste ano`}
-        className="w-full border border-zinc-200 dark:border-carbon-700 bg-white dark:bg-carbon-800 p-8 flex flex-col gap-3 min-h-[9rem] justify-center shadow-sm"
-        style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-in-out` }}
+        className="relative overflow-hidden bg-white dark:bg-carbon-950 p-8 rounded-2xl border border-zinc-200/80 dark:border-carbon-800 shadow-sm transition-all duration-500"
       >
-        <span className="font-mono text-3xl md:text-4xl font-bold text-slate-800 dark:text-ash-100 tabular-nums">
-          {formatDeathCount(count)}
-        </span>
-        <p className="text-sm md:text-base text-slate-600 dark:text-ash-300 leading-snug">
-          homens {cause.tickerVerb} neste ano
-        </p>
-        <p className="text-xs font-mono text-slate-400 dark:text-ash-600 mt-2">{cause.source}</p>
+        {/* Top bar progress line for active cause */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-zinc-100 dark:bg-carbon-900">
+          <div
+            className="h-full bg-crimson-600 dark:bg-crimson-500 transition-all duration-300"
+            style={{ width: `${(activeCause.proportion * 100 * 3.5)}%` }}
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 mb-4">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-ash-500 block mb-1">
+              Causa Selecionada ({activeIndex + 1}/{CAUSE_BREAKDOWN.length})
+            </span>
+            <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-ash-100 capitalize">
+              {activeCause.label}
+            </h3>
+          </div>
+
+          <div className="flex flex-col items-start md:items-end">
+            <span className="font-mono text-3xl md:text-4xl font-bold text-slate-900 dark:text-ash-100 tabular-nums">
+              {formatDeathCount(activeCount)}
+            </span>
+            <span className="text-xs font-mono text-slate-400 dark:text-ash-500">
+              óbitos masculinos em 2026
+            </span>
+          </div>
+        </div>
+
+        <div className="p-4 bg-zinc-50 dark:bg-carbon-900/50 rounded-xl border border-zinc-200/60 dark:border-carbon-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
+          <span className="text-slate-600 dark:text-ash-300">
+            Proporção no total de mortes: <strong className="text-slate-900 dark:text-ash-100">{(activeCause.proportion * 100).toFixed(1).replace('.', ',')}%</strong> (~{activeCause.annualEstimate.toLocaleString('pt-BR')}/ano)
+          </span>
+          <span className="text-slate-400 dark:text-ash-500 shrink-0">
+            Fonte: {activeCause.source}
+          </span>
+        </div>
       </div>
 
-      <div role="tablist" aria-label="Causas de morte" className="flex items-center gap-3">
-        {CAUSE_BREAKDOWN.map((c, i) => (
-          <button
-            key={c.id}
-            id={`ticker-${c.id}`}
-            role="tab"
-            aria-selected={i === activeIndex}
-            aria-label={c.label}
-            onClick={() => i !== activeIndex && advance(i)}
-            className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 dark:focus:ring-ash-500 dark:focus:ring-offset-carbon-900 ${
-              i === activeIndex ? 'w-6 bg-slate-600 dark:bg-ash-400' : 'w-2 bg-zinc-300 dark:bg-carbon-700 hover:bg-slate-400 dark:hover:bg-ash-600'
-            }`}
-          />
-        ))}
+      {/* Cause Selector Pills Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5" role="tablist" aria-label="Seletor de Causas">
+        {CAUSE_BREAKDOWN.map((c, i) => {
+          const isSelected = i === activeIndex;
+          const causeCount = getCauseDeaths(c, yearSeconds);
+
+          return (
+            <button
+              key={c.id}
+              role="tab"
+              aria-selected={isSelected}
+              onClick={() => setActiveIndex(i)}
+              className={`p-3 rounded-xl text-left border transition-all duration-200 flex flex-col gap-1 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-ash-500 ${
+                isSelected
+                  ? 'bg-slate-900 text-white dark:bg-ash-100 dark:text-carbon-950 border-slate-900 dark:border-ash-100 shadow-sm scale-[1.02]'
+                  : 'bg-white dark:bg-carbon-900/40 text-slate-700 dark:text-ash-300 border-zinc-200/80 dark:border-carbon-800 hover:bg-zinc-100 dark:hover:bg-carbon-800'
+              }`}
+            >
+              <div className="flex justify-between items-center w-full text-[10px] font-mono uppercase tracking-wider opacity-70">
+                <span className="truncate">{c.label}</span>
+                <span>{(c.proportion * 100).toFixed(1)}%</span>
+              </div>
+              <span className="font-mono text-sm font-bold tabular-nums">
+                {formatDeathCount(causeCount)}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

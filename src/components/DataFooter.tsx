@@ -1,47 +1,9 @@
-import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, MALE_MORTALITY_RATE_PER_100K, LIFE_EXPECTANCY_DATA, SUICIDE_DATA } from '../utils/mortality';
-
-const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
+import { MORTALITY_SOURCES, LIFE_EXPECTANCY_DATA, SUICIDE_DATA } from '../utils/mortality';
 
 export function DataFooter() {
   return (
     <footer id="footer" className="border-t border-zinc-200 dark:border-carbon-700 py-16 px-6 bg-zinc-100 dark:bg-carbon-900/30" role="contentinfo">
       <div className="max-w-2xl mx-auto space-y-10">
-
-        {/* Formulas */}
-        <div>
-          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fórmulas & Indicadores</p>
-          <div className="font-mono text-sm text-slate-600 dark:text-ash-400 bg-white dark:bg-carbon-800 border border-zinc-200 dark:border-carbon-700 p-6 leading-relaxed overflow-x-auto space-y-4 shadow-sm">
-            <div>
-              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">1. Estimativa Temporal Acumulada</p>
-              <p className="text-slate-800 dark:text-ash-200">
-                taxa = {TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} / 31.557.600 s
-              </p>
-              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
-                ≈ {(DEATHS_PER_SECOND).toFixed(5)} mortes/segundo · ~{DEATHS_PER_DAY.toLocaleString('pt-BR')} mortes masculinas/dia
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-zinc-200/60 dark:border-carbon-700/60">
-              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">2. Taxa Bruta de Mortalidade Masculina</p>
-              <p className="text-slate-800 dark:text-ash-200">
-                taxa_100k = ({TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} / ~105.700.000 homens) × 100.000
-              </p>
-              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
-                ≈ {MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens (SIM / IBGE)
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-zinc-200/60 dark:border-carbon-700/60">
-              <p className="text-slate-400 dark:text-ash-500 text-xs uppercase tracking-wider mb-1">3. Razão de Mortalidade por Suicídio</p>
-              <p className="text-slate-800 dark:text-ash-200">
-                razão = {SUICIDE_DATA.male2021.toLocaleString('pt-BR')} (H) / {SUICIDE_DATA.female2021.toLocaleString('pt-BR')} (M) = {SUICIDE_DATA.ratioMaleToFemale.toString().replace('.', ',')} : 1
-              </p>
-              <p className="text-slate-500 dark:text-ash-600 text-xs mt-1">
-                {SUICIDE_DATA.malePercentage}% das vítimas no Brasil · Taxa H: {SUICIDE_DATA.maleRatePer100k.toString().replace('.', ',')}/100k vs M: {SUICIDE_DATA.femaleRatePer100k.toString().replace('.', ',')}/100k
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* Sources */}
         <div>
@@ -92,24 +54,6 @@ export function DataFooter() {
               </span>
             </li>
           </ul>
-        </div>
-
-        {/* DNS Pointing Guide */}
-        <div>
-          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Aponte seu domínio</p>
-          <div className="font-mono text-sm text-slate-600 dark:text-ash-400 bg-white dark:bg-carbon-800 border border-zinc-200 dark:border-carbon-700 p-6 leading-relaxed space-y-4 shadow-sm">
-            <p className="text-slate-800 dark:text-ash-200">
-              Se você possui um domínio próprio e quer que ele aponte para este projeto, configure um registro <strong className="text-slate-900 dark:text-ash-100">CNAME</strong> no DNS do seu provedor:
-            </p>
-            <div className="bg-zinc-50 dark:bg-carbon-900 border border-zinc-200 dark:border-carbon-700 p-4 rounded overflow-x-auto">
-              <p className="text-slate-700 dark:text-ash-300"><strong>Tipo:</strong> CNAME</p>
-              <p className="text-slate-700 dark:text-ash-300"><strong>Host:</strong> @ <span className="text-slate-400 dark:text-ash-600">(ou www)</span></p>
-              <p className="text-slate-700 dark:text-ash-300"><strong>Valor:</strong> vidasmasculinas.netlify.app</p>
-            </div>
-            <p className="text-slate-500 dark:text-ash-600 text-xs">
-              Após configurar o CNAME, entre em contato para que possamos adicionar seu domínio personalizado no painel do Netlify. A propagação DNS leva até 48h.
-            </p>
-          </div>
         </div>
 
         {/* Bottom */}
