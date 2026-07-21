@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vidasmasculinas.netlify.app/sitemap.xml
+Sitemap: https://vidasmasculinas.vercel.app/sitemap.xml
+
+# AI & LLM Search Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: CCBot
+Allow: /

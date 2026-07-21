@@ -1,5 +1,7 @@
 import { SUICIDE_DATA } from '../utils/mortality';
-
+import { useShare } from '../hooks/useShare';
+import { Share2, Loader2 } from 'lucide-react';
+import { SuicideStoryCard } from './SuicideStoryCard';
 export function SuicideSection() {
   const {
     total2021,
@@ -15,12 +17,16 @@ export function SuicideSection() {
     sourceUrl,
   } = SUICIDE_DATA;
 
+  const { isSharing, shareToStories } = useShare();
+
   return (
     <section
       id="suicidios"
       aria-labelledby="suicidio-heading"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900/40"
     >
+      <SuicideStoryCard />
+
       <div className="max-w-2xl mx-auto">
         <h2
           id="suicidio-heading"
@@ -29,7 +35,7 @@ export function SuicideSection() {
           Mortalidade por Suicídio
         </h2>
 
-        <p className="text-slate-700 dark:text-ash-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
+        <p id="dado-suicidio" className="text-slate-700 dark:text-ash-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
           Em {year}, o Brasil registrou <strong className="text-slate-900 dark:text-ash-100 font-bold">{total2021.toLocaleString('pt-BR')} suicídios</strong>. Quase 4 em cada 5 vítimas foram homens.
         </p>
 
@@ -127,8 +133,8 @@ export function SuicideSection() {
           </a>
         </div>
 
-        {/* Footer note */}
-        <div className="pt-4 border-t border-zinc-200/60 dark:border-carbon-800/60">
+        {/* Footer note & Share */}
+        <div className="pt-4 border-t border-zinc-200/60 dark:border-carbon-800/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="text-xs font-mono text-slate-400 dark:text-ash-600">
             Fonte:{' '}
             <a
@@ -141,6 +147,16 @@ export function SuicideSection() {
             </a>
             . Dados consolidados do Ministério da Saúde / SIM.
           </p>
+
+          <button
+            onClick={() => shareToStories('suicidio-story-card-export')}
+            disabled={isSharing}
+            aria-label="Compartilhar dados sobre suicídio"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-ash-200 text-white dark:text-carbon-900 text-xs font-mono font-bold uppercase tracking-wider hover:bg-slate-800 dark:hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:focus:ring-ash-300 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+          >
+            {isSharing ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />}
+            {isSharing ? 'Gerando...' : 'Compartilhar'}
+          </button>
         </div>
       </div>
 

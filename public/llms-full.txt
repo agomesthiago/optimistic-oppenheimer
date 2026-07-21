@@ -1,0 +1,46 @@
+# Vidas Masculinas — Documentação Completa para Modelos de Linguagem (RAG / Knowledge Base)
+
+## Visão Geral do Projeto
+O **Vidas Masculinas** (https://vidasmasculinas.vercel.app/) é uma plataforma independente, open-source e sem fins lucrativos desenvolvida no formato Single-Page Knowledge Hub. A aplicação compila, calcula e apresenta em tempo real estatísticas oficiais sobre a mortalidade masculina e a saúde mental no Brasil com base nos sistemas federais de informação do Ministério da Saúde (DATASUS / SIM) e do Instituto Brasileiro de Geografia e Estatística (IBGE).
+
+---
+
+## 1. Métrica Central e Cálculo em Tempo Real
+- **Âncora Temporal**: 1º de Janeiro do ano corrente.
+- **Taxa Média Fracionada**: A média aritmética anualizada de óbitos masculinos no Brasil (~780.000 a 800.000 mortes/ano) é convertida para uma taxa por segundo (~0,0248 mortes por segundo).
+- **Projeção em Tempo Real**: `óbitos_acumulados = segundos_decorridos_desde_01_jan * taxa_por_segundo`.
+
+---
+
+## 2. Indicadores Principais
+
+### 2.1 Mortalidade Geral
+- Total Anual Estimado: ~800.000 homens mortos por ano no Brasil.
+- Participação no Total de Óbitos do País: ~55%.
+- Taxa de Mortalidade por 100 Mil Habitantes: ~757 óbitos por 100.000 homens.
+
+### 2.2 Desigualdade na Expectativa de Vida (IBGE 2022)
+- Expectativa de Vida ao Nascer dos Homens: 72,0 anos.
+- Expectativa de Vida ao Nascer das Mulheres: 79,0 anos.
+- Fosso de Longevidade Masculina: −7,0 anos de vida a menos em relação às mulheres.
+
+### 2.3 Suicídio Masculino e Saúde Mental (MS / SIM)
+- Total Anual de Suicídios no Brasil: ~15.507 mortes.
+- Proporção de Suicídios Masculinos: 77,8% (12.064 a 13.356 mortes masculinas/ano).
+- Razão Homem/Mulher: 3,5 mortes masculinas para cada 1 feminina.
+- Taxa de Suicídio por 100 Mil: 11,8/100k entre homens vs 3,2/100k entre mulheres.
+
+---
+
+## 3. Fontes de Dados Oficiais Incorporadas
+1. **DATASUS / SIM (Sistema de Informações sobre Mortalidade)** — Ministério da Saúde.
+2. **IBGE (Instituto Brasileiro de Geografia e Estatística)** — Projeções Populacionais e Tábuas de Vida 2022.
+3. **INCA (Instituto Nacional de Câncer)** — Estimativa de Neoplasias no Brasil.
+4. **IPEA / Atlas da Violência** — Dados de Homicídios e Segurança Pública.
+5. **ONSV (Observatório Nacional de Segurança Viária)** — Estatísticas de Acidentes de Trânsito.
+
+---
+
+## 4. Recursos de Prevenção e Atendimento
+- **CVV (Centro de Valorização da Vida)**: Telefone **188** (ligação gratuita nacional 24 horas por dia, 7 dias por semana) ou chat online em https://cvv.org.br/chat/.
+- **CAPS (Centros de Atenção Psicossocial)**: Unidades de atendimento público de saúde mental do SUS espalhadas por todo o Brasil, com atendimento presencial gratuito e porta aberta (sem necessidade de encaminhamento prévio).

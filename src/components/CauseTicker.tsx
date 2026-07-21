@@ -6,12 +6,11 @@ import { useShare } from '../hooks/useShare';
 const AUTO_SLIDE_MS = 7_000;
 
 export function CauseTicker() {
+  const { isSharing, shareToStories } = useShare();
   const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const { isSharing, shareToStories } = useShare();
 
   useEffect(() => {
     const id = setInterval(() => setYearSeconds(getSecondsSinceYearStart()), 1000);

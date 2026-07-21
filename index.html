@@ -4,61 +4,176 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO Básico -->
+    <!-- FEATURE 01 — SEO Técnico Completo -->
     <title>Vidas Masculinas | Mortalidade Masculina no Brasil em Dados</title>
-    <meta name="description" content="Mais de 800 mil homens morrem por ano no Brasil. Visualize em tempo real a urgência da mortalidade masculina: homicídios, acidentes, suicídios e doenças evitáveis." />
-    <meta name="keywords" content="mortalidade masculina, brasil, mortes homens, estatísticas, datasus, ibge, saúde do homem, causas de morte, conscientização, violência, suicídio masculino" />
+    <meta name="description" content="Mais de 800 mil homens morrem por ano no Brasil. Painel de visualização em tempo real e análise epidemiológica: homicídios, trânsito, suicídios e doenças evitáveis." />
+    <meta name="keywords" content="mortalidade masculina, brasil, mortes homens, estatísticas, datasus, ibge, saúde do homem, causas de morte, conscientização, violência, suicídio masculino, longevidade" />
     <meta name="author" content="Vidas Masculinas" />
+    <meta name="publisher" content="Vidas Masculinas" />
+    <meta name="copyright" content="© 2026 Vidas Masculinas — Open Source (MIT)" />
+    <meta name="generator" content="Vite + React 19 + TypeScript" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no, address=no, email=no" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://vidasmasculinas.vercel.app" />
+    <link rel="canonical" href="https://vidasmasculinas.vercel.app/" />
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Vidas Masculinas" />
-    <meta property="og:url" content="https://vidasmasculinas.vercel.app" />
-    <meta property="og:title" content="Vidas Masculinas | Mortalidade Masculina no Brasil" />
-    <meta property="og:description" content="Mais de 800 mil homens morrem por ano no Brasil. Visualize em tempo real a urgência da mortalidade masculina." />
-    <meta property="og:image" content="https://vidasmasculinas.vercel.app/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Vidas Masculinas — Contador em tempo real de mortes masculinas no Brasil" />
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://vidasmasculinas.vercel.app" />
-    <meta name="twitter:title" content="Vidas Masculinas | Mortalidade Masculina no Brasil" />
-    <meta name="twitter:description" content="Mais de 800 mil homens morrem por ano no Brasil. Visualize em tempo real a urgência da mortalidade masculina." />
-    <meta name="twitter:image" content="https://vidasmasculinas.vercel.app/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Vidas Masculinas — Contador em tempo real de mortes masculinas no Brasil" />
-
-    <!-- Theme Color -->
+    <!-- Theme & Color Scheme -->
+    <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- FEATURE 02 — Open Graph & Social Media Metadados -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Vidas Masculinas" />
+    <meta property="og:url" content="https://vidasmasculinas.vercel.app/" />
+    <meta property="og:title" content="Vidas Masculinas | Mortalidade Masculina no Brasil em Dados" />
+    <meta property="og:description" content="Mais de 800 mil homens morrem por ano no Brasil. Visualize em tempo real a urgência da mortalidade masculina e saúde mental." />
+    <meta property="og:image" content="https://vidasmasculinas.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vidas Masculinas — Painel em tempo real de mortalidade masculina no Brasil" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://vidasmasculinas.vercel.app/" />
+    <meta name="twitter:title" content="Vidas Masculinas | Mortalidade Masculina no Brasil em Dados" />
+    <meta name="twitter:description" content="Mais de 800 mil homens morrem por ano no Brasil. Visualize em tempo real a urgência da mortalidade masculina." />
+    <meta name="twitter:image" content="https://vidasmasculinas.vercel.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Vidas Masculinas — Painel em tempo real de mortalidade masculina no Brasil" />
+
+    <!-- FEATURE 03 — JSON-LD Grafo Único (@graph) Semântico -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Vidas Masculinas",
-      "url": "https://vidasmasculinas.vercel.app",
-      "description": "Projeto de visualização de dados oficiais sobre a urgência da mortalidade masculina no Brasil.",
-      "inLanguage": "pt-BR",
-      "author": {
-        "@type": "Organization",
-        "name": "Vidas Masculinas",
-        "url": "https://vidasmasculinas.vercel.app"
-      },
-      "isPartOf": {
-        "@type": "CreativeWork",
-        "name": "Contra o Esquecimento",
-        "url": "https://obrasprimas.vercel.app/"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://vidasmasculinas.vercel.app/#organization",
+          "name": "Vidas Masculinas",
+          "url": "https://vidasmasculinas.vercel.app/",
+          "logo": "https://vidasmasculinas.vercel.app/favicon.svg",
+          "sameAs": [
+            "https://github.com/agomesthiago/optimistic-oppenheimer",
+            "https://instagram.com/vidasmasculinas",
+            "https://linkedin.com/company/vidasmasculinas",
+            "https://youtube.com/@vidasmasculinas"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://vidasmasculinas.vercel.app/#website",
+          "url": "https://vidasmasculinas.vercel.app/",
+          "name": "Vidas Masculinas",
+          "description": "Painel de conscientização em tempo real e desagregação epidemiológica da mortalidade masculina no Brasil.",
+          "inLanguage": "pt-BR",
+          "publisher": { "@id": "https://vidasmasculinas.vercel.app/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://vidasmasculinas.vercel.app/#webpage",
+          "url": "https://vidasmasculinas.vercel.app/",
+          "name": "Vidas Masculinas | Mortalidade Masculina no Brasil em Dados",
+          "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
+          "primaryImageOfPage": { "@id": "https://vidasmasculinas.vercel.app/#og-image" },
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://vidasmasculinas.vercel.app/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://vidasmasculinas.vercel.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Vidas Masculinas",
+              "item": "https://vidasmasculinas.vercel.app/#projeto"
+            }
+          ]
+        },
+        {
+          "@type": "AboutPage",
+          "@id": "https://vidasmasculinas.vercel.app/#aboutpage",
+          "url": "https://vidasmasculinas.vercel.app/#projeto",
+          "name": "Sobre o Projeto Vidas Masculinas",
+          "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "Dataset",
+          "@id": "https://vidasmasculinas.vercel.app/#dataset",
+          "name": "Estatísticas da Mortalidade Masculina no Brasil",
+          "description": "Dados públicos projetados sobre mortalidade masculina a partir dos registros federais do DATASUS/SIM e IBGE 2022.",
+          "url": "https://vidasmasculinas.vercel.app/#estatisticas",
+          "license": "https://creativecommons.org/licenses/by/4.0/",
+          "creator": { "@id": "https://vidasmasculinas.vercel.app/#organization" },
+          "spatialCoverage": "Brasil",
+          "temporalCoverage": "2021/2026",
+          "distribution": {
+            "@type": "DataDownload",
+            "encodingFormat": "JSON"
+          },
+          "measurementTechnique": "Agregação de Dados e Projeção Matemática",
+          "variableMeasured": "Taxa de Mortalidade Masculina",
+          "dateModified": "2026-07-20",
+          "keywords": ["Mortalidade Masculina", "Brasil", "DATASUS", "IBGE", "Saúde do Homem"]
+        },
+        {
+          "@type": "MedicalWebPage",
+          "@id": "https://vidasmasculinas.vercel.app/#health-page",
+          "name": "Saúde Mental e Prevenção ao Suicídio Masculino",
+          "url": "https://vidasmasculinas.vercel.app/#suicidios",
+          "aspect": ["Epidemiology", "Prevention"],
+          "citation": [
+            "https://www.gov.br/saude/pt-br",
+            "https://www.ibge.gov.br/",
+            "https://datasus.saude.gov.br/",
+            "https://www.gov.br/inca/pt-br"
+          ],
+          "about": [
+            {
+              "@type": "MedicalCondition",
+              "name": "Suicídio",
+              "associatedAnatomy": {
+                "@type": "AnatomicalStructure",
+                "name": "Saúde Mental"
+              }
+            }
+          ],
+          "medicalAudience": "Public"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://vidasmasculinas.vercel.app/#creative-work",
+          "name": "Vidas Masculinas — Single Page Knowledge Hub",
+          "author": { "@id": "https://vidasmasculinas.vercel.app/#organization" },
+          "publisher": { "@id": "https://vidasmasculinas.vercel.app/#organization" },
+          "inLanguage": "pt-BR",
+          "isAccessibleForFree": true,
+          "hasPart": [
+            { "@id": "https://vidasmasculinas.vercel.app/#dataset" },
+            { "@id": "https://vidasmasculinas.vercel.app/#faq-schema" }
+          ]
+        },
+        {
+          "@type": "ImageObject",
+          "@id": "https://vidasmasculinas.vercel.app/#og-image",
+          "url": "https://vidasmasculinas.vercel.app/og-image.jpg",
+          "contentUrl": "https://vidasmasculinas.vercel.app/og-image.jpg",
+          "width": "1200",
+          "height": "630",
+          "caption": "Vidas Masculinas — Painel de Mortalidade Masculina no Brasil"
+        }
+      ]
     }
     </script>
 
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <div id="root"></div>

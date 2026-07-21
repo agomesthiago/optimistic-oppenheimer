@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
 import { StoryCard } from './StoryCard';
+import { HangingBulb } from './HangingBulb';
 import {
   formatDeathCount,
   getCounterStartDate,
@@ -24,27 +25,27 @@ const SHARE_COPY = [
 const COUNTER_PHRASES = [
   (deaths: React.ReactNode, date: string) => (
     <>
-      Até aqui, {deaths} homens morreram no Brasil desde {date} por causas diversas.
+      Até o momento, registram-se {deaths} óbitos masculinos no Brasil desde {date} por causas diversas.
     </>
   ),
   (deaths: React.ReactNode, date: string) => (
     <>
-      O silêncio engoliu {deaths} vidas masculinas no Brasil desde {date} por causas diversas.
+      Contabilizam-se {deaths} óbitos de homens no Brasil desde {date} segundo estimativas baseadas no DATASUS/SIM.
     </>
   ),
   (deaths: React.ReactNode, date: string) => (
     <>
-      Desde {date}, {deaths} homens tiveram suas histórias e sonhos interrompidos por causas diversas.
+      Desde {date}, {deaths} homens faleceram no Brasil por causas patológicas e externas evitáveis.
     </>
   ),
   (deaths: React.ReactNode, date: string) => (
     <>
-      Já se foram {deaths} pais, filhos e irmãos no Brasil desde {date} por causas diversas.
+      A mortalidade masculina acumulada atinge {deaths} óbitos no Brasil desde {date}.
     </>
   ),
   (deaths: React.ReactNode, date: string) => (
     <>
-      A triste marca de {deaths} vidas masculinas ceifadas foi alcançada desde {date} por causas diversas.
+      Estimam-se {deaths} óbitos masculinos ocorridos no país no período desde {date}.
     </>
   ),
 ];
@@ -64,58 +65,6 @@ function formatSessionTime(totalSeconds: number): string {
   return `${s}s`;
 }
 
-function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTick: boolean; isClockMode: boolean }) {
-  return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0 hidden dark:block">
-      <div className="h-full flex flex-col items-center origin-top animate-pendulum">
-        <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
-        
-        <div className="relative -mt-1 flex flex-col items-center">
-          <svg 
-            width="36" 
-            height="64" 
-            viewBox="0 0 40 70" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-zinc-400 dark:text-carbon-700 transition-colors duration-300"
-          >
-            <path d="M14 2H26V10H14V2Z" fill="currentColor" />
-            <path d="M16 10H24V14H16V10Z" fill="currentColor" opacity="0.8" />
-            <path 
-              d="M20 14C11.5 14 8 23.5 11 37.5C12.5 44 16.5 53 16.5 61.5H23.5C23.5 53 27.5 44 29 37.5C32 23.5 28.5 14 20 14Z" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-            />
-            <path d="M17 48L18.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-            <path d="M23 48L21.5 35" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-            <path 
-              d="M18.5 35C18.5 32 19.5 30 20 30C20.5 30 21.5 32 21.5 35" 
-              strokeWidth="1.8" 
-              strokeLinecap="round"
-              className="filament-glow transition-colors duration-300"
-            />
-          </svg>
-          
-          <div 
-            className="absolute top-10 w-[900px] h-[900px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
-            style={{
-              background: isClockMode
-                ? 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 40%, transparent 75%)'
-                : 'radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.03) 60%, transparent 80%)',
-              transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.12 : 1})`,
-              filter: 'blur(30px)',
-              opacity: active ? 1 : 0.25,
-              transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
-              animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 interface HeroProps {
   deaths: number;
@@ -207,23 +156,6 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
       />
       <HangingBulb active={isRunning} didTick={didTick} isClockMode={isClockMode} />
 
-      {/* Top Left Header (Logo) */}
-      <div className="absolute top-8 left-8 z-20 select-none pointer-events-none">
-        <span className="font-mono text-xs uppercase tracking-[0.35em] font-bold text-slate-800 dark:text-ash-100">
-          Vidas Masculinas
-        </span>
-      </div>
-
-      {/* Top Right Navigation Links */}
-      <nav className="absolute top-8 right-24 z-20 hidden lg:flex items-center gap-6 text-[11px] font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500">
-        <a href="#estatisticas" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Stats</a>
-        <a href="#expectativa-vida" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Longevidade</a>
-        <a href="#suicidios" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Suicídio</a>
-        <a href="#causas" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Causas</a>
-        <a href="#recursos" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Ajuda</a>
-        <a href="#metodologia" className="hover:text-slate-800 dark:hover:text-ash-200 transition-colors">Método</a>
-      </nav>
-
       {/* Center content wrapper */}
       <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto">
         {/* Mode Selector Tabs */}
@@ -291,7 +223,7 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
           {displayTagline}
         </p>
 
-        <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600 dark:text-ash-300 font-medium">
+        <p id="mortalidade-geral" className="mt-4 max-w-md text-base leading-relaxed text-slate-600 dark:text-ash-300 font-medium">
           {isClockMode ? (
             COUNTER_PHRASES[phraseIndex](
               <span className="font-bold text-slate-900 dark:text-ash-100 tabular-nums">

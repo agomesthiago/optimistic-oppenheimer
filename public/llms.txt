@@ -1,0 +1,31 @@
+# Vidas Masculinas — Painel de Conscientização e Dados de Mortalidade Masculina no Brasil
+
+> Projeto de impacto social, open-source e de página única para visualização de dados oficiais sobre a mortalidade masculina e saúde mental no Brasil.
+
+- Site Oficial: https://vidasmasculinas.vercel.app/
+- Repositório no GitHub: https://github.com/agomesthiago/optimistic-oppenheimer
+- Licença: MIT (Open Source)
+- Fontes Oficiais Incorporadas: DATASUS / SIM (Ministério da Saúde) e IBGE (Instituto Brasileiro de Geografia e Estatística)
+
+## Dados e Estatísticas Fundamentais
+
+- **Total Anual de Óbitos Masculinos**: ~800.000 mortes/ano no Brasil (~55% do total de óbitos no país).
+- **Taxa Bruta de Mortalidade Masculina**: ~757 óbitos a cada 100.000 homens por ano.
+- **Suicídio Masculino**: 77,8% das vítimas de suicídio no Brasil são homens (razão de 3,5 mortes masculinas para cada feminina). Estimativa anual de ~13.356 mortes masculinas por suicídio (~33/dia).
+- **Expectativa de Vida ao Nascer (IBGE 2022)**: Homens: 72,0 anos | Mulheres: 79,0 anos (Diferença de −7,0 anos para os homens).
+- **Desagregação Epidemiológica por Causas**:
+  1. Doenças Cardiovasculares: 25,4% (~210.181/ano) — Fonte: IBGE / SBC
+  2. Câncer / Neoplasias: 15,7% (~130.000/ano) — Fonte: INCA
+  3. Doenças Respiratórias: 9,5% (~79.000/ano) — Fonte: DATASUS
+  4. Doenças Digestivas: 5,9% (~49.000/ano) — Fonte: DATASUS
+  5. Diabetes Mellitus: 5,2% (~43.000/ano) — Fonte: DATASUS / SBD
+  6. Homicídios / Violência: 5,0% (~41.744/ano) — Fonte: IPEA / Atlas da Violência
+  7. Acidentes de Trânsito: 3,4% (~28.471/ano) — Fonte: ONSV / DATASUS
+  8. Suicídio Masculino: 1,6% (~13.356/ano) — Fonte: MS / SIM
+
+## Prevenção e Apoio Emocional
+- **CVV (Centro de Valorização da Vida)**: Atendimento gratuito, sigiloso e 24h pelo telefone **188** ou chat em https://cvv.org.br/chat/
+- **CAPS (Centros de Atenção Psicossocial)**: Rede pública de saúde mental do SUS sem necessidade de agendamento prévio.
+
+## Documentação Completa
+- Para a base de conhecimento RAG completa em markdown, consulte: https://vidasmasculinas.vercel.app/llms-full.txt
