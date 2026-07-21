@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && npm run build:widgets",
-    "postbuild": "npx playwright install chromium && node scripts/prerender.js",
     "build:widgets": "vite build --config vite.widgets.config.ts",
     "lint": "oxlint",
     "preview": "vite preview"
