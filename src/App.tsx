@@ -16,7 +16,6 @@ import { FAQSection } from './components/FAQSection';
 import { CitationBlock } from './components/CitationBlock';
 import { DataFooter } from './components/DataFooter';
 import { Header } from './components/Header';
-import { BackToTop } from './components/BackToTop';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
@@ -31,7 +30,7 @@ export default function App() {
   useScrollReveal();
 
   return (
-    <div className="relative min-h-dvh">
+    <div className="relative min-h-dvh overflow-x-hidden">
       {/* FEATURE 17 — Skip Link de Acessibilidade */}
       <a
         href="#main-content"
@@ -146,7 +145,6 @@ export default function App() {
       <footer role="contentinfo" className="relative z-10">
         <DataFooter />
       </footer>
-      <BackToTop />
     </div>
   );
 }
