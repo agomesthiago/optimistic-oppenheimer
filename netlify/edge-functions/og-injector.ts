@@ -42,16 +42,16 @@ export default async (request: Request, context: Context) => {
         `<meta property="og:description" content="${desc}" />`
       );
       
-      // Replace twitter:title
+      // Replace twitter:title (uses name attribute, not property)
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="twitter:title" content=".*?"\s*\/?>/,
-        `<meta property="twitter:title" content="${title}" />`
+        /<meta name="twitter:title" content=".*?"\s*\/?>/,
+        `<meta name="twitter:title" content="${title}" />`
       );
       
-      // Replace twitter:description
+      // Replace twitter:description (uses name attribute, not property)
       modifiedHtml = modifiedHtml.replace(
-        /<meta property="twitter:description" content=".*?"\s*\/?>/,
-        `<meta property="twitter:description" content="${desc}" />`
+        /<meta name="twitter:description" content=".*?"\s*\/?>/,
+        `<meta name="twitter:description" content="${desc}" />`
       );
     }
     

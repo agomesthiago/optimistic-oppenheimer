@@ -1,4 +1,4 @@
-import { SUICIDE_DATA } from '../utils/mortality';
+import { SUICIDE_DATA, formatDecimal } from '../utils/mortality';
 
 export function SuicideSection() {
   const {
@@ -43,7 +43,7 @@ export function SuicideSection() {
               className="font-mono font-bold text-crimson-600 dark:text-crimson-400 tabular-nums leading-none"
               style={{ fontSize: 'clamp(3.5rem, 10vw, 5.5rem)' }}
             >
-              {malePercentage.toString().replace('.', ',')}%
+              {formatDecimal(malePercentage)}%
             </span>
           </div>
           <div className="max-w-xs text-sm text-slate-600 dark:text-ash-300 font-medium leading-relaxed">
@@ -55,10 +55,10 @@ export function SuicideSection() {
         <div className="p-6 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 space-y-4 mb-10 shadow-sm">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-crimson-600 dark:text-crimson-400 font-bold">
-              Homens: {malePercentage.toString().replace('.', ',')}% ({male2021.toLocaleString('pt-BR')})
+              Homens: {formatDecimal(malePercentage)}% ({male2021.toLocaleString('pt-BR')})
             </span>
             <span className="text-slate-500 dark:text-ash-500">
-              Mulheres: {femalePercentage.toString().replace('.', ',')}% ({female2021.toLocaleString('pt-BR')})
+              Mulheres: {formatDecimal(femalePercentage)}% ({female2021.toLocaleString('pt-BR')})
             </span>
           </div>
           <div className="w-full h-3 bg-zinc-200 dark:bg-carbon-800 rounded-full overflow-hidden flex">
@@ -82,7 +82,7 @@ export function SuicideSection() {
               Razão por Sexo
             </span>
             <span className="text-2xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums">
-              {ratioMaleToFemale.toString().replace('.', ',')} : 1
+              {formatDecimal(ratioMaleToFemale)} : 1
             </span>
             <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
               homens para cada mulher
@@ -94,7 +94,7 @@ export function SuicideSection() {
               Taxa Masculina
             </span>
             <span className="text-2xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums">
-              {maleRatePer100k.toString().replace('.', ',')} / 100k
+              {formatDecimal(maleRatePer100k)} / 100k
             </span>
             <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
               por 100 mil homens
@@ -106,7 +106,7 @@ export function SuicideSection() {
               Taxa Feminina
             </span>
             <span className="text-2xl font-mono font-bold text-slate-700 dark:text-ash-300 tabular-nums">
-              {femaleRatePer100k.toString().replace('.', ',')} / 100k
+              {formatDecimal(femaleRatePer100k)} / 100k
             </span>
             <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
               por 100 mil mulheres
@@ -144,10 +144,6 @@ export function SuicideSection() {
         </div>
       </div>
 
-      {/* Bottom Left Corner (Page indicator) */}
-      <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.04</span>
-      </div>
     </section>
   );
 }
