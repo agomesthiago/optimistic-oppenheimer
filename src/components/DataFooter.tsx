@@ -1,4 +1,4 @@
-import { MORTALITY_SOURCES, LIFE_EXPECTANCY_DATA, SUICIDE_DATA } from '../utils/mortality';
+import { MORTALITY_SOURCES, LIFE_EXPECTANCY_DATA, SUICIDE_DATA, formatDecimal } from '../utils/mortality';
 
 export function DataFooter() {
   return (
@@ -36,7 +36,7 @@ export function DataFooter() {
                 IBGE
               </a>
               <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
-                Tábuas Completas de Mortalidade — {LIFE_EXPECTANCY_DATA.year} · Expectativa: H {LIFE_EXPECTANCY_DATA.male.toFixed(1).replace('.', ',')}a / M {LIFE_EXPECTANCY_DATA.female.toFixed(1).replace('.', ',')}a
+                Tábuas Completas de Mortalidade — {LIFE_EXPECTANCY_DATA.year} · Expectativa: H {formatDecimal(LIFE_EXPECTANCY_DATA.male)}a / M {formatDecimal(LIFE_EXPECTANCY_DATA.female)}a
               </span>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
@@ -70,7 +70,7 @@ export function DataFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Instagram — Contra o Esquecimento"
-                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-250"
+                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
                 aria-label="Instagram Contra o Esquecimento"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +84,7 @@ export function DataFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Website — Contra o Esquecimento"
-                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-250"
+                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
                 aria-label="Website Contra o Esquecimento"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

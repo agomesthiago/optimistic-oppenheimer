@@ -1,4 +1,4 @@
-import { formatDeathCount, getCounterStartDate } from '../utils/mortality';
+import { formatDeathCount, EPOCH_LABEL } from '../utils/mortality';
 import type { CounterMode } from '../hooks/useAutoToggle';
 
 interface StoryCardProps {
@@ -7,12 +7,6 @@ interface StoryCardProps {
   suicideDeaths: number;
   timeString: string;
 }
-
-const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-});
 
 export function StoryCard({ mode, deaths, suicideDeaths, timeString }: StoryCardProps) {
   const isClock = mode === 'clock';
@@ -39,7 +33,7 @@ export function StoryCard({ mode, deaths, suicideDeaths, timeString }: StoryCard
   const subtitleText = isClock
     ? 'A cada segundo, a emergência da mortalidade masculina continua no país.'
     : isSuicide
-    ? 'homens cometeram suicídio no Brasil desde 01/01/2026 (~33 mortes por dia). Se precisar de ajuda, ligue CVV 188.'
+    ? `homens cometeram suicídio no Brasil desde 01/01/${new Date().getFullYear().toString()} (~33 mortes por dia). Se precisar de ajuda, ligue CVV 188.`
     : 'homens morreram no Brasil por causas evitáveis, acidentes e violência este ano.';
 
   const accentColor = isSuicide

@@ -31,23 +31,12 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fadeIn 1.2s ease-out forwards',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'count-up': 'countUp 0.15s ease-out',
-        'glow-pulse': 'glowPulse 2s ease-in-out infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(8px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
         countUp: {
           '0%': { transform: 'translateY(4px)', opacity: '0.6' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        glowPulse: {
-          '0%, 100%': { textShadow: '0 0 20px rgba(239,68,68,0.3)' },
-          '50%': { textShadow: '0 0 40px rgba(239,68,68,0.6), 0 0 80px rgba(239,68,68,0.2)' },
         },
       },
     },

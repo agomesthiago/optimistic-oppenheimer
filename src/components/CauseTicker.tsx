@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, getSecondsSinceYearStart } from '../utils/mortality';
+import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, getSecondsSinceYearStart } from '../utils/mortality';
 import { CauseStoryCard } from './CauseStoryCard';
 import { useShare } from '../hooks/useShare';
 
@@ -81,7 +81,7 @@ export function CauseTicker() {
 
           <div className="flex items-center gap-3 self-start sm:self-auto">
             <span className="text-xs font-mono text-crimson-600 dark:text-crimson-400 font-bold bg-crimson-50 dark:bg-crimson-950/40 px-3 py-1 rounded-full border border-crimson-200 dark:border-crimson-900/60">
-              {(active.proportion * 100).toFixed(1).replace('.', ',')}% das mortes masculinas
+              {formatDecimal(active.proportion * 100)}% das mortes masculinas
             </span>
           </div>
         </div>
@@ -119,7 +119,7 @@ export function CauseTicker() {
               {formatDeathCount(count)}
             </span>
             <span className="text-sm font-mono text-slate-500 dark:text-ash-400">
-              óbitos masculinos estimados por {active.label.toLowerCase()} desde 01/01/2026
+              óbitos masculinos estimados por {active.label.toLowerCase()} desde {new Date().getFullYear().toString()}
             </span>
           </div>
         </div>
@@ -129,7 +129,7 @@ export function CauseTicker() {
           <div className="flex flex-col gap-1">
             <span className="text-slate-400 dark:text-ash-600 uppercase tracking-wider">Proporção no País</span>
             <span className="text-slate-800 dark:text-ash-200 font-bold text-sm">
-              {(active.proportion * 100).toFixed(1).replace('.', ',')}% do total
+              {formatDecimal(active.proportion * 100)}% do total
             </span>
           </div>
 

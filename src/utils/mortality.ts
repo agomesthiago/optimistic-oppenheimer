@@ -152,6 +152,16 @@ export const DEATHS_PER_SECOND = TOTAL_MALE_DEATHS_PER_YEAR / SECONDS_PER_YEAR;
 /** Intervalo médio entre mortes (segundos). */
 export const SECONDS_PER_DEATH = 1 / DEATHS_PER_SECOND;
 
+/** Mortes masculinas estimadas por dia. */
+export const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
+
+/** Label de data da âncora temporal (1º jan do ano corrente), formatado pt-BR. */
+export const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});
+
 // ─── Breakdown por Causa ──────────────────────────────────────────────────────
 
 /**
@@ -254,6 +264,11 @@ export function getCauseDeaths(cause: CauseBreakdown, seconds: number): number {
 /** Contagem formatada em pt-BR (inteiro). */
 export function formatDeathCount(count: number): string {
   return Math.floor(count).toLocaleString('pt-BR');
+}
+
+/** Número decimal formatado em pt-BR (vírgula como separador). */
+export function formatDecimal(value: number, decimals = 1): string {
+  return value.toFixed(decimals).replace('.', ',');
 }
 
 /** Taxa de suicídios masculinos por segundo. */

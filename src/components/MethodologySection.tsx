@@ -1,6 +1,4 @@
-import { TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_SECOND, SECONDS_PER_DEATH, MALE_MORTALITY_RATE_PER_100K, SUICIDE_DATA, LIFE_EXPECTANCY_DATA } from '../utils/mortality';
-
-const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
+import { TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_DAY, SECONDS_PER_DEATH, MALE_MORTALITY_RATE_PER_100K, SUICIDE_DATA, LIFE_EXPECTANCY_DATA, formatDecimal } from '../utils/mortality';
 
 const STEPS = [
   {
@@ -16,7 +14,7 @@ const STEPS = [
   {
     step: '03',
     title: 'Taxas Populacionais & Comparação por Sexo',
-    body: `Taxa bruta de mortalidade masculina: ~${MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens. Mortalidade por suicídio: ${SUICIDE_DATA.maleRatePer100k.toString().replace('.', ',')} por 100k homens (vs ${SUICIDE_DATA.femaleRatePer100k.toString().replace('.', ',')} por 100k mulheres, razão ${SUICIDE_DATA.ratioMaleToFemale.toString().replace('.', ',')}:1). Longevidade ao nascer: ${LIFE_EXPECTANCY_DATA.male.toFixed(1).replace('.', ',')} anos (H) vs ${LIFE_EXPECTANCY_DATA.female.toFixed(1).replace('.', ',')} anos (M).`,
+    body: `Taxa bruta de mortalidade masculina: ~${MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens. Mortalidade por suicídio: ${formatDecimal(SUICIDE_DATA.maleRatePer100k)} por 100k homens (vs ${formatDecimal(SUICIDE_DATA.femaleRatePer100k)} por 100k mulheres, razão ${formatDecimal(SUICIDE_DATA.ratioMaleToFemale)}:1). Longevidade ao nascer: ${formatDecimal(LIFE_EXPECTANCY_DATA.male)} anos (H) vs ${formatDecimal(LIFE_EXPECTANCY_DATA.female)} anos (M).`,
   },
   {
     step: '04',
@@ -35,7 +33,7 @@ export function MethodologySection() {
     <section
       id="metodologia"
       aria-labelledby="metodologia-heading"
-      className="py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900"
+      className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900"
     >
       <div className="max-w-2xl mx-auto">
         <h2
@@ -58,10 +56,6 @@ export function MethodologySection() {
         </div>
       </div>
 
-      {/* Bottom Left Corner (Page indicator) */}
-      <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.08</span>
-      </div>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import { formatDeathCount } from '../utils/mortality';
+import { formatDeathCount, formatDecimal } from '../utils/mortality';
 import type { CauseBreakdown } from '../utils/mortality';
 
 interface CauseStoryCardProps {
@@ -9,7 +9,7 @@ interface CauseStoryCardProps {
 }
 
 export function CauseStoryCard({ cause, count, currentIndex, totalCauses }: CauseStoryCardProps) {
-  const percentageStr = (cause.proportion * 100).toFixed(1).replace('.', ',');
+  const percentageStr = formatDecimal(cause.proportion * 100);
 
   return (
     <div

@@ -10,7 +10,6 @@ export default defineConfig({
         'web-component': resolve(__dirname, 'src/widgets/web-component.ts'),
       },
       formats: ['es'],
-      name: 'VidasMasculinasWidgets',
     },
     outDir: 'dist/widgets',
     rollupOptions: {

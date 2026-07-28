@@ -42,17 +42,6 @@ export default function App() {
 
   return (
     <main id="main-content" className="relative min-h-dvh">
-      {/* Subtle noise texture overlay */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-[0.02] dark:opacity-[0.04] z-0"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
-          backgroundRepeat: 'repeat',
-        }}
-      />
-
       <ThemeToggle />
 
       <div className="relative z-10">
@@ -84,11 +73,6 @@ export default function App() {
             <div className="w-full">
               <CauseTicker />
             </div>
-          </div>
-
-          {/* Bottom Left Corner (Page indicator) */}
-          <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-            <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.05</span>
           </div>
         </section>
 

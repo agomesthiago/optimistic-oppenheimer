@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import gsap from 'gsap';
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
 import { StoryCard } from './StoryCard';
 import {
   formatDeathCount,
-  getCounterStartDate,
   getSecondsSinceYearStart,
   getAccumulatedSuicides,
+  EPOCH_LABEL,
 } from '../utils/mortality';
 
 const SHARE_COPY = [
@@ -48,12 +47,6 @@ const COUNTER_PHRASES = [
     </>
   ),
 ];
-
-const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-});
 
 function formatSessionTime(totalSeconds: number): string {
   const h = Math.floor(totalSeconds / 3600);
@@ -99,15 +92,13 @@ function HangingBulb({ active, didTick, isClockMode }: { active: boolean; didTic
           </svg>
           
           <div 
-            className="absolute top-10 w-[900px] h-[900px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
+            className="absolute top-10 w-[400px] h-[400px] -translate-y-1/2 rounded-full pointer-events-none hidden dark:block"
             style={{
               background: isClockMode
                 ? 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 40%, transparent 75%)'
                 : 'radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.03) 60%, transparent 80%)',
-              transform: `translateY(-50%) scale(${didTick && !isClockMode ? 1.12 : 1})`,
-              filter: 'blur(30px)',
-              opacity: active ? 1 : 0.25,
-              transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
+              opacity: active ? (didTick && !isClockMode ? 1 : 0.85) : 0.25,
+              transition: 'opacity 0.15s ease-out, background 0.5s ease-in-out',
               animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
             }}
           />
@@ -147,17 +138,17 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
 
   // Stable random selection of melancholic phrase
   const phraseIndex = useMemo(() => Math.floor(Math.random() * COUNTER_PHRASES.length), []);
-  
-  const textContainerRef = useRef<HTMLSpanElement>(null);
 
-  // GSAP Animation when mode changes
+  // Track mode changes for CSS transition
+  const [modeTransition, setModeTransition] = useState(false);
+  const prevModeRef = useRef(mode);
+
   useEffect(() => {
-    if (textContainerRef.current) {
-      gsap.fromTo(
-        textContainerRef.current,
-        { y: 20, opacity: 0, filter: 'blur(8px)' },
-        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: 'back.out(1.5)' }
-      );
+    if (prevModeRef.current !== mode) {
+      prevModeRef.current = mode;
+      setModeTransition(true);
+      const id = setTimeout(() => setModeTransition(false), 600);
+      return () => clearTimeout(id);
     }
   }, [mode]);
 
@@ -274,14 +265,17 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
             isSuicideMode
               ? 'text-crimson-600 dark:text-crimson-400'
               : isRunning && !isClockMode
-              ? 'text-slate-900 dark:text-ash-100 dark:counter-glow-active'
+              ? 'text-slate-900 dark:text-ash-100 dark:counter-glow'
               : 'text-slate-700 dark:text-ash-300'
           }`}
           style={{ fontSize: 'clamp(4rem, 15vw, 10.5rem)' }}
         >
           <span 
-            ref={textContainerRef}
-            className={`inline-block ${didTick && !isClockMode ? 'animate-count-up' : ''}`}
+            className={`inline-block transition-[transform,opacity,filter] duration-600 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+              didTick && !isClockMode ? 'animate-count-up' : ''
+            } ${
+              modeTransition ? 'translate-y-5 opacity-0 blur-[8px]' : 'translate-y-0 opacity-1 blur-0'
+            }`}
           >
             {displayValue}
           </span>
@@ -323,7 +317,7 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
         <button
           onClick={() => shareToStories('story-card-export', isSuicideMode ? suicideDeaths : deaths)}
           disabled={isSharing}
-          className="mt-10 mb-8 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed animate-blink-random"
+          className="mt-10 mb-8 relative flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-widest uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-50 dark:hover:bg-carbon-800 hover:ring-2 hover:ring-red-500/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="18" cy="5" r="3"></circle>
@@ -336,22 +330,21 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, isRunning }: HeroP
         </button>
       </div>
 
-      {/* Bottom Left Corner (Page indicator & Session elapsed timer) */}
+      {/* Bottom Left Corner — Session elapsed timer */}
       <div className="absolute bottom-8 left-8 z-20 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 text-left select-none">
-        <span className="text-sm font-bold text-slate-600 dark:text-ash-400">.01</span>
         {sessionSeconds > 0 && (
           <span className="tabular-nums">Sessão: {formatSessionTime(sessionSeconds)}</span>
         )}
       </div>
 
-      {/* Bottom Right Corner (Scroll indicator line) */}
-      <div className="absolute bottom-8 right-8 z-20 flex flex-col items-center gap-3.5 pointer-events-none select-none">
+      {/* Bottom Right Corner — Scroll indicator */}
+      <div className="absolute bottom-8 right-8 z-20 flex flex-col items-center gap-2 pointer-events-none select-none">
         <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-400 dark:text-ash-600 [writing-mode:vertical-lr]">
           Scroll
         </span>
-        <div className="w-px h-12 bg-zinc-200 dark:bg-carbon-800 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1/2 bg-slate-400 dark:bg-ash-500 animate-scroll-line" />
-        </div>
+        <svg width="8" height="20" viewBox="0 0 8 20" fill="none" className="text-slate-400 dark:text-ash-600">
+          <path d="M4 2V18M4 18L1 14M4 18L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </div>
     </section>
   );
