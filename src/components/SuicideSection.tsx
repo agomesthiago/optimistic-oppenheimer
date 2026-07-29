@@ -25,7 +25,7 @@ export function SuicideSection() {
       aria-labelledby="suicidio-heading"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900/40"
     >
-      {isSharing && <SuicideStoryCard />}
+      <SuicideStoryCard />
 
       <div className="max-w-2xl mx-auto">
         <h2

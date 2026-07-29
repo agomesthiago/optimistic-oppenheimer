@@ -86,3 +86,43 @@
     filter: none !important;
   }
 }
+
+@keyframes flicker-glow {
+  0%, 100% { opacity: 0.92; }
+  45% { opacity: 0.98; }
+  50% { opacity: 0.85; }
+  55% { opacity: 1; }
+  75% { opacity: 0.9; }
+}
+
+@keyframes flicker-filament {
+  0%, 100% { opacity: 0.9; }
+  40% { opacity: 0.95; }
+  45% { opacity: 0.65; }
+  50% { opacity: 0.95; }
+  65% { opacity: 1; }
+  85% { opacity: 0.8; }
+}
+
+@keyframes swing {
+  0% { transform: rotate(-6deg); }
+  100% { transform: rotate(6deg); }
+}
+
+.animate-pendulum {
+  animation: swing 4.5s ease-in-out infinite alternate !important;
+  transform-origin: top center !important;
+  will-change: transform;
+}
+
+.filament-glow {
+  stroke: #a1a1aa; /* zinc-400 */
+  filter: none;
+}
+
+.dark .filament-glow {
+  stroke: #ffffff; /* branco (luz fria/branca) */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85));
+  animation: flicker-filament 6s infinite;
+}
+

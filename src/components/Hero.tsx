@@ -12,6 +12,7 @@ import {
 import { HeroScrollIndicator } from './HeroScrollIndicator';
 import { HeroSessionIndicator } from './HeroSessionIndicator';
 import { HeroModeSelector } from './HeroModeSelector';
+import { HangingBulb } from './HangingBulb';
 
 
 
@@ -51,10 +52,18 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, yearSeconds, isRun
   // 3.4 aria-live funcional no contador: Região sr-only com cadência estável sem flooding
   const [isHydrated, setIsHydrated] = useState(false);
   const [srAnnouncement, setSrAnnouncement] = useState('');
+  const [didTick, setDidTick] = useState(false);
 
   useEffect(() => {
     setIsHydrated(true);
   }, []);
+
+  // Animação da lâmpada ao mudar valor
+  useEffect(() => {
+    setDidTick(true);
+    const t = setTimeout(() => setDidTick(false), 150);
+    return () => clearTimeout(t);
+  }, [deaths]);
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -76,13 +85,13 @@ export function Hero({ deaths, sessionDeaths, sessionSeconds, yearSeconds, isRun
         {srAnnouncement}
       </div>
 
-      {isSharing && (
-        <StoryCard
-          mode={mode}
-          deaths={deaths}
-          suicideDeaths={suicideDeaths}
-        />
-      )}
+      <StoryCard
+        mode={mode}
+        deaths={deaths}
+        suicideDeaths={suicideDeaths}
+      />
+
+      <HangingBulb active={isRunning} didTick={didTick} />
 
       {/* Center content wrapper */}
       <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto">

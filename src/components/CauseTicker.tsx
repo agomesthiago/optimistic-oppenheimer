@@ -50,14 +50,12 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
       onTouchEnd={() => setIsHovered(false)}
     >
       {/* Hidden Export Card for currently active cause */}
-      {isSharing && (
-        <CauseStoryCard
-          cause={active}
-          count={count}
-          currentIndex={currentIndex}
-          totalCauses={CAUSE_BREAKDOWN.length}
-        />
-      )}
+      <CauseStoryCard
+        cause={active}
+        count={count}
+        currentIndex={currentIndex}
+        totalCauses={CAUSE_BREAKDOWN.length}
+      />
 
       {/* 1. Primeiro Controle Focalizável do Componente - Mecanismo Explícito de Pausa/Parada (WCAG 2.2.2) */}
       <div className="flex items-center justify-between gap-4 px-2">
