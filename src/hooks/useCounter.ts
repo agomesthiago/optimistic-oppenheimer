@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
   getAccumulatedDeaths,
   getSecondsSinceYearStart,
@@ -11,15 +11,13 @@ export interface CounterState {
   sessionDeaths: number;
   /** Segundos decorridos desde o primeiro acesso */
   sessionSeconds: number;
+  /** Segundos desde o inicio do ano */
+  yearSeconds: number;
   /** Contador rodando */
   isRunning: boolean;
 }
 
-interface UseCounterReturn extends CounterState {
-  start: () => void;
-}
-
-const TICK_MS = 80;
+const TICK_MS = 200; // Reduzido renders/s (issue 2.1)
 const STORAGE_KEY = 'contandovidas_first_visit';
 
 /**
@@ -28,12 +26,12 @@ const STORAGE_KEY = 'contandovidas_first_visit';
  * deaths = mortes desde 1º jan do ano corrente
  * sessionDeaths = mortes desde o primeiro acesso (salvo no localStorage)
  */
-export function useCounter(): UseCounterReturn {
+export function useCounter(): CounterState {
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef<number>(0);
 
-  // Recupera o timestamp do primeiro acesso ou cria um novo
-  const [firstVisitTime] = useState<number>(() => {
+  // Recupera o timestamp do primeiro acesso (issue 5.4 - useMemo em vez de useState)
+  const firstVisitTime = useMemo<number>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -46,7 +44,7 @@ export function useCounter(): UseCounterReturn {
       // Fallback para abas anônimas se localStorage falhar
       return Date.now();
     }
-  });
+  }, []);
 
   const [state, setState] = useState<CounterState>(() => {
     const now = Date.now();
@@ -57,6 +55,7 @@ export function useCounter(): UseCounterReturn {
       deaths: getAccumulatedDeaths(totalElapsed),
       sessionDeaths: getAccumulatedDeaths(sessionElapsed),
       sessionSeconds: sessionElapsed,
+      yearSeconds: totalElapsed,
       isRunning: false,
     };
   });
@@ -76,22 +75,20 @@ export function useCounter(): UseCounterReturn {
       deaths: getAccumulatedDeaths(totalElapsed),
       sessionDeaths: getAccumulatedDeaths(sessionElapsed),
       sessionSeconds: sessionElapsed,
+      yearSeconds: totalElapsed,
       isRunning: true,
     });
 
     rafRef.current = requestAnimationFrame(tick);
   }, [firstVisitTime]);
 
-  const start = useCallback(() => {
-    setState((prev) => ({ ...prev, isRunning: true }));
-    rafRef.current = requestAnimationFrame(tick);
-  }, [tick]);
-
+  // Auto-iniciar o contador (issue 5.5)
   useEffect(() => {
+    rafRef.current = requestAnimationFrame(tick);
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [tick]);
 
-  return { ...state, start };
+  return state;
 }

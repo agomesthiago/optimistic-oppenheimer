@@ -67,6 +67,7 @@ export function ResourcesSection() {
         </div>
       </div>
 
+
     </section>
   );
 }

@@ -33,6 +33,8 @@ export interface CauseBreakdown {
   /** Número absoluto anual estimado, para validação */
   annualEstimate: number;
   source: string;
+  /** Categoria epidemiológica opcional (ex: "Causas Externas") */
+  category?: string;
 }
 
 export interface LifeExpectancyData {

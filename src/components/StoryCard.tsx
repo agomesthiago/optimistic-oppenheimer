@@ -5,34 +5,24 @@ interface StoryCardProps {
   mode: CounterMode;
   deaths: number;
   suicideDeaths: number;
-  timeString: string;
 }
 
-export function StoryCard({ mode, deaths, suicideDeaths, timeString }: StoryCardProps) {
-  const isClock = mode === 'clock';
+export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
   const isSuicide = mode === 'suicide';
 
-  const titleText = isClock
-    ? 'O Tempo Não Para'
-    : isSuicide
+  const titleText = isSuicide
     ? 'Prevenção ao Suicídio Masculino'
     : 'Mortalidade Masculina no Brasil';
 
-  const taglineText = isClock
-    ? 'Horário Local'
-    : isSuicide
+  const taglineText = isSuicide
     ? '77,8% das Vítimas são Homens (MS / SIM)'
     : `Estimativa Acumulada Desde ${EPOCH_LABEL}`;
 
-  const mainValue = isClock
-    ? timeString
-    : isSuicide
+  const mainValue = isSuicide
     ? formatDeathCount(suicideDeaths)
     : formatDeathCount(deaths);
 
-  const subtitleText = isClock
-    ? 'A cada segundo, a emergência da mortalidade masculina continua no país.'
-    : isSuicide
+  const subtitleText = isSuicide
     ? `homens cometeram suicídio no Brasil desde 01/01/${new Date().getFullYear().toString()} (~33 mortes por dia). Se precisar de ajuda, ligue CVV 188.`
     : 'homens morreram no Brasil por causas evitáveis, acidentes e violência este ano.';
 
@@ -82,7 +72,7 @@ export function StoryCard({ mode, deaths, suicideDeaths, timeString }: StoryCard
         <div 
           className={`font-mono font-bold tracking-tight mb-14 ${isSuicide ? 'text-crimson-400' : 'text-zinc-50'}`}
           style={{
-            fontSize: isClock ? '12rem' : '13rem',
+            fontSize: '13rem',
             lineHeight: '1',
             textShadow: isSuicide ? '0 0 90px rgba(225,29,72,0.6)' : '0 0 90px rgba(255,255,255,0.3)'
           }}

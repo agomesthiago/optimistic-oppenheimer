@@ -1,5 +1,14 @@
 import { useState, useCallback } from 'react';
 
+function dataUrlToBlob(dataUrl: string): Blob {
+  const [meta, base64] = dataUrl.split(',');
+  const mime = meta.match(/:(.*?);/)?.[1] || 'image/png';
+  const binary = atob(base64);
+  const array = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
+  return new Blob([array], { type: mime });
+}
+
 export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
 
@@ -21,7 +30,7 @@ export function useShare() {
       });
 
       // Convert to file
-      const blob = await (await fetch(dataUrl)).blob();
+      const blob = dataUrlToBlob(dataUrl);
       const file = new File([blob], 'vidas-ceifadas.png', { type: blob.type });
 
       // Build dynamic share URL containing current death count for crawlable preview metadata

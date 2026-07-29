@@ -1,10 +1,23 @@
-import { TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_DAY, SECONDS_PER_DEATH, MALE_MORTALITY_RATE_PER_100K, SUICIDE_DATA, LIFE_EXPECTANCY_DATA, formatDecimal } from '../utils/mortality';
+import { 
+  LIFE_EXPECTANCY_DATA,
+  DEATHS_PER_DAY,
+  MALE_MORTALITY_RATE_PER_100K,
+  SUICIDE_DATA,
+  formatDecimal,
+  TOTAL_MALE_DEATHS_PER_YEAR,
+  SECONDS_PER_DEATH
+} from '../utils/mortality';
+import { Abbr } from './Abbr';
 
 const STEPS = [
   {
     step: '01',
     title: 'Fontes de Dados Oficiais',
-    body: 'Sistema de Informações sobre Mortalidade (SIM/DATASUS - Ministério da Saúde) e Tábuas Completas de Mortalidade do IBGE. Utiliza-se a média ponderada de anos consolidados recentes para mitigar anomalias pontuais.',
+    body: (
+      <>
+        Sistema de Informações sobre Mortalidade (<Abbr title="Sistema de Informações sobre Mortalidade">SIM</Abbr>/<Abbr title="Departamento de Informática do Sistema Único de Saúde">DATASUS</Abbr> - Ministério da Saúde) e Tábuas Completas de Mortalidade do <Abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</Abbr>. Utiliza-se a média ponderada de anos consolidados recentes para mitigar anomalias pontuais.
+      </>
+    ),
   },
   {
     step: '02',
@@ -55,6 +68,7 @@ export function MethodologySection() {
           ))}
         </div>
       </div>
+
 
     </section>
   );

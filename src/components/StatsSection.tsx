@@ -28,20 +28,21 @@ export function StatsSection({ deaths }: StatsSectionProps) {
         </div>
       </div>
       
+
     </section>
   );
 }
 
 function Stat({ label, value, sublabel }: { label: string; value: string; sublabel: string }) {
   return (
-    <div className="group flex flex-col items-center gap-1.5 p-5 rounded-2xl bg-zinc-50/70 dark:bg-carbon-900/40 border border-zinc-200/60 dark:border-carbon-800 transition-colors hover:bg-white dark:hover:bg-carbon-800/60 cursor-default text-center">
+    <div className="group flex flex-col items-center gap-1.5 p-5 rounded-2xl bg-zinc-50/70 dark:bg-carbon-900/40 border border-zinc-200/60 dark:border-carbon-800 text-center">
       <span className="text-2xl sm:text-3xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums transition-colors group-hover:text-crimson-500 dark:group-hover:text-crimson-400">
         {value}
       </span>
       <span className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-ash-400 font-semibold">
         {label}
       </span>
-      <span className="text-[11px] text-slate-400 dark:text-ash-600 font-mono">
+      <span className="text-[11px] text-slate-500 dark:text-ash-400 font-mono">
         {sublabel}
       </span>
     </div>

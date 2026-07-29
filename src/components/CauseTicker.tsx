@@ -1,30 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
-import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, getSecondsSinceYearStart } from '../utils/mortality';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, EPOCH_LABEL } from '../utils/mortality';
 import { CauseStoryCard } from './CauseStoryCard';
 import { useShare } from '../hooks/useShare';
+import { Share2 } from 'lucide-react';
 
 const AUTO_SLIDE_MS = 7_000;
 
-export function CauseTicker() {
-  const [yearSeconds, setYearSeconds] = useState(() => getSecondsSinceYearStart());
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+interface CauseTickerProps {
+  yearSeconds: number;
+}
 
+export function CauseTicker({ yearSeconds }: CauseTickerProps) {
   const { isSharing, shareToStories } = useShare();
 
-  useEffect(() => {
-    const id = setInterval(() => setYearSeconds(getSecondsSinceYearStart()), 1000);
-    return () => clearInterval(id);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPausedByUser, setIsPausedByUser] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const isPaused = isPausedByUser || isHovered;
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % CAUSE_BREAKDOWN.length);
   }, []);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % CAUSE_BREAKDOWN.length);
-  };
-
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + CAUSE_BREAKDOWN.length) % CAUSE_BREAKDOWN.length);
-  };
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
@@ -34,7 +36,7 @@ export function CauseTicker() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [currentIndex, isPaused]);
+  }, [currentIndex, isPaused, nextSlide]);
 
   const active = CAUSE_BREAKDOWN[currentIndex];
   const count = getCauseDeaths(active, yearSeconds);
@@ -42,16 +44,73 @@ export function CauseTicker() {
   return (
     <div
       className="w-full max-w-4xl mx-auto flex flex-col gap-8 select-none"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
     >
       {/* Hidden Export Card for currently active cause */}
-      <CauseStoryCard
-        cause={active}
-        count={count}
-        currentIndex={currentIndex}
-        totalCauses={CAUSE_BREAKDOWN.length}
-      />
+      {isSharing && (
+        <CauseStoryCard
+          cause={active}
+          count={count}
+          currentIndex={currentIndex}
+          totalCauses={CAUSE_BREAKDOWN.length}
+        />
+      )}
+
+      {/* 1. Primeiro Controle Focalizável do Componente - Mecanismo Explícito de Pausa/Parada (WCAG 2.2.2) */}
+      <div className="flex items-center justify-between gap-4 px-2">
+        <button
+          type="button"
+          onClick={() => setIsPausedByUser((prev) => !prev)}
+          aria-pressed={isPausedByUser}
+          aria-label={
+            isPausedByUser
+              ? 'Retomar rotação automática do carrossel'
+              : 'Pausar rotação automática do carrossel'
+          }
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-300 dark:border-carbon-700 bg-white dark:bg-carbon-900 text-xs font-mono tracking-wider uppercase text-slate-700 dark:text-ash-300 hover:bg-zinc-100 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-ash-500 cursor-pointer shadow-sm"
+        >
+          {isPausedByUser ? (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="none"
+              >
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Retomar rotação</span>
+            </>
+          ) : (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="none"
+              >
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+              <span>Pausar rotação</span>
+            </>
+          )}
+        </button>
+        <span className="text-xs font-mono text-slate-500 dark:text-ash-400">
+          {isPausedByUser
+            ? 'Carrossel pausado pelo usuário'
+            : isHovered
+            ? 'Pausado (cursor sobre o card)'
+            : 'Rotação automática ativa (~7s)'}
+        </span>
+      </div>
 
       {/* Large Featured Slide Card */}
       <div
@@ -70,11 +129,17 @@ export function CauseTicker() {
 
         {/* Slide Header Info */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-100 dark:border-carbon-800/80 pb-6">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="px-3 py-1 bg-zinc-100 dark:bg-carbon-900 rounded-full font-mono text-xs font-bold text-slate-700 dark:text-ash-300">
               Causa {String(currentIndex + 1).padStart(2, '0')} / {String(CAUSE_BREAKDOWN.length).padStart(2, '0')}
             </span>
-            <span className="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-ash-500">
+            {active.category && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase border border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900 text-slate-700 dark:text-ash-200 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-500 dark:bg-ash-400" aria-hidden="true" />
+                {active.category}
+              </span>
+            )}
+            <span className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-ash-400">
               Desagregação Epidemiológica
             </span>
           </div>
@@ -100,13 +165,7 @@ export function CauseTicker() {
               className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900 text-xs font-mono text-slate-700 dark:text-ash-300 hover:bg-zinc-100 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 cursor-pointer self-start sm:self-auto disabled:opacity-50"
               title={`Compartilhar estatísticas da causa ${active.label}`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-              </svg>
+              <Share2 size={12} />
               {isSharing ? 'Gerando...' : 'Compartilhar esta causa'}
             </button>
           </div>
@@ -119,7 +178,7 @@ export function CauseTicker() {
               {formatDeathCount(count)}
             </span>
             <span className="text-sm font-mono text-slate-500 dark:text-ash-400">
-              óbitos masculinos estimados por {active.label.toLowerCase()} desde {new Date().getFullYear().toString()}
+              óbitos masculinos estimados por {active.label.toLowerCase()} desde {EPOCH_LABEL}
             </span>
           </div>
         </div>
@@ -127,21 +186,21 @@ export function CauseTicker() {
         {/* Slide Footer Metadata */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-zinc-100 dark:border-carbon-800/80 text-xs font-mono">
           <div className="flex flex-col gap-1">
-            <span className="text-slate-400 dark:text-ash-600 uppercase tracking-wider">Proporção no País</span>
+            <span className="text-slate-500 dark:text-ash-400 uppercase tracking-wider">Proporção no País</span>
             <span className="text-slate-800 dark:text-ash-200 font-bold text-sm">
               {formatDecimal(active.proportion * 100)}% do total
             </span>
           </div>
 
           <div className="flex flex-col gap-1">
-            <span className="text-slate-400 dark:text-ash-600 uppercase tracking-wider">Estimativa Anual</span>
+            <span className="text-slate-500 dark:text-ash-400 uppercase tracking-wider">Estimativa Anual</span>
             <span className="text-slate-800 dark:text-ash-200 font-bold text-sm">
               ~{active.annualEstimate.toLocaleString('pt-BR')} mortes/ano
             </span>
           </div>
 
           <div className="flex flex-col gap-1">
-            <span className="text-slate-400 dark:text-ash-600 uppercase tracking-wider">Fonte Oficial</span>
+            <span className="text-slate-500 dark:text-ash-400 uppercase tracking-wider">Fonte Oficial</span>
             <span className="text-slate-700 dark:text-ash-300 truncate font-semibold">
               {active.source}
             </span>
@@ -181,15 +240,15 @@ export function CauseTicker() {
                 className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? 'w-8 bg-crimson-600 dark:bg-crimson-500'
-                    : 'w-2.5 bg-zinc-200 dark:bg-carbon-700 hover:bg-slate-400 dark:hover:bg-ash-600'
+                    : 'w-2.5 bg-zinc-200 dark:bg-carbon-700 hover:bg-slate-400 dark:hover:bg-ash-400'
                 }`}
               />
             );
           })}
         </div>
 
-        <span className="text-xs font-mono text-slate-400 dark:text-ash-600 hidden md:block">
-          {isPaused ? 'Pausado (mouse sobre a seção)' : 'Auto-rotação ativa'}
+        <span className="text-xs font-mono text-slate-500 dark:text-ash-400 hidden md:block">
+          {isPaused ? 'Pausado (clique em Retomar para rodar)' : 'Auto-rotação ativa'}
         </span>
       </div>
     </div>

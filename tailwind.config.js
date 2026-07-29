@@ -31,13 +31,8 @@ export default {
         },
       },
       animation: {
-        'count-up': 'countUp 0.15s ease-out',
       },
       keyframes: {
-        countUp: {
-          '0%': { transform: 'translateY(4px)', opacity: '0.6' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
       },
     },
   },

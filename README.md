@@ -16,10 +16,6 @@
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fagomesthiago%2Foptimistic-oppenheimer">
     <img src="https://vercel.com/button" alt="Deploy with Vercel" />
   </a>
-  &nbsp;&nbsp;
-  <a href="https://www.netlify.com">
-    <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
-  </a>
 </p>
 
 ---
@@ -33,7 +29,6 @@ Mais de **800.000 homens** morrem por ano no Brasil por diversas causas, represe
 | Provedor | Domínio / URL | Status | Observações |
 |---|---|---|---|
 | **Vercel** *(Principal)* | **[vidasmasculinas.vercel.app](https://vidasmasculinas.vercel.app/)** | 🟢 **Ativo (Produção)** | Provedor principal e ativo com Vercel Analytics & Speed Insights. |
-| **Netlify** *(Legado)* | `vidasmasculinas.netlify.app` | 🔴 **Descontinuado (Deprecated)** | Descontinuado devido a limitações de cota gratuita de compilação (*Build Minutes Credit Limits*). |
 
 ### Eixos Centrais de Atuação:
 * **Mortalidade por Suicídio & Prevenção**: No Brasil, **77,8% das vítimas de suicídio são homens** (com uma razão de 3,5 mortes masculinas para cada feminina). O projeto dedica uma seção exclusiva e um modo de contador em tempo real para dar visibilidade a essa epidemia silenciosa, promovendo o acolhimento gratuito e sigiloso do **CVV 188** e da rede **CAPS/SUS**.

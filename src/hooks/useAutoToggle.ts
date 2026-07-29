@@ -1,22 +1,17 @@
 import { useState, useCallback } from 'react';
 
-export type CounterMode = 'deaths' | 'clock' | 'suicide';
+export type CounterMode = 'deaths' | 'suicide';
 
 /**
- * Hook para gerenciar a alternância entre os três modos do contador principal:
+ * Hook para gerenciar a alternância entre os dois modos do contador principal:
  * 1. 'deaths' — Estimativa em tempo real de óbitos masculinos por todas as causas.
- * 2. 'clock' — Horário local atual.
- * 3. 'suicide' — Estimativa acumulada em tempo real de suicídios masculinos.
+ * 2. 'suicide' — Estimativa acumulada em tempo real de suicídios masculinos.
  */
 export function useAutoToggle() {
   const [mode, setMode] = useState<CounterMode>('deaths');
 
   const toggleMode = useCallback(() => {
-    setMode((prev) => {
-      if (prev === 'deaths') return 'clock';
-      if (prev === 'clock') return 'suicide';
-      return 'deaths';
-    });
+    setMode((prev) => (prev === 'deaths' ? 'suicide' : 'deaths'));
   }, []);
 
   const setModeExplicit = useCallback((newMode: CounterMode) => {
@@ -25,7 +20,6 @@ export function useAutoToggle() {
 
   return {
     mode,
-    isClockMode: mode === 'clock',
     isSuicideMode: mode === 'suicide',
     isDeathsMode: mode === 'deaths',
     toggleMode,
