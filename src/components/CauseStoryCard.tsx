@@ -8,7 +8,7 @@ interface CauseStoryCardProps {
   totalCauses: number;
 }
 
-export function CauseStoryCard({ cause, count, currentIndex, totalCauses }: CauseStoryCardProps) {
+export function CauseStoryCard({ cause, count }: CauseStoryCardProps) {
   const percentageStr = formatDecimal(cause.proportion * 100);
 
   return (

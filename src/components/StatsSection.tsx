@@ -14,6 +14,7 @@ export function StatsSection({ deaths }: StatsSectionProps) {
       id="estatisticas"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
+      <span id="dados" className="sr-only" />
       <div className="max-w-3xl mx-auto">
         <h2 className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-16">
           Estatísticas Gerais

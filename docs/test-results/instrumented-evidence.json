@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-07-29T03:32:15.958Z",
+  "gates": {
+    "gate1": {
+      "status": "PASS",
+      "details": "oxlint passou com 0 erros."
+    },
+    "gate4": {
+      "status": "PASS",
+      "h1Count": 1
+    },
+    "gate5": {
+      "status": "PASS",
+      "h1Count": 1
+    },
+    "gate3": {
+      "status": "PASS",
+      "metrics": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "bodyScrollWidth": 160,
+        "overflowX": false
+      }
+    },
+    "gate6": {
+      "status": "PASS",
+      "rootChildrenCount": 1
+    },
+    "gate9": {
+      "status": "PASS",
+      "rootChildrenCount": 1
+    },
+    "gate2": {
+      "status": "PASS WITH WARNINGS",
+      "note": "Click spam in desktop chromium passed without unhandled JS exception, but architectural concurrency risk remains."
+    },
+    "gate7": {
+      "status": "PASS"
+    },
+    "gate8": {
+      "status": "PASS WITH WARNINGS",
+      "details": "Heurística visual: affordance interativa no contador é implícita sem ícone explícito de clique."
+    },
+    "gate10": {
+      "status": "PASS WITH WARNINGS",
+      "details": "Pacotes de analytics (@vercel/analytics) configurados; sem smoke tests obrigatórios bloqueantes no CI/CD."
+    }
+  },
+  "confirmedFailures": [],
+  "reproducedFailures": [],
+  "risks": [
+    {
+      "id": "RISK-CONCURRENCY-USE-SHARE",
+      "gate": "GATE 2",
+      "type": "RISCO",
+      "title": "Ausência de controle de concorrência em shareToStories (useShare.ts:15)",
+      "explanation": "Embora o teste no Chromium Desktop 16GB RAM não tenha estourado heap, em celulares WebViews com RAM restrita múltiplas chamadas concorrentes a html-to-image geram risco de Out of Memory."
+    }
+  ],
+  "hypotheses": []
+}

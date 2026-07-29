@@ -20,7 +20,7 @@ export function DataDisclaimer() {
         </div>
 
         <div className="w-full max-w-lg mt-4 border-t border-zinc-200 dark:border-carbon-800 pt-8">
-          <h4 className="text-center text-slate-900 dark:text-ash-100 font-bold mb-6 font-mono uppercase tracking-widest text-xs">Como interpretar estes números</h4>
+          <h2 className="text-center text-slate-900 dark:text-ash-100 font-bold mb-6 font-mono uppercase tracking-widest text-xs">Como interpretar estes números</h2>
           
           <div className="flex flex-col items-center space-y-3">
             <div className="w-full bg-white dark:bg-carbon-950 px-4 py-3 rounded-lg border border-zinc-200 dark:border-carbon-800 text-center text-slate-600 dark:text-ash-300">

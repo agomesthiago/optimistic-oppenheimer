@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && npm run build:widgets",
+    "build": "tsc -b && vite build && npm run build:widgets && node scripts/generate-sitemap.mjs",
     "build:widgets": "vite build --config vite.widgets.config.ts",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lighthouse-ci": "node scripts/run-lighthouse-ci.mjs",
+    "test:cert": "node scripts/run-instrumented-certification.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

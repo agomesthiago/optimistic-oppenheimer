@@ -1,60 +1,64 @@
-import { MORTALITY_SOURCES, LIFE_EXPECTANCY_DATA, SUICIDE_DATA, formatDecimal } from '../utils/mortality';
+
+
+import dataset from '../config/dataset.json';
 
 export function DataFooter() {
   return (
     <footer id="footer" className="border-t border-zinc-200 dark:border-carbon-700 py-16 px-6 bg-zinc-100 dark:bg-carbon-900/30" role="contentinfo">
       <div className="max-w-2xl mx-auto space-y-10">
 
-        {/* Sources */}
-        <div>
-          <p className="text-sm font-mono text-slate-500 dark:text-ash-600 uppercase tracking-widest mb-4">Fontes Oficiais</p>
-          <ul className="space-y-3" role="list">
-            {MORTALITY_SOURCES.map((src) => (
-              <li key={src.id} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                <a
-                  href={src.url}
-                  id={`source-${src.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-mono text-slate-700 dark:text-ash-400 hover:text-slate-900 dark:hover:text-ash-200 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-slate-500 dark:hover:decoration-ash-400 transition-colors"
-                >
-                  {src.institution}
-                </a>
-                <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
-                  {src.publication} — {src.year} · {src.totalMaleDeaths.toLocaleString('pt-BR')} óbitos
-                </span>
-              </li>
-            ))}
-            <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-              <a
-                href={LIFE_EXPECTANCY_DATA.sourceUrl}
-                id="source-ibge-life-expectancy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-mono text-slate-700 dark:text-ash-400 hover:text-slate-900 dark:hover:text-ash-200 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-slate-500 dark:hover:decoration-ash-400 transition-colors"
-              >
-                IBGE
-              </a>
-              <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
-                Tábuas Completas de Mortalidade — {LIFE_EXPECTANCY_DATA.year} · Expectativa: H {formatDecimal(LIFE_EXPECTANCY_DATA.male)}a / M {formatDecimal(LIFE_EXPECTANCY_DATA.female)}a
-              </span>
-            </li>
-            <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-              <a
-                href={SUICIDE_DATA.sourceUrl}
-                id="source-ms-suicide"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-mono text-slate-700 dark:text-ash-400 hover:text-slate-900 dark:hover:text-ash-200 underline underline-offset-4 decoration-slate-300 dark:decoration-ash-600 hover:decoration-slate-500 dark:hover:decoration-ash-400 transition-colors"
-              >
-                Ministério da Saúde / SIM
-              </a>
-              <span className="text-sm font-mono text-slate-500 dark:text-ash-600">
-                Boletim Epidemiológico Suicídios — {SUICIDE_DATA.year} · {SUICIDE_DATA.malePercentage}% das vítimas eram homens
-              </span>
-            </li>
-          </ul>
-        </div>
+        {/* Header Links Repeated */}
+        <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 border-b border-zinc-200 dark:border-carbon-700 pb-8">
+          {[
+            { name: 'Stats', href: '#estatisticas' },
+            { name: 'Longevidade', href: '#expectativa-vida' },
+            { name: 'Suicídio', href: '#suicidios' },
+            { name: 'Causas', href: '#causas' },
+            { name: 'Método', href: '#metodologia' },
+            { name: 'FAQ', href: '#faq' },
+          ].map((link) => (
+            <a 
+              key={link.name}
+              href={link.href} 
+              className="text-[11px] sm:text-xs font-mono tracking-widest uppercase text-slate-500 dark:text-ash-400 hover:text-slate-800 dark:hover:text-ash-200 transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a 
+            href="tel:188"
+            className="px-4 py-1.5 rounded-full bg-crimson-600 hover:bg-crimson-700 text-white text-[10px] sm:text-[11px] font-mono tracking-widest uppercase font-bold transition-colors shadow-sm ml-0 sm:ml-4"
+          >
+            Fale com CVV 188
+          </a>
+        </nav>
+
+        {/* Governance & Public Dataset Info */}
+        <section aria-label="Governança Pública do Dataset" className="border-b border-zinc-200 dark:border-carbon-700 pb-8 space-y-4 text-xs font-mono text-slate-600 dark:text-ash-400">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <span className="block font-bold uppercase tracking-wider text-slate-700 dark:text-ash-200">Dataset</span>
+              <span>{dataset.name}</span>
+            </div>
+            <div>
+              <span className="block font-bold uppercase tracking-wider text-slate-700 dark:text-ash-200">Última atualização</span>
+              <span>{dataset.lastUpdateBR}</span>
+            </div>
+            <div>
+              <span className="block font-bold uppercase tracking-wider text-slate-700 dark:text-ash-200">Metodologia</span>
+              <span>consulte a seção &quot;Metodologia&quot; desta página.</span>
+            </div>
+          </div>
+          <div className="pt-2">
+            <span className="block font-bold uppercase tracking-wider text-slate-700 dark:text-ash-200 mb-1">Changelog Público</span>
+            <div className="text-[11px] text-slate-500 dark:text-ash-400 space-y-0.5">
+              <span className="block font-semibold text-slate-600 dark:text-ash-300">{dataset.changelog[0].version}</span>
+              {dataset.changelog[0].changes.map((change, i) => (
+                <span key={i} className="block">• {change}</span>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Bottom */}
         <div className="flex flex-col items-center gap-6 border-t border-zinc-200 dark:border-carbon-700 pt-8">
@@ -101,16 +105,8 @@ export function DataFooter() {
               média calculada · não representa mortes em tempo real
             </span>
             <div className="flex items-center gap-4">
-              <a
-                href="https://www.netlify.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-ash-600 hover:text-slate-600 dark:hover:text-ash-400 transition-colors"
-              >
-                Deploys by Netlify
-              </a>
               <span className="text-xs font-mono text-slate-500 dark:text-ash-600">
-                CVV <strong className="text-slate-700 dark:text-ash-400">188</strong>
+                Fale com CVV <strong className="text-slate-700 dark:text-ash-400">188</strong>
               </span>
             </div>
           </div>

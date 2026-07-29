@@ -64,7 +64,7 @@ export function GlossarySection() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
           {GLOSSARY_TERMS.map((item, idx) => (
             <div key={idx} className="pb-6 border-b border-zinc-100 dark:border-carbon-800/60 last:border-0 sm:[&:nth-last-child(-n+2)]:border-0">
               <dt className="text-base font-bold text-slate-900 dark:text-ash-100 mb-2 font-mono">
@@ -75,7 +75,7 @@ export function GlossarySection() {
               </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );

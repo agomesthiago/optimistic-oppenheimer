@@ -2,9 +2,7 @@ import { SUICIDE_DATA, formatDecimal } from '../utils/mortality';
 
 export function SuicideStoryCard() {
   const {
-    male2021,
     malePercentage,
-    ratioMaleToFemale
   } = SUICIDE_DATA;
 
   return (

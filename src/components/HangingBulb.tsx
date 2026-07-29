@@ -1,6 +1,6 @@
 export function HangingBulb({ active, didTick }: { active: boolean; didTick: boolean }) {
   return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[35dvh] pointer-events-none z-0 hidden dark:block">
+    <div className="relative h-16 mb-4 pointer-events-none z-0 hidden dark:block">
       <div className="h-full flex flex-col items-center origin-top animate-pendulum">
         <div className="w-px h-full bg-zinc-300 dark:bg-carbon-800 transition-colors duration-300" />
         

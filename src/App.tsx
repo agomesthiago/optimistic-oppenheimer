@@ -11,10 +11,8 @@ import { CauseTicker } from './components/CauseTicker';
 import { EditorialSection } from './components/EditorialSection';
 import { MethodologySection } from './components/MethodologySection';
 import { GlossarySection } from './components/GlossarySection';
-import { SourcesSection } from './components/SourcesSection';
 import { ResourcesSection } from './components/ResourcesSection';
 import { FAQSection } from './components/FAQSection';
-import { CitationBlock } from './components/CitationBlock';
 import { DataFooter } from './components/DataFooter';
 import { Header } from './components/Header';
 import { VLibrasWidget } from './components/VLibrasWidget';
@@ -118,11 +116,6 @@ export default function App() {
         {/* Glossário */}
         <GlossarySection />
 
-        {/* Fontes Oficiais */}
-        <div className="reveal-on-scroll">
-          <SourcesSection />
-        </div>
-        
         {/* Recursos de Apoio (Rede de Ajuda) */}
         <div className="reveal-on-scroll">
           <ResourcesSection />
@@ -132,9 +125,6 @@ export default function App() {
         <div className="reveal-on-scroll">
           <FAQSection />
         </div>
-        
-        {/* Como Citar */}
-        <CitationBlock />
 
       </main>
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
-import { Share2 } from 'lucide-react';
+
 import { StoryCard } from './StoryCard';
 import {
   formatDeathCount,
@@ -87,7 +87,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
         suicideDeaths={suicideDeaths}
       />
 
-      <HangingBulb active={isRunning} didTick={didTick} />
+
 
       {/* Center content wrapper */}
       <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto">
@@ -97,7 +97,13 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
           setModeExplicit={setModeExplicit} 
         />
 
-        {/* Removed displayHeader H1 per user request */}
+        <h1 className="sr-only">
+          Vidas Masculinas: Mortalidade Masculina no Brasil em Tempo Real
+        </h1>
+
+        <div className="mt-8">
+          <HangingBulb active={isRunning} didTick={didTick} />
+        </div>
 
         <button
           id="main-counter-toggle"

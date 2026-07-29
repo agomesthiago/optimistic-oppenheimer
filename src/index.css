@@ -126,3 +126,124 @@
   animation: flicker-filament 6s infinite;
 }
 
+/* ========================================================
+   CUSTOM PALETTES / THEMES OVERRIDES
+   ======================================================== */
+
+/* 1. CLINICAL CYAN (Deep Slate & Neon Cyan) */
+html.theme-cyan body {
+  background-color: #020617 !important;
+  color: #e2e8f0 !important;
+}
+html.theme-cyan .dark\:bg-carbon-900,
+html.theme-cyan .dark\:bg-carbon-950,
+html.theme-cyan .bg-carbon-900,
+html.theme-cyan .bg-carbon-950 {
+  background-color: #090d16 !important;
+}
+html.theme-cyan .dark\:bg-carbon-800,
+html.theme-cyan .dark\:bg-carbon-700 {
+  background-color: #0f172a !important;
+}
+html.theme-cyan .text-crimson-400,
+html.theme-cyan .text-crimson-500,
+html.theme-cyan .text-crimson-600,
+html.theme-cyan .dark\:text-crimson-400 {
+  color: #06b6d4 !important;
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+}
+html.theme-cyan .bg-crimson-600,
+html.theme-cyan .hover\:bg-crimson-700:hover {
+  background-color: #0891b2 !important;
+  color: #ffffff !important;
+}
+html.theme-cyan .border-crimson-500\/30,
+html.theme-cyan .border-crimson-500\/20 {
+  border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+/* 2. OPPENHEIMER P&B (Pure Black & White Brutalist) */
+html.theme-bw body {
+  background-color: #000000 !important;
+  color: #f5f5f5 !important;
+}
+html.theme-bw .dark\:bg-carbon-900,
+html.theme-bw .dark\:bg-carbon-950,
+html.theme-bw .bg-carbon-900,
+html.theme-bw .bg-carbon-950 {
+  background-color: #050505 !important;
+}
+html.theme-bw .dark\:bg-carbon-800,
+html.theme-bw .dark\:bg-carbon-700 {
+  background-color: #121212 !important;
+}
+html.theme-bw .text-crimson-400,
+html.theme-bw .text-crimson-500,
+html.theme-bw .text-crimson-600,
+html.theme-bw .dark\:text-crimson-400 {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+html.theme-bw .bg-crimson-600,
+html.theme-bw .hover\:bg-crimson-700:hover {
+  background-color: #262626 !important;
+  color: #ffffff !important;
+  border: 1px solid #525252;
+}
+html.theme-bw .border-crimson-500\/30,
+html.theme-bw .border-crimson-500\/20 {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* 3. DOSSIÊ SEPIA (Warm Parchment & Espresso) */
+html.theme-sepia body {
+  background-color: #fcf9f2 !important;
+  color: #2c2420 !important;
+}
+html.theme-sepia .bg-zinc-50,
+html.theme-sepia .bg-zinc-100,
+html.theme-sepia .bg-white,
+html.theme-sepia .dark\:bg-carbon-900,
+html.theme-sepia .dark\:bg-carbon-950 {
+  background-color: #f5efe6 !important;
+  color: #2c2420 !important;
+}
+html.theme-sepia .dark\:bg-carbon-800,
+html.theme-sepia .dark\:bg-carbon-700,
+html.theme-sepia .bg-zinc-200 {
+  background-color: #eae2d6 !important;
+  color: #2c2420 !important;
+}
+html.theme-sepia .text-slate-900,
+html.theme-sepia .text-slate-800,
+html.theme-sepia .text-slate-700,
+html.theme-sepia .dark\:text-ash-100,
+html.theme-sepia .dark\:text-ash-200,
+html.theme-sepia .dark\:text-ash-300 {
+  color: #2c2420 !important;
+}
+html.theme-sepia .text-slate-500,
+html.theme-sepia .text-slate-400,
+html.theme-sepia .dark\:text-ash-400,
+html.theme-sepia .dark\:text-ash-500 {
+  color: #786c62 !important;
+}
+html.theme-sepia .text-crimson-400,
+html.theme-sepia .text-crimson-500,
+html.theme-sepia .text-crimson-600,
+html.theme-sepia .dark\:text-crimson-400 {
+  color: #b45309 !important; /* Amber-700 */
+}
+html.theme-sepia .bg-crimson-600,
+html.theme-sepia .hover\:bg-crimson-700:hover {
+  background-color: #854d0e !important;
+  color: #ffffff !important;
+}
+html.theme-sepia .border-zinc-200,
+html.theme-sepia .border-zinc-300,
+html.theme-sepia .dark\:border-carbon-700,
+html.theme-sepia .dark\:border-carbon-800 {
+  border-color: #ded5c8 !important;
+}
+
+

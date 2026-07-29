@@ -58,7 +58,7 @@ export function FAQSection() {
             id="faq-heading"
             className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-4"
           >
-            Perguntas Frequentes & Repositório de Conhecimento (.09)
+            Perguntas Frequentes & Repositório de Conhecimento
           </h2>
           <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-ash-100 tracking-tight mb-4">
             Respostas essenciais sobre mortalidade masculina, longevidade e prevenção no Brasil.
@@ -157,12 +157,6 @@ export function FAQSection() {
           })}
         </div>
 
-        {/* Post-FAQ Counter */}
-        <div className="mt-12 flex items-center justify-between gap-4 pt-6 border-t border-zinc-200 dark:border-carbon-800 font-mono text-xs">
-          <span className="text-slate-500 dark:text-ash-400">
-            Exibindo {filteredFaqs.length} de {FAQ_DATA.length} respostas catalogadas
-          </span>
-        </div>
       </div>
 
 

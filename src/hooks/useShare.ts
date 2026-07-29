@@ -13,6 +13,7 @@ export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
 
   const shareToStories = useCallback(async (elementId: string, deaths?: number) => {
+    if (isSharing) return;
     const node = document.getElementById(elementId);
     if (!node) return;
 
@@ -22,11 +23,13 @@ export function useShare() {
       // Dynamic import to reduce initial bundle size (html-to-image is only loaded when user shares)
       const { toPng } = await import('html-to-image');
       
-      // Generate PNG
+      // Generate PNG (skipFonts e fontEmbedCSS vazios evitam exceção SecurityError em CORS de folhas externas)
       const dataUrl = await toPng(node, {
         quality: 0.95,
         pixelRatio: 1, // Fixes scale issues on high DPI screens since node is fixed at 1080x1920
-        style: { opacity: '1' }
+        style: { opacity: '1' },
+        skipFonts: true,
+        fontEmbedCSS: '',
       });
 
       // Convert to file
@@ -58,7 +61,7 @@ export function useShare() {
     } finally {
       setIsSharing(false);
     }
-  }, []);
+  }, [isSharing]);
 
   return { isSharing, shareToStories };
 }

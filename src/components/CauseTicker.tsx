@@ -3,7 +3,7 @@ import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, EPOCH
 import { CauseStoryCard } from './CauseStoryCard';
 import { ShareButton } from './ShareButton';
 import { useShare } from '../hooks/useShare';
-import { Share2 } from 'lucide-react';
+
 
 const AUTO_SLIDE_MS = 7_000;
 

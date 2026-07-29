@@ -1,0 +1,21 @@
+{
+  "version": "v2026.07",
+  "name": "Dataset v2026.07",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-29",
+  "lastUpdateBR": "29/07/2026",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "changelog": [
+    {
+      "version": "v2026.07",
+      "date": "29/07/2026",
+      "changes": [
+        "Correção metodológica",
+        "Atualização dos dados oficiais",
+        "Melhorias de acessibilidade",
+        "Melhorias de SEO",
+        "Atualização do Schema.org"
+      ]
+    }
+  ]
+}

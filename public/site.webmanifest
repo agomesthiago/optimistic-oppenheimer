@@ -1,0 +1,30 @@
+{
+  "name": "Vidas Masculinas | Mortalidade Masculina no Brasil em Dados",
+  "short_name": "Vidas Masculinas",
+  "id": "/",
+  "scope": "/",
+  "lang": "pt-BR",
+  "orientation": "portrait",
+  "categories": [
+    "health",
+    "education"
+  ],
+  "description": "Painel de visualização em tempo real da mortalidade masculina no Brasil. Estatísticas oficiais do DATASUS e IBGE.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

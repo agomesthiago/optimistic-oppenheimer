@@ -9,6 +9,7 @@ export function LifeExpectancySection() {
       aria-labelledby="longevidade-heading"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
+      <span id="expectativa" className="sr-only" />
       <div className="max-w-2xl mx-auto">
         <h2
           id="longevidade-heading"

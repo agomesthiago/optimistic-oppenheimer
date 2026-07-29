@@ -17,10 +17,14 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://vidasmasculinas.vercel.app/" />
 
-    <!-- Google Fonts preload -->
+    <!-- Google Fonts preload & DNS prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Discovery" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Theme & Color Scheme -->
     <meta name="color-scheme" content="dark light" />
@@ -72,6 +76,8 @@
           "name": "Vidas Masculinas",
           "description": "Painel de conscientização em tempo real e desagregação epidemiológica da mortalidade masculina no Brasil.",
           "inLanguage": "pt-BR",
+          "datePublished": "2026-07-01",
+          "dateModified": "2026-07-29",
           "publisher": { "@id": "https://vidasmasculinas.vercel.app/#organization" }
         },
         {
@@ -81,7 +87,9 @@
           "name": "Vidas Masculinas | Mortalidade Masculina no Brasil em Dados",
           "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
           "primaryImageOfPage": { "@id": "https://vidasmasculinas.vercel.app/#og-image" },
-          "inLanguage": "pt-BR"
+          "inLanguage": "pt-BR",
+          "datePublished": "2026-07-01",
+          "dateModified": "2026-07-29"
         },
         {
           "@type": "BreadcrumbList",
@@ -114,9 +122,12 @@
           "@id": "https://vidasmasculinas.vercel.app/#dataset",
           "name": "Estatísticas da Mortalidade Masculina no Brasil",
           "description": "Dados públicos projetados sobre mortalidade masculina a partir dos registros federais do DATASUS/SIM e IBGE 2022.",
+          "version": "Dataset v2026.07",
           "url": "https://vidasmasculinas.vercel.app/#estatisticas",
           "license": "https://creativecommons.org/licenses/by/4.0/",
+          "isAccessibleForFree": true,
           "creator": { "@id": "https://vidasmasculinas.vercel.app/#organization" },
+          "publisher": { "@id": "https://vidasmasculinas.vercel.app/#organization" },
           "spatialCoverage": "Brasil",
           "temporalCoverage": "2021/2026",
           "distribution": {
@@ -125,7 +136,8 @@
           },
           "measurementTechnique": "Agregação de Dados e Projeção Matemática",
           "variableMeasured": "Taxa de Mortalidade Masculina",
-          "dateModified": "2026-07-20",
+          "datePublished": "2026-07-01",
+          "dateModified": "2026-07-29",
           "keywords": ["Mortalidade Masculina", "Brasil", "DATASUS", "IBGE", "Saúde do Homem"]
         },
         {

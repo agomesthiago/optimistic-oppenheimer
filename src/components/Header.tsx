@@ -81,8 +81,16 @@ export function Header() {
               {link.name}
             </a>
           ))}
-          <div className="pl-4 border-l border-zinc-300 dark:border-carbon-700">
+          <div className="pl-4 border-l border-zinc-300 dark:border-carbon-700 flex items-center gap-4">
             <ThemeToggle standalone={false} />
+            <a 
+              href="https://cvv.org.br/chat/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-1.5 rounded-full bg-crimson-600 hover:bg-crimson-700 text-white text-[11px] font-mono tracking-widest uppercase font-bold transition-colors shadow-sm"
+            >
+              Fale com CVV 188
+            </a>
           </div>
         </nav>
 
@@ -115,6 +123,14 @@ export function Header() {
                 {link.name}
               </a>
             ))}
+            <a 
+              href="https://cvv.org.br/chat/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 px-6 py-3 rounded-full bg-crimson-600 hover:bg-crimson-700 text-white text-sm font-mono tracking-widest uppercase font-bold transition-colors shadow-sm text-center"
+            >
+              Fale com CVV 188
+            </a>
           </nav>
         </div>
       </div>

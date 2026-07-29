@@ -1,3 +1,7 @@
+import { useState, useEffect, useRef } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { ChevronDown } from 'lucide-react';
+
 const RESOURCES = [
   {
     id: 'cvv',
@@ -10,64 +14,150 @@ const RESOURCES = [
     id: 'caps',
     name: 'CAPS — Centro de Atenção Psicossocial',
     description: 'Rede pública do SUS que oferece acolhimento especializado em saúde mental de forma gratuita e sem necessidade de agendamento.',
-    action: 'Buscar CAPS no Google',
+    action: 'Buscar CAPS',
     href: 'https://www.google.com/search?q=CAPS+Centros+de+Aten%C3%A7%C3%A3o+Psicossocial+mais+pr%C3%B3ximo',
-  },
-  {
-    id: 'atlas',
-    name: 'Atlas da Violência — IPEA',
-    description: 'Acesso a estudos detalhados, séries históricas e dados estruturados sobre segurança pública e violência no Brasil.',
-    action: 'Acessar estudos',
-    href: 'https://www.ipea.gov.br/atlasviolencia/',
-  },
+  }
 ];
 
+const FAQ = [
+  {
+    q: 'Quais são os principais sinais de alerta?',
+    a: 'Fique atento a mudanças bruscas de comportamento, isolamento social, falas sobre desesperança ou falta de sentido na vida, descuido com a aparência ou higiene, e despedidas implícitas.',
+  },
+  {
+    q: 'Como abordar um amigo ou familiar?',
+    a: 'Ouça sem julgar. Evite minimizar a dor (não diga "isso passa" ou "tem gente pior"). Valide o sofrimento da pessoa e ofereça-se para acompanhá-la na busca por ajuda profissional.',
+  },
+  {
+    q: 'O que fazer em uma emergência?',
+    a: 'Não deixe a pessoa sozinha. Remova meios letais do alcance. Entre em contato imediato com o CVV (188), chame o SAMU (192) ou leve a pessoa ao pronto-socorro psiquiátrico ou geral mais próximo.',
+  }
+];
+
+function AccordionItem({ q, a, index }: { q: string; a: string; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className={`reveal-on-scroll border-b border-zinc-200 dark:border-carbon-700`} style={{ transitionDelay: `${index * 100}ms` }}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 group cursor-pointer"
+      >
+        <span className="font-semibold text-slate-800 dark:text-ash-200 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">
+          {q}
+        </span>
+        <ChevronDown 
+          size={18} 
+          className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-crimson-500' : ''}`} 
+        />
+      </button>
+      <div 
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-48 opacity-100 pb-5' : 'max-h-0 opacity-0'}`}
+      >
+        <p className="text-slate-600 dark:text-ash-400 text-sm leading-relaxed">
+          {a}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function ResourcesSection() {
+  useScrollReveal();
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      // Only calculate parallax when section is in viewport
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Calculate offset based on scroll position relative to the section
+        const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        setOffset((scrollProgress - 0.5) * 150); // Maps to roughly -75px to +75px
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section
       id="recursos"
+      ref={sectionRef}
       aria-labelledby="recursos-heading"
-      className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
+      className="relative py-32 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-950 overflow-hidden"
     >
-      <div className="max-w-2xl mx-auto">
-        <h2
-          id="recursos-heading"
-          className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12"
-        >
-          Ajuda
-        </h2>
+      {/* Parallax Background Element */}
+      <div 
+        className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-2xl max-h-2xl rounded-full bg-gradient-to-br from-crimson-100/50 to-transparent dark:from-crimson-900/10 dark:to-transparent blur-3xl -z-10 opacity-60 pointer-events-none transition-transform duration-75 ease-linear"
+        style={{ transform: `translate3d(20%, ${offset}px, 0)` }}
+      />
+      <div 
+        className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-xl max-h-xl rounded-full bg-gradient-to-tr from-slate-200/50 to-transparent dark:from-carbon-800/30 dark:to-transparent blur-3xl -z-10 opacity-50 pointer-events-none transition-transform duration-75 ease-linear"
+        style={{ transform: `translate3d(-20%, ${-offset * 0.8}px, 0)` }}
+      />
 
-        <p className="text-slate-600 dark:text-ash-300 text-base mb-12 leading-relaxed">
-          Se você ou alguém precisa de ajuda: cada indicador nesta página representa uma história interrompida. Se a visualização destes dados 
-          te afetou de alguma forma, saiba que há suporte disponível. O acolhimento é sigiloso, humanizado e gratuito.
-        </p>
+      <div className="max-w-3xl mx-auto z-10 relative">
+        <div className="reveal-on-scroll">
+          <h2
+            id="recursos-heading"
+            className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-6 text-center"
+          >
+            O que podemos fazer
+          </h2>
+          <p className="text-slate-600 dark:text-ash-300 text-lg md:text-xl text-center mb-16 leading-relaxed max-w-2xl mx-auto font-light">
+            O primeiro passo é <strong className="font-semibold text-slate-800 dark:text-ash-100">quebrar o silêncio</strong>. 
+            O acolhimento e a conversa sem julgamentos salvam vidas todos os dias.
+          </p>
+        </div>
 
-        <div className="space-y-4">
-          {RESOURCES.map((res) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          {RESOURCES.map((res, i) => (
             <a
               key={res.id}
               id={res.id}
               href={res.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-zinc-50 dark:bg-carbon-800 hover:bg-zinc-100 dark:hover:bg-carbon-700 border border-zinc-200 dark:border-carbon-700 hover:border-slate-300 dark:hover:border-ash-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-ash-500 shadow-sm"
+              className="reveal-on-scroll group flex flex-col justify-between gap-4 p-8 bg-white dark:bg-carbon-900 rounded-2xl border border-zinc-200 dark:border-carbon-700 hover:border-crimson-300 dark:hover:border-crimson-800 transition-all duration-300 hover:shadow-xl hover:shadow-crimson-900/5 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-slate-400"
+              style={{ transitionDelay: `${i * 150}ms` }}
               aria-label={`${res.name}: ${res.description}. ${res.action}`}
             >
-              <div className="flex flex-col gap-1.5">
-                <span className="text-base font-semibold text-slate-800 dark:text-ash-200 group-hover:text-slate-900 dark:group-hover:text-ash-100 transition-colors">
+              <div className="flex flex-col gap-3">
+                <span className="text-lg font-bold text-slate-800 dark:text-ash-100 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">
                   {res.name}
                 </span>
-                <span className="text-sm text-slate-500 dark:text-ash-400">{res.description}</span>
+                <span className="text-sm text-slate-600 dark:text-ash-400 leading-relaxed">{res.description}</span>
               </div>
-              <span className="shrink-0 text-sm font-mono text-slate-500 dark:text-ash-600 group-hover:text-slate-700 dark:group-hover:text-ash-400 transition-colors whitespace-nowrap">
-                {res.action} →
-              </span>
+              <div className="mt-4 flex items-center justify-between border-t border-zinc-100 dark:border-carbon-800 pt-4">
+                <span className="text-xs font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500 group-hover:text-crimson-500 transition-colors">
+                  {res.action}
+                </span>
+                <span className="text-slate-400 group-hover:text-crimson-500 transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </div>
             </a>
           ))}
         </div>
+
+        <div className="bg-white dark:bg-carbon-900 rounded-3xl border border-zinc-200 dark:border-carbon-800 p-8 md:p-12 shadow-sm relative overflow-hidden">
+          <div className="reveal-on-scroll mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 dark:text-ash-100 mb-2">Perguntas Frequentes</h3>
+            <p className="text-sm text-slate-500 dark:text-ash-400">Como identificar sinais e oferecer suporte efetivo.</p>
+          </div>
+          
+          <div className="flex flex-col">
+            {FAQ.map((item, i) => (
+              <AccordionItem key={i} q={item.q} a={item.a} index={i} />
+            ))}
+          </div>
+        </div>
+        
       </div>
-
-
     </section>
   );
 }
