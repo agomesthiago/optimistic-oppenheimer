@@ -1,4 +1,4 @@
-import { formatDeathCount, EPOCH_LABEL } from '../utils/mortality';
+import { formatDeathCount } from '../utils/mortality';
 import type { CounterMode } from '../hooks/useAutoToggle';
 
 interface StoryCardProps {
@@ -10,90 +10,78 @@ interface StoryCardProps {
 export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
   const isSuicide = mode === 'suicide';
 
-  const titleText = isSuicide
-    ? 'Prevenção ao Suicídio Masculino'
-    : 'Mortalidade Masculina no Brasil';
-
-  const taglineText = isSuicide
-    ? '77,8% das Vítimas são Homens (MS / SIM)'
-    : `Estimativa Acumulada Desde ${EPOCH_LABEL}`;
-
   const mainValue = isSuicide
     ? formatDeathCount(suicideDeaths)
     : formatDeathCount(deaths);
 
   const subtitleText = isSuicide
-    ? `homens cometeram suicídio no Brasil desde 01/01/${new Date().getFullYear().toString()} (~33 mortes por dia). Se precisar de ajuda, ligue CVV 188.`
-    : 'homens morreram no Brasil por causas evitáveis, acidentes e violência este ano.';
+    ? 'suicídios masculinos'
+    : 'vidas interrompidas';
 
-  const accentColor = isSuicide
-    ? 'rgba(225, 29, 72, 0.35)'
-    : 'rgba(239, 68, 68, 0.25)';
+  // Site-matching dramatic glow
+  const accentGlow = isSuicide
+    ? 'radial-gradient(circle at 50% 45%, rgba(225, 29, 72, 0.4) 0%, rgba(225, 29, 72, 0.1) 35%, transparent 65%)'
+    : 'radial-gradient(circle at 50% 45%, rgba(253, 230, 138, 0.15) 0%, rgba(253, 230, 138, 0.05) 40%, transparent 70%)';
+
+  const textGlow = isSuicide
+    ? '0 0 120px rgba(225,29,72,0.8), 0 0 40px rgba(255,255,255,0.4)'
+    : '0 0 120px rgba(253,230,138,0.4), 0 0 40px rgba(255,255,255,0.3)';
 
   return (
     <div
       aria-hidden="true"
       id="story-card-export"
-      className="fixed top-0 left-0 opacity-0 pointer-events-none -z-50 flex flex-col items-center justify-between text-center overflow-hidden p-20 select-none"
+      className="fixed top-0 left-0 opacity-0 pointer-events-none -z-50 flex flex-col items-center text-center overflow-hidden p-20 select-none"
       style={{
         width: '1080px',
         height: '1920px',
-        backgroundColor: '#0a0a0a',
-        color: '#f5f5f5',
-        fontFamily: "'Inter', sans-serif"
+        backgroundColor: '#09090b', // zinc-950
+        color: '#f8fafc',
+        fontFamily: "'Inter', system-ui, sans-serif"
       }}
     >
-      {/* Background Gradient */}
+      {/* Dynamic Background Glow matching Hero */}
       <div 
         className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% 40%, ${accentColor} 0%, transparent 80%)`,
-        }}
+        style={{ background: accentGlow }}
       />
       
-      {/* Brand Header */}
-      <div className="relative z-10 pt-16 flex flex-col items-center gap-4">
-        <span className="font-mono text-[2.2rem] uppercase tracking-[0.4em] text-zinc-400 font-bold">
-          Vidas Masculinas
-        </span>
-        <div className="h-1 w-24 bg-crimson-600 rounded-full" />
-      </div>
+      {/* Noise Texture Overlay for premium feel */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+      />
 
-      {/* Main Content Area */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-16 my-auto">
-        <h2 className="text-[3.8rem] font-bold tracking-tight text-zinc-100 leading-snug mb-12 font-sans">
-          {titleText}
-        </h2>
-        
-        <p className="mb-12 text-[2.2rem] font-mono uppercase tracking-[0.25em] text-zinc-400 font-semibold bg-zinc-900/80 px-8 py-3 rounded-full border border-zinc-800">
-          {taglineText}
-        </p>
-
+      <div className="relative z-10 flex flex-col items-center justify-center w-full flex-grow px-16" style={{ paddingBottom: '100px' }}>
         <div 
-          className={`font-mono font-bold tracking-tight mb-14 ${isSuicide ? 'text-crimson-400' : 'text-zinc-50'}`}
+          className="font-mono font-bold tracking-tighter whitespace-nowrap text-white"
           style={{
             fontSize: '13rem',
             lineHeight: '1',
-            textShadow: isSuicide ? '0 0 90px rgba(225,29,72,0.6)' : '0 0 90px rgba(255,255,255,0.3)'
+            textShadow: textGlow
           }}
         >
-          {mainValue}
+          {mainValue.split('.').map((part, i, arr) => (
+            <span key={i}>
+              {part}
+              {i < arr.length - 1 && <span className="text-[0.4em] opacity-80 mx-[0.05em]">.</span>}
+            </span>
+          ))}
         </div>
-        
-        <p className="text-[2.8rem] font-mono text-zinc-300 max-w-4xl leading-relaxed">
+
+        <p className="font-mono uppercase tracking-[0.2em] mt-8 text-zinc-400" style={{ fontSize: '2.4rem' }}>
           {subtitleText}
         </p>
       </div>
-
-      {/* Footer Branding & Link */}
-      <div className="relative z-10 pb-20 w-full flex flex-col items-center gap-6">
-        {isSuicide && (
-          <p className="text-[2.2rem] font-mono text-crimson-400 font-bold tracking-widest uppercase">
-            Apoio Emocional Gratuito · Ligue CVV 188
-          </p>
-        )}
-        <p className="text-[2.2rem] font-mono tracking-widest text-zinc-400 border border-zinc-700/80 bg-zinc-900/50 px-12 py-5 rounded-full">
-          vidasmasculinas.vercel.app
+      
+      {/* Footer matching Hero branding - Moved up above bottom safe zone */}
+      <div className="absolute z-10 w-full flex flex-col items-center gap-6" style={{ bottom: '280px' }}>
+        <div className="w-16 h-px bg-zinc-700/50" />
+        <p className="font-mono text-zinc-500 font-bold tracking-[0.4em] uppercase" style={{ fontSize: '2rem' }}>
+          VIDAS MASCULINAS
+        </p>
+        <p className="font-mono text-zinc-400 opacity-80 tracking-widest uppercase mt-4" style={{ fontSize: '1.4rem', maxWidth: '60%', lineHeight: '1.6' }}>
+          Uma estatística silenciosa. <span className={isSuicide ? 'text-crimson-400 font-bold' : 'text-amber-200 font-bold'}>Quebre o silêncio</span> e compartilhe para ajudar a conscientizar.
         </p>
       </div>
     </div>

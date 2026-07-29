@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, EPOCH_LABEL } from '../utils/mortality';
 import { CauseStoryCard } from './CauseStoryCard';
+import { ShareButton } from './ShareButton';
 import { useShare } from '../hooks/useShare';
 import { Share2 } from 'lucide-react';
 
@@ -157,15 +158,11 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
             </h3>
 
             {/* Share Cause Button */}
-            <button
+            <ShareButton
               onClick={() => shareToStories('cause-story-card-export', count)}
-              disabled={isSharing}
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900 text-xs font-mono text-slate-700 dark:text-ash-300 hover:bg-zinc-100 dark:hover:bg-carbon-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 cursor-pointer self-start sm:self-auto disabled:opacity-50"
-              title={`Compartilhar estatísticas da causa ${active.label}`}
-            >
-              <Share2 size={12} />
-              {isSharing ? 'Gerando...' : 'Compartilhar esta causa'}
-            </button>
+              isSharing={isSharing}
+              className="mt-6 md:mt-0"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-4">

@@ -18,11 +18,12 @@ import { CitationBlock } from './components/CitationBlock';
 import { DataFooter } from './components/DataFooter';
 import { Header } from './components/Header';
 import { VLibrasWidget } from './components/VLibrasWidget';
+import { GlobalScrollIndicator } from './components/GlobalScrollIndicator';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
-  const { deaths, sessionDeaths, sessionSeconds, yearSeconds, isRunning } = useCounter();
+  const { deaths, currentSessionSeconds, currentSessionDeaths, lifetimeDeaths, yearSeconds, isRunning } = useCounter();
 
   useSmoothScroll();
   useScrollReveal();
@@ -62,8 +63,9 @@ export default function App() {
 
         <Hero 
           deaths={deaths} 
-          sessionDeaths={sessionDeaths} 
-          sessionSeconds={sessionSeconds}
+          currentSessionSeconds={currentSessionSeconds}
+          currentSessionDeaths={currentSessionDeaths}
+          lifetimeDeaths={lifetimeDeaths}
           yearSeconds={yearSeconds} 
           isRunning={isRunning} 
         />
@@ -140,6 +142,9 @@ export default function App() {
       <footer role="contentinfo" className="relative z-10">
         <DataFooter />
       </footer>
+
+      {/* Global Scroll Indicator with Parallax */}
+      <GlobalScrollIndicator />
     </div>
       <Analytics />
       <SpeedInsights />

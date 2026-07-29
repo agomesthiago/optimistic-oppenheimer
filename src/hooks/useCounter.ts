@@ -7,9 +7,13 @@ import {
 export interface CounterState {
   /** Mortes acumuladas desde 1º jan do ano corrente até o momento atual */
   deaths: number;
+  /** Mortes acumuladas nesta aba/sessão atual */
+  currentSessionDeaths: number;
   /** Mortes acumuladas desde o PRIMEIRO ACESSO do usuário (persistente) */
-  sessionDeaths: number;
-  /** Segundos decorridos desde o primeiro acesso */
+  lifetimeDeaths: number;
+  /** Segundos decorridos nesta aba/sessão atual */
+  currentSessionSeconds: number;
+  /** Segundos decorridos desde o primeiro acesso (persistente) */
   sessionSeconds: number;
   /** Segundos desde o inicio do ano */
   yearSeconds: number;
@@ -24,7 +28,8 @@ const STORAGE_KEY = 'contandovidas_first_visit';
  * useCounter
  *
  * deaths = mortes desde 1º jan do ano corrente
- * sessionDeaths = mortes desde o primeiro acesso (salvo no localStorage)
+ * lifetimeDeaths = mortes desde o primeiro acesso (salvo no localStorage)
+ * currentSessionDeaths = mortes apenas nesta aba/sessão
  */
 export function useCounter(): CounterState {
   const rafRef = useRef<number | null>(null);
@@ -46,15 +51,21 @@ export function useCounter(): CounterState {
     }
   }, []);
 
+  // Tempo de início apenas da aba/sessão atual
+  const sessionStartTime = useMemo<number>(() => Date.now(), []);
+
   const [state, setState] = useState<CounterState>(() => {
     const now = Date.now();
-    const sessionElapsed = (now - firstVisitTime) / 1000;
+    const lifetimeElapsed = (now - firstVisitTime) / 1000;
+    const currentElapsed = (now - sessionStartTime) / 1000;
     const totalElapsed = getSecondsSinceYearStart();
     
     return {
       deaths: getAccumulatedDeaths(totalElapsed),
-      sessionDeaths: getAccumulatedDeaths(sessionElapsed),
-      sessionSeconds: sessionElapsed,
+      currentSessionDeaths: getAccumulatedDeaths(currentElapsed),
+      lifetimeDeaths: getAccumulatedDeaths(lifetimeElapsed),
+      currentSessionSeconds: currentElapsed,
+      sessionSeconds: lifetimeElapsed,
       yearSeconds: totalElapsed,
       isRunning: false,
     };
@@ -68,13 +79,16 @@ export function useCounter(): CounterState {
     lastTickRef.current = timestamp;
 
     const now = Date.now();
-    const sessionElapsed = (now - firstVisitTime) / 1000;
+    const lifetimeElapsed = (now - firstVisitTime) / 1000;
+    const currentElapsed = (now - sessionStartTime) / 1000;
     const totalElapsed = getSecondsSinceYearStart(); // Recalcula sempre para evitar dessincronização (sleep do PC)
 
     setState({
       deaths: getAccumulatedDeaths(totalElapsed),
-      sessionDeaths: getAccumulatedDeaths(sessionElapsed),
-      sessionSeconds: sessionElapsed,
+      currentSessionDeaths: getAccumulatedDeaths(currentElapsed),
+      lifetimeDeaths: getAccumulatedDeaths(lifetimeElapsed),
+      currentSessionSeconds: currentElapsed,
+      sessionSeconds: lifetimeElapsed,
       yearSeconds: totalElapsed,
       isRunning: true,
     });

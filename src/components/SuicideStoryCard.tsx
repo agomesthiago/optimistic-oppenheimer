@@ -38,15 +38,6 @@ export function SuicideStoryCard() {
 
       {/* Main Content Area */}
       <div className="relative z-10 flex flex-col items-center justify-center px-16 my-auto w-full">
-        {/* Cause Index Badge */}
-        <div className="flex items-center gap-4 mb-8">
-          <span className="px-6 py-2 bg-zinc-900 rounded-full font-mono text-[1.8rem] font-bold text-zinc-300 border border-zinc-800">
-            Fator de Risco Crítico
-          </span>
-          <span className="text-[1.8rem] font-mono uppercase tracking-widest text-crimson-400 font-bold bg-crimson-950/60 px-6 py-2 rounded-full border border-crimson-900/60">
-            Saúde Mental
-          </span>
-        </div>
 
         {/* Title */}
         <h2 className="text-[4.2rem] font-bold tracking-tight text-zinc-50 capitalize mb-12 font-sans max-w-4xl">
@@ -69,30 +60,8 @@ export function SuicideStoryCard() {
           dos suicídios registrados no Brasil acometem a <strong className="text-zinc-100 font-bold">população masculina</strong>.
         </p>
 
-        {/* Cause Metadata Cards */}
-        <div className="grid grid-cols-2 gap-8 w-full max-w-4xl pt-10 border-t border-zinc-800/80 text-left font-mono">
-          <div className="flex flex-col gap-2 bg-zinc-900/60 p-8 rounded-2xl border border-zinc-800/60">
-            <span className="text-[1.6rem] text-zinc-500 uppercase tracking-wider">Razão por Sexo</span>
-            <span className="text-[2.4rem] text-zinc-100 font-bold">
-              {formatDecimal(ratioMaleToFemale)} homens / 1 mulher
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-2 bg-zinc-900/60 p-8 rounded-2xl border border-zinc-800/60">
-            <span className="text-[1.6rem] text-zinc-500 uppercase tracking-wider">Homens Vítimas</span>
-            <span className="text-[2.4rem] text-zinc-200 font-semibold truncate">
-              {male2021.toLocaleString('pt-BR')} (ano-base)
-            </span>
-          </div>
-        </div>
       </div>
 
-      {/* Footer Branding & Link */}
-      <div className="relative z-10 pb-20 w-full flex flex-col items-center gap-6">
-        <p className="text-[2.2rem] font-mono tracking-widest text-zinc-400 border border-zinc-700/80 bg-zinc-900/50 px-12 py-5 rounded-full">
-          vidasmasculinas.vercel.app
-        </p>
-      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { SUICIDE_DATA, formatDecimal } from '../utils/mortality';
 import { useShare } from '../hooks/useShare';
-import { Share2, Loader2 } from 'lucide-react';
+import { ShareButton } from './ShareButton';
 import { SuicideStoryCard } from './SuicideStoryCard';
 export function SuicideSection() {
   const {
@@ -148,15 +148,11 @@ export function SuicideSection() {
             . Dados consolidados do Ministério da Saúde / SIM.
           </p>
 
-          <button
+          <ShareButton
             onClick={() => shareToStories('suicidio-story-card-export')}
-            disabled={isSharing}
-            aria-label="Compartilhar dados sobre suicídio"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-ash-200 text-white dark:text-carbon-900 text-xs font-mono font-bold uppercase tracking-wider hover:bg-slate-800 dark:hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:focus:ring-ash-300 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
-          >
-            {isSharing ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />}
-            {isSharing ? 'Gerando...' : 'Compartilhar'}
-          </button>
+            isSharing={isSharing}
+            className="shrink-0"
+          />
         </div>
       </div>
 

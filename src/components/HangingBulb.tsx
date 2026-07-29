@@ -34,24 +34,28 @@ export function HangingBulb({ active, didTick }: { active: boolean; didTick: boo
           
           {/* 1. Brilho do Filamento (Soft Socket Glow) */}
           <div 
-            className="absolute top-8 w-32 h-32 -translate-x-1/2 left-1/2 rounded-full pointer-events-none hidden dark:block"
+            className="absolute w-40 h-40 rounded-full pointer-events-none hidden dark:block"
             style={{
-              background: 'radial-gradient(circle, rgba(255,255,255,0.40) 0%, rgba(255,255,255,0.08) 50%, transparent 80%)',
-              transform: `translateX(-50%) scale(${didTick ? 1.15 : 1})`,
-              filter: 'blur(16px)',
+              top: '35px',
+              left: '50%',
+              background: 'radial-gradient(circle, rgba(253,230,138,0.55) 0%, rgba(253,230,138,0.15) 50%, transparent 80%)',
+              transform: `translate(-50%, -50%) scale(${didTick ? 1.25 : 1})`,
+              filter: 'blur(20px)',
               opacity: active ? 1 : 0.2,
               transition: 'transform 0.15s ease-out',
             }}
             aria-hidden="true"
           />
 
-          {/* 2. Difusão Atmosférica Ultra-Suave na Superfície do Hero */}
+          {/* 2. Difusão Atmosférica na Superfície do Hero - Emissor Focado na Lâmpada */}
           <div 
-            className="absolute top-10 left-1/2 -translate-x-1/2 w-[1200px] h-[750px] rounded-full pointer-events-none hidden dark:block"
+            className="absolute w-[1200px] h-[1200px] pointer-events-none hidden dark:block"
             style={{
+              top: '20px',
+              left: '50%',
               background:
-                'radial-gradient(ellipse 75% 55% at 50% 25%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 45%, rgba(255,255,255,0.01) 70%, transparent 90%)',
-              transform: `translate(-50%, -10%) scale(${didTick ? 1.05 : 1})`,
+                'radial-gradient(circle at center, rgba(253,230,138,0.09) 0%, rgba(253,230,138,0.05) 30%, rgba(253,230,138,0.02) 60%, rgba(253,230,138,0.005) 85%, transparent 100%)',
+              transform: `translate(-50%, -50%) scale(${didTick ? 1.05 : 1})`,
               filter: 'blur(60px)',
               opacity: active ? 1 : 0.25,
               transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',

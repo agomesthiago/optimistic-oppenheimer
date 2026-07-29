@@ -44,9 +44,6 @@ export function CauseStoryCard({ cause, count, currentIndex, totalCauses }: Caus
       <div className="relative z-10 flex flex-col items-center justify-center px-16 my-auto w-full">
         {/* Cause Index Badge */}
         <div className="flex items-center gap-4 mb-8">
-          <span className="px-6 py-2 bg-zinc-900 rounded-full font-mono text-[1.8rem] font-bold text-zinc-300 border border-zinc-800">
-            Causa {String(currentIndex + 1).padStart(2, '0')} / {String(totalCauses).padStart(2, '0')}
-          </span>
           <span className="text-[1.8rem] font-mono uppercase tracking-widest text-crimson-400 font-bold bg-crimson-950/60 px-6 py-2 rounded-full border border-crimson-900/60">
             {percentageStr}% dos óbitos masculinos
           </span>
@@ -73,29 +70,8 @@ export function CauseStoryCard({ cause, count, currentIndex, totalCauses }: Caus
           óbitos masculinos estimados por <strong className="text-zinc-100 font-bold">{cause.label.toLowerCase()}</strong> no Brasil este ano.
         </p>
 
-        {/* Cause Metadata Cards */}
-        <div className="grid grid-cols-2 gap-8 w-full max-w-4xl pt-10 border-t border-zinc-800/80 text-left font-mono">
-          <div className="flex flex-col gap-2 bg-zinc-900/60 p-8 rounded-2xl border border-zinc-800/60">
-            <span className="text-[1.6rem] text-zinc-500 uppercase tracking-wider">Estimativa Anual</span>
-            <span className="text-[2.4rem] text-zinc-100 font-bold">
-              ~{cause.annualEstimate.toLocaleString('pt-BR')} mortes/ano
-            </span>
-          </div>
 
-          <div className="flex flex-col gap-2 bg-zinc-900/60 p-8 rounded-2xl border border-zinc-800/60">
-            <span className="text-[1.6rem] text-zinc-500 uppercase tracking-wider">Fonte Oficial</span>
-            <span className="text-[2.2rem] text-zinc-200 font-semibold truncate">
-              {cause.source}
-            </span>
-          </div>
-        </div>
-      </div>
 
-      {/* Footer Branding & Link */}
-      <div className="relative z-10 pb-20 w-full flex flex-col items-center gap-6">
-        <p className="text-[2.2rem] font-mono tracking-widest text-zinc-400 border border-zinc-700/80 bg-zinc-900/50 px-12 py-5 rounded-full">
-          vidasmasculinas.vercel.app
-        </p>
       </div>
     </div>
   );
