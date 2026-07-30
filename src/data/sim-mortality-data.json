@@ -1,0 +1,77 @@
+{
+  "source": {
+    "provider": "ETL SIM Local (CSV)",
+    "dataset": "SIM",
+    "index": "D:\\ETLSIM",
+    "retrievedAt": "2026-07-30T00:40:57.585Z"
+  },
+  "years": [
+    {
+      "year": 2019,
+      "maleDeaths": 745519,
+      "femaleDeaths": 603725,
+      "maleSuicides": 10599,
+      "femaleSuicides": 2919,
+      "causeDeaths": {
+        "cardiovascular": 191722,
+        "cancer": 123285,
+        "respiratory": 81975,
+        "digestive": 41563,
+        "diabetes": 30785,
+        "homicide": 40231,
+        "traffic": 27280,
+        "falls": 8698,
+        "alcohol_liver": 0,
+        "drowning": 4233,
+        "suicide": 10599
+      }
+    },
+    {
+      "year": 2022,
+      "maleDeaths": 844920,
+      "femaleDeaths": 698720,
+      "maleSuicides": 12908,
+      "femaleSuicides": 3553,
+      "causeDeaths": {
+        "cardiovascular": 210181,
+        "cancer": 125800,
+        "respiratory": 88645,
+        "digestive": 45981,
+        "diabetes": 35172,
+        "homicide": 40504,
+        "traffic": 28886,
+        "falls": 10201,
+        "alcohol_liver": 0,
+        "drowning": 4104,
+        "suicide": 12908
+      }
+    },
+    {
+      "year": 2023,
+      "maleDeaths": 803200,
+      "femaleDeaths": 661884,
+      "maleSuicides": 13244,
+      "femaleSuicides": 3758,
+      "causeDeaths": {
+        "cardiovascular": 205159,
+        "cancer": 131051,
+        "respiratory": 86271,
+        "digestive": 45759,
+        "diabetes": 32498,
+        "homicide": 39459,
+        "traffic": 29758,
+        "falls": 10615,
+        "alcohol_liver": 0,
+        "drowning": 4489,
+        "suicide": 13244
+      }
+    }
+  ],
+  "methodology": {
+    "maleSexValue": "Masculino",
+    "suicideCidRange": [
+      "X60",
+      "X84"
+    ]
+  }
+}

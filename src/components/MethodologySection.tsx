@@ -5,7 +5,8 @@ import {
   SUICIDE_DATA,
   formatDecimal,
   TOTAL_MALE_DEATHS_PER_YEAR,
-  SECONDS_PER_DEATH
+  SECONDS_PER_DEATH,
+  SECONDS_PER_YEAR
 } from '../utils/mortality';
 import { Abbr } from './Abbr';
 
@@ -22,7 +23,7 @@ const STEPS = [
   {
     step: '02',
     title: 'Estimativa Temporal em Tempo Real',
-    body: `~${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} óbitos masculinos/ano ÷ 31.557.600 s/ano = 1 morte a cada ~${Math.round(SECONDS_PER_DEATH)} segundos (~${DEATHS_PER_DAY.toLocaleString('pt-BR')}/dia).`,
+    body: `~${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} óbitos masculinos/ano ÷ ${SECONDS_PER_YEAR.toLocaleString('pt-BR')} s/ano = 1 morte a cada ~${Math.round(SECONDS_PER_DEATH)} segundos (~${DEATHS_PER_DAY.toLocaleString('pt-BR')}/dia).`,
   },
   {
     step: '03',

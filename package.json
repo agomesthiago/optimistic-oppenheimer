@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && npm run build:widgets && node scripts/generate-sitemap.mjs",
+    "build": "tsc -b && npm run test:math && vite build && npm run build:widgets && node scripts/generate-sitemap.mjs",
     "build:widgets": "vite build --config vite.widgets.config.ts",
     "lint": "oxlint",
     "preview": "vite preview",
+    "test:math": "node scripts/verify-mortality-consistency.mjs",
     "lighthouse-ci": "node scripts/run-lighthouse-ci.mjs",
     "test:cert": "node scripts/run-instrumented-certification.mjs"
   },

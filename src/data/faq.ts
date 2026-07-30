@@ -49,13 +49,13 @@ export const FAQ_DATA: FAQItem[] = [
     id: 'faq-07',
     category: 'Estatísticas',
     question: 'Quantos homens morrem por homicídios e violência no Brasil por ano?',
-    answer: 'De acordo com o Atlas da Violência do IPEA e o DATASUS/SIM, mais de 40.000 homens são vítimas de homicídio anualmente no Brasil. Homens de 15 a 29 anos constituem mais de 91% de todas as vítimas de mortes violentas intencionais no país.'
+    answer: 'De acordo com o Atlas da Violência do IPEA e o DATASUS/SIM, quase 40.000 homens são vítimas de homicídio anualmente no Brasil. Homens de 15 a 29 anos constituem mais de 91% de todas as vítimas de mortes violentas intencionais no país.'
   },
   {
     id: 'faq-08',
     category: 'Estatísticas',
     question: 'Quantos homens morrem em acidentes de trânsito no Brasil por ano?',
-    answer: 'Os acidentes de trânsito causam a morte de cerca de 28.000 a 30.000 homens por ano no Brasil (~3,4% do total de óbitos masculinos). Homens representam mais de 80% das vítimas fatais em sinistros de transporte terrestre (motocicletas, automóveis e atropelamentos).'
+    answer: 'Os acidentes de trânsito causam a morte de cerca de 26.000 a 30.000 homens por ano no Brasil (~3,4% do total de óbitos masculinos). Homens representam mais de 80% das vítimas fatais em sinistros de transporte terrestre (motocicletas, automóveis e atropelamentos).'
   },
 
   // Categoria: Longevidade (09 - 11)
@@ -89,7 +89,7 @@ export const FAQ_DATA: FAQItem[] = [
     id: 'faq-13',
     category: 'Suicídio',
     question: 'Quantos homens morrem por suicídio a cada dia no Brasil?',
-    answer: 'Estimam-se cerca de 13.356 mortes masculinas por suicídio ao ano no Brasil, o que corresponde a uma média de aproximadamente 33 a 36 homens que falecem por essa causa diariamente no país.'
+    answer: 'Estimam-se entre 12.000 e 13.400 mortes masculinas por suicídio ao ano no Brasil, o que corresponde a uma média de aproximadamente 33 a 36 homens que falecem por essa causa diariamente no país.'
   },
   {
     id: 'faq-14',

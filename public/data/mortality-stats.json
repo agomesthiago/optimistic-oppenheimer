@@ -1,0 +1,99 @@
+{
+  "total_male_deaths_per_year": 797880,
+  "total_female_deaths_per_year": 654776,
+  "seconds_per_year": 31557600,
+  "deaths_per_second": 0.02528329150505742,
+  "seconds_per_death": 39.551812302601896,
+  "deaths_per_day": 2184,
+  "suicide_deaths_per_year": 12250,
+  "suicide_female_deaths_per_year": 3410,
+  "suicide_total_deaths_per_year": 15660,
+  "suicide_male_percentage": 78.22477650063857,
+  "suicide_female_percentage": 21.77522349936143,
+  "suicide_male_rate_per_100k": 12.43245485336701,
+  "suicide_female_rate_per_100k": 3.2622188439708566,
+  "suicide_ratio_male_to_female": 3.592375366568915,
+  "suicide_deaths_per_second": 0.0003881790757218546,
+  "suicide_seconds_per_death": 2576.130612244898,
+  "suicide_deaths_per_day": 34,
+  "epoch_label": "01/01/2026",
+  "causes": [
+    {
+      "id": "cardiovascular",
+      "label": "doenças cardiovasculares",
+      "proportion": 0.25361457863337844,
+      "annual_estimate": 202354,
+      "source": "IBGE / SBC — CID-10 I00-I99 (2022)"
+    },
+    {
+      "id": "cancer",
+      "label": "câncer",
+      "proportion": 0.15881084874918533,
+      "annual_estimate": 126712,
+      "source": "INCA / SIM — CID-10 C00-D48 (2022)"
+    },
+    {
+      "id": "respiratory",
+      "label": "doenças respiratórias",
+      "proportion": 0.10732190304306412,
+      "annual_estimate": 85630,
+      "source": "SIM/DATASUS — CID-10 J00-J99 (2022)"
+    },
+    {
+      "id": "digestive",
+      "label": "doenças digestivas",
+      "proportion": 0.05569007870857773,
+      "annual_estimate": 44434,
+      "source": "SIM/DATASUS — CID-10 K00-K93 (2022)"
+    },
+    {
+      "id": "diabetes",
+      "label": "diabetes",
+      "proportion": 0.04113149847094801,
+      "annual_estimate": 32818,
+      "source": "SIM/DATASUS — CID-10 E10-E14 (2022)"
+    },
+    {
+      "id": "homicide",
+      "label": "homicídio",
+      "proportion": 0.05021431794254775,
+      "annual_estimate": 40065,
+      "source": "IPEA — Atlas da Violência 2024 — CID-10 X85-Y09"
+    },
+    {
+      "id": "traffic",
+      "label": "acidentes de trânsito",
+      "proportion": 0.03589637539479621,
+      "annual_estimate": 28641,
+      "source": "SIM/DATASUS + IPEA 2024 — CID-10 V01-V99"
+    },
+    {
+      "id": "falls",
+      "label": "quedas acidentais",
+      "proportion": 0.012330174963653682,
+      "annual_estimate": 9838,
+      "source": "SIM/DATASUS — CID-10 W00-W19 (2022)"
+    },
+    {
+      "id": "alcohol_liver",
+      "label": "doença hepática alcoólica",
+      "proportion": 0.011000401062816464,
+      "annual_estimate": 8777,
+      "source": "SIM/DATASUS — CID-10 K70 (2022)"
+    },
+    {
+      "id": "drowning",
+      "label": "afogamento acidental",
+      "proportion": 0.005357948563693788,
+      "annual_estimate": 4275,
+      "source": "SIM/DATASUS — CID-10 W65-W74 (2022)"
+    },
+    {
+      "id": "suicide",
+      "label": "suicídio",
+      "proportion": 0.015353185942748282,
+      "annual_estimate": 12250,
+      "source": "Ministério da Saúde / SIM — CID-10 X60-X84 (~2022)"
+    }
+  ]
+}

@@ -4,9 +4,9 @@ import { ShareButton } from './ShareButton';
 import { SuicideStoryCard } from './SuicideStoryCard';
 export function SuicideSection() {
   const {
-    total2021,
-    male2021,
-    female2021,
+    total,
+    male,
+    female,
     malePercentage,
     femalePercentage,
     maleRatePer100k,
@@ -37,7 +37,7 @@ export function SuicideSection() {
         </h2>
 
         <p id="dado-suicidio" className="text-slate-700 dark:text-ash-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
-          Em {year}, o Brasil registrou <strong className="text-slate-900 dark:text-ash-100 font-bold">{total2021.toLocaleString('pt-BR')} suicídios</strong>. Quase 4 em cada 5 vítimas foram homens.
+          {typeof year === 'string' && year.startsWith('Média') ? `${year}` : `Em ${year}`}, o Brasil registrou uma média anual de <strong className="text-slate-900 dark:text-ash-100 font-bold">{Math.round(total).toLocaleString('pt-BR')} suicídios</strong>. Quase 4 em cada 5 vítimas foram homens.
         </p>
 
         {/* Highlight Main Number */}
@@ -54,7 +54,7 @@ export function SuicideSection() {
             </span>
           </div>
           <div className="max-w-xs text-sm text-slate-600 dark:text-ash-300 font-medium leading-relaxed">
-            {male2021.toLocaleString('pt-BR')} dos {total2021.toLocaleString('pt-BR')} suicídios registrados no Brasil no ano-base ocorreram entre a população masculina.
+            {Math.round(male).toLocaleString('pt-BR')} dos {Math.round(total).toLocaleString('pt-BR')} suicídios anuais registrados no Brasil ocorreram entre a população masculina.
           </div>
         </div>
 
@@ -62,10 +62,10 @@ export function SuicideSection() {
         <div className="p-6 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 space-y-4 mb-10 shadow-sm">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-crimson-600 dark:text-crimson-400 font-bold">
-              Homens: {formatDecimal(malePercentage)}% ({male2021.toLocaleString('pt-BR')})
+              Homens: {formatDecimal(malePercentage)}% ({Math.round(male).toLocaleString('pt-BR')})
             </span>
             <span className="text-slate-500 dark:text-ash-500">
-              Mulheres: {formatDecimal(femalePercentage)}% ({female2021.toLocaleString('pt-BR')})
+              Mulheres: {formatDecimal(femalePercentage)}% ({Math.round(female).toLocaleString('pt-BR')})
             </span>
           </div>
           <div className="w-full h-3 bg-zinc-200 dark:bg-carbon-800 rounded-full overflow-hidden flex">

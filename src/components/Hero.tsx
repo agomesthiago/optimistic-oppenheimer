@@ -8,6 +8,8 @@ import {
   formatDeathCount,
   getAccumulatedSuicides,
   EPOCH_LABEL,
+  ESTIMATED_SUICIDES_PER_DAY,
+  getCounterStartDate,
 } from '../utils/mortality';
 import { HeroSessionIndicator } from './HeroSessionIndicator';
 import { HeroModeSelector } from './HeroModeSelector';
@@ -135,7 +137,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
           <span>{displayTagline}</span>
           {!isSuicideMode && (
             <span className="text-[8px] sm:text-[9px] text-slate-400 dark:text-ash-500 tracking-wider">
-              Cálculo local estimado a partir de primeiro de janeiro de 2026
+              Cálculo local estimado a partir de 1º de janeiro de {getCounterStartDate().getFullYear()}
             </span>
           )}
         </p>
@@ -147,7 +149,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
               <span className="font-bold text-crimson-600 dark:text-crimson-400 tabular-nums">
                 {formatDeathCount(suicideDeaths)}
               </span>{' '}
-              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} (~33 por dia).
+              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} (~{ESTIMATED_SUICIDES_PER_DAY} por dia).
             </>
           ) : null}
         </p>
