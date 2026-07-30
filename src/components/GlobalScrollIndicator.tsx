@@ -39,18 +39,18 @@ export function GlobalScrollIndicator() {
   return (
     <button 
       onClick={handleClick}
-      className="fixed bottom-8 right-8 z-50 flex flex-col items-center gap-2 cursor-pointer text-slate-400 dark:text-ash-500 hover:text-slate-700 dark:hover:text-ash-200 transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded-full p-2"
+      className="fixed bottom-8 right-8 z-50 flex flex-col items-center gap-2 cursor-pointer text-slate-600 dark:text-ash-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded-full p-2"
       style={{
         transform: `translateY(${parallaxOffset}px)`,
         transition: 'transform 0.1s ease-out'
       }}
-      aria-label={isAtBottom ? "Voltar ao topo" : "Rolar para baixo"}
+      aria-label={isAtBottom ? "Topo - Voltar ao topo" : "Deslize - Rolar para baixo"}
     >
       <span className="font-mono text-[9px] uppercase tracking-[0.3em] [writing-mode:vertical-lr] transition-all duration-300">
         {isAtBottom ? 'Topo' : 'Deslize'}
       </span>
       <div className="transition-transform duration-500" style={{ transform: isAtBottom ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-        <ChevronDown size={14} className="opacity-50" />
+        <ChevronDown size={14} className="opacity-75" />
       </div>
     </button>
   );

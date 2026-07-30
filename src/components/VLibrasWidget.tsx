@@ -9,6 +9,8 @@ export function VLibrasWidget() {
     if (document.getElementById('vlibras-script')) return;
 
     const loadVLibras = () => {
+      if (document.getElementById('vlibras-script')) return;
+      cleanup();
       const script = document.createElement('script');
       script.id = 'vlibras-script';
       script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
@@ -23,10 +25,16 @@ export function VLibrasWidget() {
       document.body.appendChild(script);
     };
 
-    // Usar um setTimeout simples (1.5s) para evitar impactos no LCP, 
-    // mas garantir que o script carregue confiavelmente em todos os browsers.
-    const timer = setTimeout(loadVLibras, 1500);
-    return () => clearTimeout(timer);
+    const events = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+    const cleanup = () => {
+      events.forEach(ev => window.removeEventListener(ev, loadVLibras));
+      clearTimeout(timer);
+    };
+
+    events.forEach(ev => window.addEventListener(ev, loadVLibras, { passive: true, once: true }));
+    const timer = setTimeout(loadVLibras, 12000);
+
+    return cleanup;
   }, []);
 
   return (

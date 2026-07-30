@@ -40,7 +40,6 @@ export function HangingBulb({ active, didTick }: { active: boolean; didTick: boo
               left: '50%',
               background: 'radial-gradient(circle, rgba(253,230,138,0.55) 0%, rgba(253,230,138,0.15) 50%, transparent 80%)',
               transform: `translate(-50%, -50%) scale(${didTick ? 1.25 : 1})`,
-              filter: 'blur(20px)',
               opacity: active ? 1 : 0.2,
               transition: 'transform 0.15s ease-out',
             }}
@@ -49,17 +48,15 @@ export function HangingBulb({ active, didTick }: { active: boolean; didTick: boo
 
           {/* 2. Difusão Atmosférica na Superfície do Hero - Emissor Focado na Lâmpada */}
           <div 
-            className="absolute w-[1200px] h-[1200px] pointer-events-none hidden dark:block"
+            className="absolute w-[600px] h-[600px] pointer-events-none hidden dark:block"
             style={{
               top: '20px',
               left: '50%',
               background:
                 'radial-gradient(circle at center, rgba(253,230,138,0.09) 0%, rgba(253,230,138,0.05) 30%, rgba(253,230,138,0.02) 60%, rgba(253,230,138,0.005) 85%, transparent 100%)',
               transform: `translate(-50%, -50%) scale(${didTick ? 1.05 : 1})`,
-              filter: 'blur(60px)',
               opacity: active ? 1 : 0.25,
-              transition: 'transform 0.15s ease-out, background 0.5s ease-in-out',
-              animation: active ? 'flicker-glow 5s infinite alternate' : 'none'
+              transition: 'transform 0.15s ease-out',
             }}
             aria-hidden="true"
           />

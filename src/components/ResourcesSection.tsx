@@ -81,7 +81,6 @@ export function ResourcesSection() {
               rel="noopener noreferrer"
               className="reveal-on-scroll group flex flex-col justify-between gap-4 p-8 bg-white dark:bg-carbon-900 rounded-2xl border border-zinc-200 dark:border-carbon-700 hover:border-crimson-300 dark:hover:border-crimson-800 transition-all duration-300 hover:shadow-xl hover:shadow-crimson-900/5 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-slate-400"
               style={{ transitionDelay: `${i * 150}ms` }}
-              aria-label={`${res.name}: ${res.description}. ${res.action}`}
             >
               <div className="flex flex-col gap-3">
                 <span className="text-lg font-bold text-slate-800 dark:text-ash-100 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">

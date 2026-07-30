@@ -15,10 +15,13 @@ O **Vidas Masculinas** (https://vidasmasculinas.vercel.app/) é uma plataforma i
 ## 2. Indicadores Principais e Estrutura de Rotas SPA
 
 ### 2.0 Rotas do Painel e Repositório de Conhecimento
-- **Visão Geral / Home**: https://vidasmasculinas.vercel.app/
-- **Página Dedicada de Metodologia**: https://vidasmasculinas.vercel.app/#metodologia
-- **Página Dedicada de Glossário**: https://vidasmasculinas.vercel.app/#glossario
-- **Perguntas Frequentes (FAQ)**: https://vidasmasculinas.vercel.app/#faq
+- [Visão Geral / Home](https://vidasmasculinas.vercel.app/): Página principal com contadores e gráficos
+- [Página Dedicada de Metodologia](https://vidasmasculinas.vercel.app/#metodologia): Documentação científica dos microdados do SIM/DATASUS
+- [Página Dedicada de Glossário](https://vidasmasculinas.vercel.app/#glossario): Conceitos demográficos e epidemiológicos
+- [Perguntas Frequentes](https://vidasmasculinas.vercel.app/#faq): Base de conhecimento e dúvidas frequentes
+- [Repositório no GitHub](https://github.com/agomesthiago/optimistic-oppenheimer): Código fonte aberto sob licença MIT
+- [DATASUS / SIM](https://datasus.saude.gov.br/): Sistema de Informações sobre Mortalidade
+- [IBGE](https://www.ibge.gov.br/): Instituto Brasileiro de Geografia e Estatística
 
 ### 2.1 Mortalidade Geral
 - Total Anual Consolidado: 800.000 homens mortos por ano no Brasil.

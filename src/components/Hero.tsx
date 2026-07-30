@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
@@ -50,6 +50,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
   const [isHydrated, setIsHydrated] = useState(false);
   const [srAnnouncement, setSrAnnouncement] = useState('');
   const [didTick, setDidTick] = useState(false);
+  const [shouldMountStoryCard, setShouldMountStoryCard] = useState(false);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -62,15 +63,19 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
     return () => clearTimeout(t);
   }, [deaths]);
 
+  const latestDisplayRef = useRef({ displayHeader, displayValue });
+  latestDisplayRef.current = { displayHeader, displayValue };
+
   useEffect(() => {
     if (!isHydrated) return;
     setSrAnnouncement(`Modo de exibição: ${displayHeader}. Estatística atual: ${displayValue}.`);
 
     const id = setInterval(() => {
-      setSrAnnouncement(`Estatística atualizada: ${displayHeader} - ${displayValue}.`);
+      const { displayHeader: h, displayValue: v } = latestDisplayRef.current;
+      setSrAnnouncement(`Estatística atualizada: ${h} - ${v}.`);
     }, 15000);
     return () => clearInterval(id);
-  }, [isHydrated, mode, displayHeader, displayValue]);
+  }, [isHydrated]);
 
   return (
     <section
@@ -83,7 +88,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
         {srAnnouncement}
       </div>
 
-      {typeof document !== 'undefined' && createPortal(
+      {shouldMountStoryCard && typeof document !== 'undefined' && createPortal(
         <StoryCard
           mode={mode}
           deaths={deaths}
@@ -114,7 +119,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
           id="main-counter-toggle"
           onClick={toggleMode}
           title="Clique para alternar o modo de exibição"
-          aria-label={`Alternar modo. Atual: ${displayHeader}`}
+          aria-label={`${displayValue} ${displayHeader}. Clique para alternar o modo de exibição.`}
           className={`relative font-mono font-bold leading-none select-none transition-colors duration-500 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50 rounded-3xl hover:opacity-90 ${
             isSuicideMode
               ? 'text-crimson-600 dark:text-crimson-400'
@@ -161,7 +166,10 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
       <div className="relative z-10 flex flex-col items-center">
         {/* Share button - Ação utilitária de compartilhamento */}
         <ShareButton
-          onClick={() => shareToStories('story-card-export', isSuicideMode ? suicideDeaths : deaths)}
+          onClick={() => {
+            setShouldMountStoryCard(true);
+            setTimeout(() => shareToStories('story-card-export', isSuicideMode ? suicideDeaths : deaths), 50);
+          }}
           isSharing={isSharing}
           className="mt-10 mb-8"
         />

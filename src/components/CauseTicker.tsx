@@ -228,7 +228,7 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
         </div>
 
         {/* Carousel Dots Indicator */}
-        <div className="flex items-center gap-2 overflow-x-auto max-w-full py-1">
+        <div className="flex items-center gap-1 overflow-x-auto max-w-full py-1">
           {CAUSE_BREAKDOWN.map((c, i) => {
             const isSelected = i === currentIndex;
             return (
@@ -236,12 +236,16 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
                 key={c.id}
                 onClick={() => setCurrentIndex(i)}
                 aria-label={`Ir para a causa ${c.label}`}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  isSelected
-                    ? 'w-8 bg-crimson-600 dark:bg-crimson-500'
-                    : 'w-2.5 bg-zinc-200 dark:bg-carbon-700 hover:bg-slate-400 dark:hover:bg-ash-400'
-                }`}
-              />
+                className="p-2 min-h-[28px] min-w-[28px] flex items-center justify-center cursor-pointer focus:outline-none"
+              >
+                <span
+                  className={`h-2.5 rounded-full transition-all duration-300 block ${
+                    isSelected
+                      ? 'w-8 bg-crimson-600 dark:bg-crimson-500'
+                      : 'w-2.5 bg-zinc-200 dark:bg-carbon-700 hover:bg-slate-400 dark:hover:bg-ash-400'
+                  }`}
+                />
+              </button>
             );
           })}
         </div>

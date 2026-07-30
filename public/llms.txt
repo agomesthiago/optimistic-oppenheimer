@@ -2,13 +2,14 @@
 
 > Projeto de impacto social, open-source e de página única para visualização de dados oficiais sobre a mortalidade masculina e saúde mental no Brasil.
 
-- Site Oficial: https://vidasmasculinas.vercel.app/
-- Metodologia Científica: https://vidasmasculinas.vercel.app/#metodologia
-- Glossário Epidemiológico: https://vidasmasculinas.vercel.app/#glossario
-- Perguntas Frequentes & Repositório de Conhecimento: https://vidasmasculinas.vercel.app/#faq
-- Repositório no GitHub: https://github.com/agomesthiago/optimistic-oppenheimer
-- Licença: MIT (Open Source)
-- Fontes Oficiais Incorporadas: DATASUS / SIM (Ministério da Saúde) e IBGE (Instituto Brasileiro de Geografia e Estatística)
+- [Site Oficial](https://vidasmasculinas.vercel.app/): Portal de impacto social sobre mortalidade masculina e saúde mental no Brasil
+- [Metodologia Científica](https://vidasmasculinas.vercel.app/#metodologia): Documentação dos microdados do SIM/DATASUS e fontes
+- [Glossário Epidemiológico](https://vidasmasculinas.vercel.app/#glossario): Termos técnicos e conceitos demográficos
+- [Perguntas Frequentes & Repositório de Conhecimento](https://vidasmasculinas.vercel.app/#faq): Base de conhecimento e dúvidas frequentes
+- [Repositório no GitHub](https://github.com/agomesthiago/optimistic-oppenheimer): Código open-source MIT
+- [Licença MIT](https://github.com/agomesthiago/optimistic-oppenheimer/blob/main/LICENSE): Open Source
+- [DATASUS / SIM](https://datasus.saude.gov.br/): Fonte oficial do Ministério da Saúde
+- [IBGE](https://www.ibge.gov.br/): Instituto Brasileiro de Geografia e Estatística
 
 ## Dados e Estatísticas Fundamentais
 
