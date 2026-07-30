@@ -4,8 +4,8 @@ Allow: /
 Sitemap: https://vidasmasculinas.vercel.app/sitemap.xml
 
 # AI & LLM Discovery Files (GEO / AI Search)
-# /llms.txt
-# /llms-full.txt
+# https://vidasmasculinas.vercel.app/llms.txt
+# https://vidasmasculinas.vercel.app/llms-full.txt
 
 # AI & LLM Search Crawlers
 User-agent: GPTBot

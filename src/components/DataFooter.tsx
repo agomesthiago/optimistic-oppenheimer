@@ -15,6 +15,7 @@ export function DataFooter() {
             { name: 'Suicídio', href: '#suicidios' },
             { name: 'Causas', href: '#causas' },
             { name: 'Método', href: '#metodologia' },
+            { name: 'Glossário', href: '#glossario' },
             { name: 'FAQ', href: '#faq' },
           ].map((link) => (
             <a 
@@ -46,7 +47,7 @@ export function DataFooter() {
             </div>
             <div>
               <span className="block font-bold uppercase tracking-wider text-slate-700 dark:text-ash-200">Metodologia</span>
-              <span>consulte a seção &quot;Metodologia&quot; desta página.</span>
+              <a href="#metodologia" className="underline hover:text-slate-800 dark:hover:text-ash-200">consulte a página &quot;Metodologia&quot;.</a>
             </div>
           </div>
           <div className="pt-2">

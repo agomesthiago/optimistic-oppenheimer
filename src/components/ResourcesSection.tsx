@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { ChevronDown } from 'lucide-react';
-
 const RESOURCES = [
   {
     id: 'cvv',
@@ -19,47 +17,6 @@ const RESOURCES = [
   }
 ];
 
-const FAQ = [
-  {
-    q: 'Quais são os principais sinais de alerta?',
-    a: 'Fique atento a mudanças bruscas de comportamento, isolamento social, falas sobre desesperança ou falta de sentido na vida, descuido com a aparência ou higiene, e despedidas implícitas.',
-  },
-  {
-    q: 'Como abordar um amigo ou familiar?',
-    a: 'Ouça sem julgar. Evite minimizar a dor (não diga "isso passa" ou "tem gente pior"). Valide o sofrimento da pessoa e ofereça-se para acompanhá-la na busca por ajuda profissional.',
-  },
-  {
-    q: 'O que fazer em uma emergência?',
-    a: 'Não deixe a pessoa sozinha. Remova meios letais do alcance. Entre em contato imediato com o CVV (188), chame o SAMU (192) ou leve a pessoa ao pronto-socorro psiquiátrico ou geral mais próximo.',
-  }
-];
-
-function AccordionItem({ q, a, index }: { q: string; a: string; index: number }) {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className={`reveal-on-scroll border-b border-zinc-200 dark:border-carbon-700`} style={{ transitionDelay: `${index * 100}ms` }}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 group cursor-pointer"
-      >
-        <span className="font-semibold text-slate-800 dark:text-ash-200 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">
-          {q}
-        </span>
-        <ChevronDown 
-          size={18} 
-          className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-crimson-500' : ''}`} 
-        />
-      </button>
-      <div 
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-48 opacity-100 pb-5' : 'max-h-0 opacity-0'}`}
-      >
-        <p className="text-slate-600 dark:text-ash-400 text-sm leading-relaxed">
-          {a}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 export function ResourcesSection() {
   useScrollReveal();
@@ -142,19 +99,6 @@ export function ResourcesSection() {
               </div>
             </a>
           ))}
-        </div>
-
-        <div className="bg-white dark:bg-carbon-900 rounded-3xl border border-zinc-200 dark:border-carbon-800 p-8 md:p-12 shadow-sm relative overflow-hidden">
-          <div className="reveal-on-scroll mb-8">
-            <h3 className="text-2xl font-bold text-slate-800 dark:text-ash-100 mb-2">Perguntas Frequentes</h3>
-            <p className="text-sm text-slate-500 dark:text-ash-400">Como identificar sinais e oferecer suporte efetivo.</p>
-          </div>
-          
-          <div className="flex flex-col">
-            {FAQ.map((item, i) => (
-              <AccordionItem key={i} q={item.q} a={item.a} index={i} />
-            ))}
-          </div>
         </div>
         
       </div>

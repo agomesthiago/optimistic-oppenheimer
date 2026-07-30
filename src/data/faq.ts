@@ -167,5 +167,24 @@ export const FAQ_DATA: FAQItem[] = [
     category: 'Apoio',
     question: 'Como localizar o CAPS mais próximo?',
     answer: 'É possível localizar a unidade de referência pesquisando por "CAPS mais próximo" em serviços de mapas ou consultando a Secretaria de Saúde do município.'
+  },
+  {
+    id: 'faq-25',
+    category: 'Apoio',
+    question: 'Quais são os principais sinais de alerta em situações de risco ou sofrimento psíquico?',
+    answer: 'Fique atento a mudanças bruscas de comportamento, isolamento social, falas sobre desesperança ou falta de sentido na vida, descuido com a aparência ou higiene, e despedidas implícitas.'
+  },
+  {
+    id: 'faq-26',
+    category: 'Apoio',
+    question: 'Como abordar um amigo ou familiar que apresente sinais de sofrimento?',
+    answer: 'Ouça sem julgar. Evite minimizar a dor (não diga "isso passa" ou "tem gente pior"). Valide o sofrimento da pessoa e ofereça-se para acompanhá-la na busca por ajuda profissional em serviços especializados (como CAPS ou psicologia).'
+  },
+  {
+    id: 'faq-27',
+    category: 'Apoio',
+    question: 'O que fazer imediatamente em uma emergência de saúde mental?',
+    answer: 'Não deixe a pessoa sozinha e remova meios letais do alcance. Entre em contato imediato com o CVV (188), chame o SAMU (192) ou leve a pessoa ao pronto-socorro psiquiátrico ou hospital geral mais próximo.'
   }
 ];
+

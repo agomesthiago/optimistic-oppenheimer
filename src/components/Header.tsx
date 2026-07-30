@@ -25,14 +25,25 @@ export function Header() {
     { name: 'Suicídio', href: '#suicidios' },
     { name: 'Causas', href: '#causas' },
     { name: 'Método', href: '#metodologia' },
+    { name: 'Glossário', href: '#glossario' },
     { name: 'FAQ', href: '#faq' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (href === '#metodologia' || href === '#glossario') {
+      window.location.hash = href;
+      return;
+    }
+
+    if (window.location.hash === '#metodologia' || window.location.hash === '#glossario') {
+      window.location.hash = href;
+      return;
+    }
     
-    // Smooth scroll to element
+    window.location.hash = href;
     const el = document.querySelector(href);
     if (el) {
       const headerOffset = 80;

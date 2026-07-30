@@ -178,6 +178,66 @@
           ]
         },
         {
+          "@type": "FAQPage",
+          "@id": "https://vidasmasculinas.vercel.app/#faq-schema",
+          "url": "https://vidasmasculinas.vercel.app/#faq",
+          "name": "Perguntas Frequentes & Repositório de Conhecimento — Mortalidade Masculina",
+          "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
+          "inLanguage": "pt-BR",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Por que a expectativa de vida dos homens no Brasil é 7 anos menor que a das mulheres?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O fosso na longevidade decorre principalmente da sobremortalidade masculina por causas externas (homicídios e acidentes de trânsito) e do diagnóstico tardio de doenças crônicas, fatores agravados pelo menor acesso e adesão preventiva à rede de atenção primária."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como funciona o apoio gratuito do CVV (188)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O Centro de Valorização da Vida (CVV) oferece apoio emocional gratuito, sigiloso e disponível 24 horas por dia através do número 188 para todo o Brasil, ou via chat online em cvv.org.br."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Por que o número de mortes por suicídio entre homens é 3,59 vezes maior que entre mulheres?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Embora mulheres apresentem maior incidência de tentativas, homens utilizam meios com maior letalidade imediata e enfrentam barreiras culturais ligadas a papéis tradicionais de masculinidade que dificultam a busca por auxílio psicológico e psiquiátrico."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como os contadores e indicadores em tempo real são calculados?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Os indicadores apresentados nesta página utilizam dados oficiais publicados pelo DATASUS, IBGE, Ministério da Saúde e PCDaS/Fiocruz. Os contadores em tempo real refletem uma média anualizada contínua extraída das séries históricas consolidadas dos microdados do SIM, expurgando anomalias pandêmicas."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "@id": "https://vidasmasculinas.vercel.app/#methodology-page",
+          "url": "https://vidasmasculinas.vercel.app/#metodologia",
+          "name": "Metodologia Científica e Auditoria dos Dados de Mortalidade",
+          "headline": "Rigor Estatístico e Consistência com Bases do DATASUS e IBGE",
+          "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "DefinedTermSet",
+          "@id": "https://vidasmasculinas.vercel.app/#glossary-page",
+          "url": "https://vidasmasculinas.vercel.app/#glossario",
+          "name": "Glossário Epidemiológico e Demográfico",
+          "description": "Definições dos termos técnicos, siglas e conceitos demográficos utilizados no painel.",
+          "isPartOf": { "@id": "https://vidasmasculinas.vercel.app/#website" },
+          "inLanguage": "pt-BR"
+        },
+        {
           "@type": "ImageObject",
           "@id": "https://vidasmasculinas.vercel.app/#og-image",
           "url": "https://vidasmasculinas.vercel.app/og-image.jpg",
@@ -196,17 +256,23 @@
     <div id="root">
       <div id="estatisticas" class="sr-only">
         <h1>Vidas Masculinas: Mortalidade Masculina no Brasil</h1>
-        <p>Mais de 800.000 homens morrem anualmente no Brasil. O projeto Vidas Masculinas compila estatísticas de saúde do DATASUS e IBGE para conscientização pública.</p>
-        <h2>Principais Causas de Morte</h2>
+        <p>Os indicadores apresentados nesta página utilizam dados oficiais publicados pelo DATASUS, IBGE, Ministério da Saúde e PCDaS/Fiocruz. Os contadores em tempo real refletem uma média anualizada contínua extraída das séries históricas consolidadas dos microdados do SIM, expurgando anomalias pandêmicas.</p>
+        <h2>Principais Causas de Morte (#causas)</h2>
         <ul>
           <li>Doenças Cardiovasculares</li>
           <li>Câncer de Próstata e outras Neoplasias</li>
           <li>Causas Externas (Homicídios, Acidentes de Trânsito)</li>
-          <li>Suicídio</li>
+          <li>Suicídio Masculino</li>
         </ul>
-        <h2>Expectativa de Vida</h2>
+        <h2>Expectativa de Vida e Longevidade (#expectativa-vida)</h2>
         <p>A expectativa de vida ao nascer para homens no Brasil é em média 7 anos menor que a das mulheres, fortemente impactada pela mortalidade prematura.</p>
-        <p>Para mais dados interativos, acesse o painel completo no navegador com JavaScript habilitado.</p>
+        <h2>Metodologia Científica (#metodologia)</h2>
+        <p>Documentação dos critérios de auditoria, cálculo contínuo de mortalidade e tratamento de dados oficiais do SIM, DATASUS e IBGE.</p>
+        <h2>Glossário Epidemiológico (#glossario)</h2>
+        <p>Definições de CID-10, Taxa Bruta de Mortalidade (TBM), Anos Potenciais de Vida Perdidos (APVP) e mortalidade prematura.</p>
+        <h2>Perguntas Frequentes &amp; Repositório de Conhecimento (#faq)</h2>
+        <p>Respostas sobre sobremortalidade masculina, causas externas, saúde mental, apoio CVV (188) e CAPS do SUS.</p>
+        <p>Para interagir com o painel completo em tempo real, acesse no navegador com JavaScript habilitado.</p>
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>

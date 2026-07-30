@@ -12,12 +12,18 @@ O **Vidas Masculinas** (https://vidasmasculinas.vercel.app/) é uma plataforma i
 
 ---
 
-## 2. Indicadores Principais
+## 2. Indicadores Principais e Estrutura de Rotas SPA
+
+### 2.0 Rotas do Painel e Repositório de Conhecimento
+- **Visão Geral / Home**: https://vidasmasculinas.vercel.app/
+- **Página Dedicada de Metodologia**: https://vidasmasculinas.vercel.app/#metodologia
+- **Página Dedicada de Glossário**: https://vidasmasculinas.vercel.app/#glossario
+- **Perguntas Frequentes (FAQ)**: https://vidasmasculinas.vercel.app/#faq
 
 ### 2.1 Mortalidade Geral
-- Total Anual Estimado: ~800.000 homens mortos por ano no Brasil.
-- Participação no Total de Óbitos do País: ~55%.
-- Taxa de Mortalidade por 100 Mil Habitantes: ~757 óbitos por 100.000 homens.
+- Total Anual Consolidado: 800.000 homens mortos por ano no Brasil.
+- Participação no Total de Óbitos do País: 55%.
+- Taxa Bruta de Mortalidade por 100 Mil Habitantes: 757 óbitos por 100.000 homens.
 
 ### 2.2 Desigualdade na Expectativa de Vida (IBGE 2022)
 - Expectativa de Vida ao Nascer dos Homens: 72,0 anos.
@@ -25,10 +31,10 @@ O **Vidas Masculinas** (https://vidasmasculinas.vercel.app/) é uma plataforma i
 - Fosso de Longevidade Masculina: −7,0 anos de vida a menos em relação às mulheres.
 
 ### 2.3 Suicídio Masculino e Saúde Mental (MS / SIM)
-- Total Anual de Suicídios no Brasil: ~15.507 mortes.
-- Proporção de Suicídios Masculinos: 77,8% (12.064 a 13.356 mortes masculinas/ano).
-- Razão Homem/Mulher: 3,5 mortes masculinas para cada 1 feminina.
-- Taxa de Suicídio por 100 Mil: 11,8/100k entre homens vs 3,2/100k entre mulheres.
+- Total Anual Consolidado de Suicídios no Brasil: 15.660 mortes (média 2019–2023, excl. 2020–2021).
+- Proporção de Suicídios Masculinos: 78,22% (12.250 mortes masculinas/ano; 34 homens por dia).
+- Razão Homem/Mulher: 3,59 mortes masculinas para cada 1 feminina.
+- Taxa de Suicídio por 100 Mil (Censo IBGE 2022): 12,43/100k entre homens vs 3,26/100k entre mulheres.
 
 ---
 

@@ -48,11 +48,10 @@ test.describe('Bateria Severa de Auditoria UI e Reconciliação Dinâmica', () =
       'stats-section',
       'suicide-section',
       'causes-section',
-      'methodology-section',
       'faq-section'
     ];
 
-    for (const testId of coreSectionIds) {
+    const checkSection = async (testId: string) => {
       const section = page.getByTestId(testId);
       if (await section.count() > 0) {
         const textContent = await section.textContent();
@@ -71,7 +70,19 @@ test.describe('Bateria Severa de Auditoria UI e Reconciliação Dinâmica', () =
           `Caractere '~' indevido encontrado na seção ${testId}`
         ).not.toContain('~');
       }
+    };
+
+    for (const testId of coreSectionIds) {
+      await checkSection(testId);
     }
+
+    await page.goto('http://127.0.0.1:5173/#metodologia');
+    await checkSection('methodology-section');
+
+    await page.goto('http://127.0.0.1:5173/#glossario');
+    await checkSection('glossary-section');
+
+    await page.goto('http://127.0.0.1:5173/');
   });
 
   test('3. Correspondência entre números exibidos e base dinâmica reconciliada', async ({ page }) => {
@@ -100,6 +111,7 @@ test.describe('Bateria Severa de Auditoria UI e Reconciliação Dinâmica', () =
     expect(suicideText).toContain('2024');
 
     // 3.4 Seção Metodologia deve exibir o número de segundos civil correto do ano corrente (31.536.000 para ano comum)
+    await page.goto('http://127.0.0.1:5173/#metodologia');
     const methodologySection = page.getByTestId('methodology-section');
     await expect(methodologySection).toBeVisible();
     const methodologyText = await methodologySection.textContent();
@@ -140,12 +152,11 @@ test.describe('Bateria Severa de Auditoria UI e Reconciliação Dinâmica', () =
   });
 
   test('5. Regressões estruturais e validação das seções', async ({ page }) => {
-    // 5.1 Verificar visibilidade das seções fundamentais
+    // 5.1 Verificar visibilidade das seções fundamentais na Home
     await expect(page.getByTestId('hero-section')).toBeVisible();
     await expect(page.getByTestId('stats-section')).toBeVisible();
     await expect(page.getByTestId('suicide-section')).toBeVisible();
     await expect(page.getByTestId('causes-section')).toBeVisible();
-    await expect(page.getByTestId('methodology-section')).toBeVisible();
     await expect(page.getByTestId('faq-section')).toBeVisible();
 
     // 5.2 Verificar que FAQ é expansível e interativo
@@ -155,5 +166,12 @@ test.describe('Bateria Severa de Auditoria UI e Reconciliação Dinâmica', () =
     await firstQuestion.click();
     // Confirma que não houve quebra de layout após clique
     await expect(faqSection).toBeVisible();
+
+    // 5.3 Verificar navegação para rotas SPA dedicadas (Metodologia e Glossário)
+    await page.goto('/#metodologia');
+    await expect(page.getByTestId('methodology-page')).toBeVisible();
+
+    await page.goto('/#glossario');
+    await expect(page.getByTestId('glossary-page')).toBeVisible();
   });
 });

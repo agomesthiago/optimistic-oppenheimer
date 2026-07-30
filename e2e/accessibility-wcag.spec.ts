@@ -62,6 +62,7 @@ test.describe('Auditoria de Acessibilidade WCAG com @axe-core/playwright', () =>
   });
 
   test('3. Auditoria acessível específica da seção de Metodologia e FAQ', async ({ page }) => {
+    await page.goto('http://127.0.0.1:5173/#metodologia');
     const methodologyResults = await new AxeBuilder({ page })
       .include('#metodologia')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -72,6 +73,7 @@ test.describe('Auditoria de Acessibilidade WCAG com @axe-core/playwright', () =>
       `Violações WCAG na Metodologia: ${JSON.stringify(methodologyResults.violations.map(v => v.id))}`
     ).toEqual([]);
 
+    await page.goto('http://127.0.0.1:5173/#faq');
     const faqResults = await new AxeBuilder({ page })
       .include('#faq')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
