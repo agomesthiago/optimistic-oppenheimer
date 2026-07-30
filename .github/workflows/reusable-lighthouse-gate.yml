@@ -1,0 +1,52 @@
+name: Reusable Lighthouse Go-Live Gate
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: false
+        type: string
+        default: '20.x'
+      min-performance-score:
+        required: false
+        type: number
+        default: 95
+
+jobs:
+  lighthouse-audit:
+    name: Reusable Lighthouse CI Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Install Chromium for Lighthouse Audit
+        run: npx playwright install --with-deps chromium
+
+      - name: Execute Lighthouse Audit & Verify Targets
+        run: npm run test:lighthouse
+        env:
+          CI: true
+
+      - name: Upload Lighthouse Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reusable-lighthouse-ci-report
+          path: |
+            docs/test-results/lighthouse-ci-report.report.html
+            docs/test-results/lighthouse-ci-report.report.json
+          retention-days: 14
