@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, EPOCH_LABEL } from '../utils/mortality';
 import { CauseStoryCard } from './CauseStoryCard';
 import { ShareButton } from './ShareButton';
@@ -50,16 +51,19 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
-      {/* Hidden Export Card for currently active cause */}
-      <CauseStoryCard
-        cause={active}
-        count={count}
-        currentIndex={currentIndex}
-        totalCauses={CAUSE_BREAKDOWN.length}
-      />
+      {/* Hidden Export Card for currently active cause (rendered in document.body via Portal to prevent layout overflow) */}
+      {typeof document !== 'undefined' && createPortal(
+        <CauseStoryCard
+          cause={active}
+          count={count}
+          currentIndex={currentIndex}
+          totalCauses={CAUSE_BREAKDOWN.length}
+        />,
+        document.body
+      )}
 
       {/* 1. Primeiro Controle Focalizável do Componente - Mecanismo Explícito de Pausa/Parada (WCAG 2.2.2) */}
-      <div className="flex items-center justify-between gap-4 px-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 px-2">
         <button
           type="button"
           onClick={() => setIsPausedByUser((prev) => !prev)}
@@ -107,7 +111,7 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
             ? 'Carrossel pausado pelo usuário'
             : isHovered
             ? 'Pausado (cursor sobre o card)'
-            : 'Rotação automática ativa (~7s)'}
+            : 'Rotação automática ativa (7s)'}
         </span>
       </div>
 
@@ -116,7 +120,7 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
         role="region"
         aria-roledescription="slide"
         aria-label={`${active.label} - Slide ${currentIndex + 1} de ${CAUSE_BREAKDOWN.length}`}
-        className="relative overflow-hidden bg-white dark:bg-carbon-950 p-8 sm:p-12 rounded-3xl border border-zinc-200 dark:border-carbon-800 shadow-md transition-all duration-500 flex flex-col justify-between min-h-[26rem]"
+        className="relative overflow-hidden bg-white dark:bg-carbon-950 p-5 sm:p-12 rounded-3xl border border-zinc-200 dark:border-carbon-800 shadow-md transition-all duration-500 flex flex-col justify-between min-h-[26rem]"
       >
         {/* Top Accent Bar (Proportion Scale) */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-zinc-100 dark:bg-carbon-900">
@@ -168,12 +172,12 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-4">
             <span
               className="font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums leading-none tracking-tight"
-              style={{ fontSize: 'clamp(3.5rem, 11vw, 6.5rem)' }}
+              style={{ fontSize: 'clamp(2.4rem, 9vw, 6.5rem)' }}
             >
               {formatDeathCount(count)}
             </span>
             <span className="text-sm font-mono text-slate-500 dark:text-ash-400">
-              óbitos masculinos estimados por {active.label.toLowerCase()} desde {EPOCH_LABEL}
+              óbitos masculinos contabilizados por {active.label.toLowerCase()} desde {EPOCH_LABEL}
             </span>
           </div>
         </div>
@@ -188,9 +192,9 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
           </div>
 
           <div className="flex flex-col gap-1">
-            <span className="text-slate-500 dark:text-ash-400 uppercase tracking-wider">Estimativa Anual</span>
+            <span className="text-slate-500 dark:text-ash-400 uppercase tracking-wider">Média Anual</span>
             <span className="text-slate-800 dark:text-ash-200 font-bold text-sm">
-              ~{active.annualEstimate.toLocaleString('pt-BR')} mortes/ano
+              {active.annualEstimate.toLocaleString('pt-BR')} mortes/ano
             </span>
           </div>
 
@@ -204,7 +208,7 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
       </div>
 
       {/* Slide Controls & Carousel Navigation Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-4 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 p-4 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 shadow-sm overflow-hidden">
         {/* Previous / Next Slide Buttons */}
         <div className="flex items-center gap-3">
           <button

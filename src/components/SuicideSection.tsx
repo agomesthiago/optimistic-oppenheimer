@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { SUICIDE_DATA, formatDecimal } from '../utils/mortality';
 import { useShare } from '../hooks/useShare';
 import { ShareButton } from './ShareButton';
@@ -22,11 +23,15 @@ export function SuicideSection() {
   return (
     <section
       id="suicidios"
+      data-testid="suicide-section"
       aria-labelledby="suicidio-heading"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900/40"
     >
       <span id="suicidio" className="sr-only" />
-      <SuicideStoryCard />
+      {typeof document !== 'undefined' && createPortal(
+        <SuicideStoryCard />,
+        document.body
+      )}
 
       <div className="max-w-2xl mx-auto">
         <h2
@@ -43,7 +48,7 @@ export function SuicideSection() {
         {/* Highlight Main Number */}
         <div className="p-8 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 mb-10 shadow-sm flex flex-col md:flex-row items-baseline justify-between gap-6">
           <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-ash-500">
+            <span className="text-xs font-mono uppercase tracking-widest text-slate-600 dark:text-ash-400">
               Participação Masculina
             </span>
             <span
@@ -64,7 +69,7 @@ export function SuicideSection() {
             <span className="text-crimson-600 dark:text-crimson-400 font-bold">
               Homens: {formatDecimal(malePercentage)}% ({Math.round(male).toLocaleString('pt-BR')})
             </span>
-            <span className="text-slate-500 dark:text-ash-500">
+            <span className="text-slate-600 dark:text-ash-400">
               Mulheres: {formatDecimal(femalePercentage)}% ({Math.round(female).toLocaleString('pt-BR')})
             </span>
           </div>
@@ -85,37 +90,37 @@ export function SuicideSection() {
         {/* Auxiliary Indicators Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
           <div className="p-5 bg-white dark:bg-carbon-950 rounded-xl border border-zinc-200 dark:border-carbon-800 flex flex-col gap-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-ash-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-ash-400">
               Razão por Sexo
             </span>
             <span className="text-2xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums">
               {formatDecimal(ratioMaleToFemale)} : 1
             </span>
-            <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
+            <span className="text-[11px] font-mono text-slate-600 dark:text-ash-400">
               homens para cada mulher
             </span>
           </div>
 
           <div className="p-5 bg-white dark:bg-carbon-950 rounded-xl border border-zinc-200 dark:border-carbon-800 flex flex-col gap-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-ash-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-ash-400">
               Taxa Masculina
             </span>
             <span className="text-2xl font-mono font-bold text-slate-900 dark:text-ash-100 tabular-nums">
               {formatDecimal(maleRatePer100k)} / 100k
             </span>
-            <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
+            <span className="text-[11px] font-mono text-slate-600 dark:text-ash-400">
               por 100 mil homens
             </span>
           </div>
 
           <div className="p-5 bg-white dark:bg-carbon-950 rounded-xl border border-zinc-200 dark:border-carbon-800 flex flex-col gap-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-ash-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-ash-400">
               Taxa Feminina
             </span>
             <span className="text-2xl font-mono font-bold text-slate-700 dark:text-ash-300 tabular-nums">
               {formatDecimal(femaleRatePer100k)} / 100k
             </span>
-            <span className="text-[11px] font-mono text-slate-500 dark:text-ash-500">
+            <span className="text-[11px] font-mono text-slate-600 dark:text-ash-400">
               por 100 mil mulheres
             </span>
           </div>
@@ -136,7 +141,7 @@ export function SuicideSection() {
 
         {/* Footer note & Share */}
         <div className="pt-4 border-t border-zinc-200/60 dark:border-carbon-800/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="text-xs font-mono text-slate-400 dark:text-ash-600">
+          <p className="text-xs font-mono text-slate-600 dark:text-ash-400">
             Fonte:{' '}
             <a
               href={sourceUrl}
@@ -146,7 +151,7 @@ export function SuicideSection() {
             >
               {source}
             </a>
-            . Dados consolidados do Ministério da Saúde / SIM.
+            . Dados consolidados do Ministério da Saúde / SIM (1996–2024).
           </p>
 
           <ShareButton

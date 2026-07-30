@@ -7,11 +7,11 @@ export default defineConfig({
   workers: 1,
   reporter: [
     ['list'],
-    ['json', { outputFile: 'docs/test-results/certification-report.json' }],
+    ['json', { outputFile: 'docs/test-results/e2e-report.json' }],
     ['html', { outputFolder: 'docs/test-results/html-report', open: 'never' }]
   ],
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'http://127.0.0.1:5173',
     trace: 'on',
     screenshot: 'on',
     video: 'on-first-retry',
@@ -20,6 +20,14 @@ export default defineConfig({
     {
       name: 'chromium-desktop',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'mobile-chrome-pixel',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'mobile-safari-iphone',
+      use: { ...devices['iPhone 13'] },
     },
     {
       name: 'chromium-mobile-320px',
@@ -40,9 +48,9 @@ export default defineConfig({
     }
   ],
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4173',
-    port: 4173,
-    reuseExistingServer: true,
-    timeout: 30000,
+    command: 'npm run build && npm run preview -- --port 5173 --host 127.0.0.1',
+    port: 5173,
+    reuseExistingServer: !process.env.CI,
+    timeout: 60000,
   },
 });

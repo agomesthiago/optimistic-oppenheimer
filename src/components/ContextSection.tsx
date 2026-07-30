@@ -1,11 +1,11 @@
 import { MORTALITY_SOURCES, TOTAL_MALE_DEATHS_PER_YEAR, DEATHS_PER_DAY, LIFE_EXPECTANCY_DATA, formatDecimal } from '../utils/mortality';
 
 const FACTS = [
-  { id: 'daily-deaths', number: `~${DEATHS_PER_DAY.toLocaleString('pt-BR')}`, label: 'mortes masculinas/dia', source: 'IBGE + SIM (2022/2023)' },
-  { id: 'annual-deaths', number: `~${(TOTAL_MALE_DEATHS_PER_YEAR / 1000).toFixed(0)}k`, label: 'óbitos/ano de base nacional', source: 'IBGE + SIM (2022/2023)' },
-  { id: 'life-expectancy', number: `−${formatDecimal(LIFE_EXPECTANCY_DATA.gap)}`, label: 'anos de expectativa de vida vs. mulheres', source: 'IBGE Tábua 2022' },
-  { id: 'external', number: '~85%', label: 'das mortes por causas externas', source: 'SIM/DATASUS 2022' },
-  { id: 'young', number: '4,1×', label: 'mais mortes na faixa 20–24 anos vs. mulheres', source: 'IBGE Tábua 2024' },
+  { id: 'daily-deaths', number: `${DEATHS_PER_DAY.toLocaleString('pt-BR')}`, label: 'mortes masculinas/dia', source: 'SIM/PCDaS' },
+  { id: 'annual-deaths', number: `${(TOTAL_MALE_DEATHS_PER_YEAR / 1000).toFixed(0)}k`, label: 'óbitos/ano de base nacional', source: 'SIM/PCDaS' },
+  { id: 'life-expectancy', number: `−${formatDecimal(LIFE_EXPECTANCY_DATA.gap)}`, label: 'anos de expectativa de vida vs. mulheres', source: 'IBGE' },
+  { id: 'external', number: '85%', label: 'das mortes por causas externas', source: 'SIM/PCDaS' },
+  { id: 'young', number: '4,1×', label: 'mais mortes na faixa 20–24 anos vs. mulheres', source: 'IBGE' },
 ];
 
 export function ContextSection() {
@@ -56,7 +56,7 @@ export function ContextSection() {
               <p className="text-slate-700 dark:text-ash-200 text-base leading-snug font-medium transition-colors duration-300 group-hover:text-slate-900 dark:group-hover:text-ash-100">
                 {fact.label}
               </p>
-              <p className="text-slate-400 dark:text-ash-600 text-xs font-mono mt-auto pt-4 border-t border-zinc-200/40 dark:border-carbon-800/60">
+              <p className="text-slate-600 dark:text-ash-400 text-xs font-mono mt-auto pt-4 border-t border-zinc-200/40 dark:border-carbon-800/60">
                 {fact.source}
               </p>
             </div>

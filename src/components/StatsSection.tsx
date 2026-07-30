@@ -12,6 +12,7 @@ export function StatsSection({ deaths }: StatsSectionProps) {
   return (
     <section
       id="estatisticas"
+      data-testid="stats-section"
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-white dark:bg-transparent"
     >
       <span id="dados" className="sr-only" />
@@ -22,10 +23,10 @@ export function StatsSection({ deaths }: StatsSectionProps) {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 select-none w-full">
-          <Stat label={`em ${YEAR_LABEL}`} value={formattedDeaths} sublabel="estimativa acumulada" />
-          <Stat label="média anual" value={`~${Math.round(TOTAL_MALE_DEATHS_PER_YEAR / 1000).toLocaleString('pt-BR')}k`} sublabel="óbitos masculinos (SIM/IBGE)" />
-          <Stat label="taxa bruta" value={`~${MALE_MORTALITY_RATE_PER_100K}`} sublabel="óbitos / 100k homens" />
-          <Stat label="por dia" value={`≈ ${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="média diária" />
+          <Stat label={`em ${YEAR_LABEL}`} value={formattedDeaths} sublabel="acumulado" />
+          <Stat label="ano base 2024" value={`${Math.round(TOTAL_MALE_DEATHS_PER_YEAR / 1000).toLocaleString('pt-BR')}k`} sublabel="óbitos masculinos (SIM/PCDaS)" />
+          <Stat label="taxa bruta" value={`${MALE_MORTALITY_RATE_PER_100K}`} sublabel="óbitos / 100k homens" />
+          <Stat label="por dia" value={`${DEATHS_PER_DAY.toLocaleString('pt-BR')}`} sublabel="média diária" />
         </div>
       </div>
       

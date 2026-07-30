@@ -45,7 +45,10 @@ test.describe('CERTIFICATION GATE INSTRUMENTED TEST SUITE', () => {
     expect(Number(computedOpacity), 'Seções .reveal-on-scroll não podem ficar com opacidade 0 em navegadores sem JavaScript').toBeGreaterThan(0);
   });
 
-  test('GATE 2 & 9: Monkey Test — Spam de 10 Cliques Consecutivos no Botão Compartilhar', async ({ page }) => {
+  test('GATE 2 & 9: Monkey Test — Spam de 10 Cliques Consecutivos no Botão Compartilhar', async ({ page }, testInfo) => {
+    if (testInfo.project.name === 'chromium-no-js') {
+      test.skip();
+    }
     const errors: string[] = [];
     page.on('pageerror', (err) => {
       errors.push(err.message);
@@ -53,7 +56,7 @@ test.describe('CERTIFICATION GATE INSTRUMENTED TEST SUITE', () => {
     });
 
     await page.goto('/');
-    const shareBtn = page.locator('button:has-text("Compartilhar")').first();
+    const shareBtn = page.getByTestId('share-button').first();
     await shareBtn.waitFor({ state: 'visible' });
 
     console.log('[INSTRUMENTED LOG] Iniciando spam de 10 cliques em Compartilhar...');

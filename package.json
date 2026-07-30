@@ -11,7 +11,14 @@
     "preview": "vite preview",
     "test:math": "node scripts/verify-mortality-consistency.mjs",
     "lighthouse-ci": "node scripts/run-lighthouse-ci.mjs",
-    "test:cert": "node scripts/run-instrumented-certification.mjs"
+    "test:cert": "node scripts/run-instrumented-certification.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:mobile": "playwright test --project=mobile-chrome-pixel --project=mobile-safari-iphone",
+    "test:lighthouse": "node scripts/run-lighthouse-ci.mjs",
+    "seo:audit": "lighthouse http://127.0.0.1:5173 --only-categories=seo,performance,accessibility,best-practices --output=json --output=html --output-path=./lighthouse/report --chrome-flags=\"--headless=new --no-sandbox --disable-gpu\"",
+    "seo:audit:desktop": "lighthouse http://127.0.0.1:5173 --only-categories=seo,performance,accessibility,best-practices --preset=desktop --output=json --output=html --output-path=./lighthouse/report-desktop --chrome-flags=\"--headless=new --no-sandbox --disable-gpu\""
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -25,11 +32,15 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.0",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.3",
+    "axe-html-reporter": "^2.2.11",
+    "lighthouse": "^13.4.1",
     "oxlint": "^1.71.0",
     "playwright": "^1.61.1",
     "postcss": "^8.5.19",

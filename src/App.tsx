@@ -94,7 +94,7 @@ export default function App() {
         </div>
         
         {/* Principais causas */}
-        <section id="causas" aria-labelledby="causas-heading" className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50">
+        <section id="causas" data-testid="causes-section" aria-labelledby="causas-heading" className="reveal-on-scroll relative py-24 px-4 sm:px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-100 dark:bg-carbon-900/50 overflow-hidden">
           <div className="max-w-4xl mx-auto">
             <h2 id="causas-heading" className="text-sm font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-400 mb-12">
               Detalhes por causa

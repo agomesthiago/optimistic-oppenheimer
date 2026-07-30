@@ -65,7 +65,7 @@ export function DataFooter() {
           
           {/* Contra o Esquecimento */}
           <div className="flex flex-col items-center gap-3">
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-500 dark:text-ash-500">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-600 dark:text-ash-400">
               Contra o Esquecimento
             </span>
             <div className="flex items-center gap-5">
@@ -74,7 +74,7 @@ export function DataFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Instagram — Contra o Esquecimento"
-                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
+                className="text-slate-500 dark:text-ash-400 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
                 aria-label="Instagram Contra o Esquecimento"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,7 +88,7 @@ export function DataFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Website — Contra o Esquecimento"
-                className="text-slate-400 dark:text-ash-600 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
+                className="text-slate-500 dark:text-ash-400 hover:text-slate-800 dark:hover:text-ash-300 transition-colors duration-200"
                 aria-label="Website Contra o Esquecimento"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -101,12 +101,12 @@ export function DataFooter() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
-            <span className="text-xs font-mono text-slate-500 dark:text-ash-600 text-center sm:text-left">
+            <span className="text-xs font-mono text-slate-600 dark:text-ash-400 text-center sm:text-left">
               média calculada · não representa mortes em tempo real
             </span>
             <div className="flex items-center gap-4">
-              <span className="text-xs font-mono text-slate-500 dark:text-ash-600">
-                Fale com CVV <strong className="text-slate-700 dark:text-ash-400">188</strong>
+              <span className="text-xs font-mono text-slate-600 dark:text-ash-400">
+                Fale com CVV <strong className="text-slate-900 dark:text-ash-300">188</strong>
               </span>
             </div>
           </div>

@@ -42,6 +42,7 @@ export function FAQSection() {
   return (
     <section
       id="faq"
+      data-testid="faq-section"
       aria-labelledby="faq-heading"
       className="reveal-on-scroll relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900/40"
     >

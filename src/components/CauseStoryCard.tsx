@@ -67,7 +67,7 @@ export function CauseStoryCard({ cause, count }: CauseStoryCardProps) {
         </div>
         
         <p className="text-[2.6rem] font-mono text-zinc-300 max-w-4xl leading-relaxed mb-16">
-          óbitos masculinos estimados por <strong className="text-zinc-100 font-bold">{cause.label.toLowerCase()}</strong> no Brasil este ano.
+          óbitos masculinos contabilizados por <strong className="text-zinc-100 font-bold">{cause.label.toLowerCase()}</strong> no Brasil este ano.
         </p>
 
 

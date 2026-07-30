@@ -10,8 +10,8 @@ const rootDir = path.resolve(__dirname, '..');
 const outDir = path.join(rootDir, 'docs', 'test-results');
 fs.mkdirSync(outDir, { recursive: true });
 
-console.log('[Lighthouse CI] Iniciando servidor de preview na porta 4173...');
-const previewProcess = spawn('npx', ['--no-install', 'vite', 'preview', '--port', '4173', '--strictPort'], {
+console.log('[Lighthouse CI] Iniciando servidor de preview na porta 5173...');
+const previewProcess = spawn('npx', ['--no-install', 'vite', 'preview', '--port', '5173', '--strictPort'], {
   cwd: rootDir,
   stdio: 'pipe',
   shell: true,
@@ -24,11 +24,11 @@ function wait(ms) {
 async function runCI() {
   try {
     await wait(3000); // Aguarda subida do preview
-    console.log('[Lighthouse CI] Servidor ativo. Executando Lighthouse...');
+    console.log('[Lighthouse CI] Servidor ativo. Executando Lighthouse em mobile mode...');
 
     const profileDir = path.join(rootDir, 'node_modules', '.cache', 'chrome-profile').replace(/\\/g, '/');
     const reportPathWithoutExt = path.join(outDir, 'lighthouse-ci-report');
-    const cmd = `npx -y lighthouse http://localhost:4173/ --output=json --output=html --output-path="${reportPathWithoutExt}" --chrome-flags="--headless=new --no-sandbox --disable-gpu --user-data-dir=${profileDir}"`;
+    const cmd = `npx -y lighthouse http://127.0.0.1:5173/ --output=json --output=html --output-path="${reportPathWithoutExt}" --chrome-flags="--headless=new --no-sandbox --disable-gpu --user-data-dir=${profileDir}"`;
 
     try {
       execSync(cmd, { cwd: rootDir, stdio: 'inherit' });

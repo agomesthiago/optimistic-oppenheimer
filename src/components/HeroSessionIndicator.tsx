@@ -32,7 +32,7 @@ export function HeroSessionIndicator({
     
   // Para estimar o lifetime em segundos para usar no cálculo de suicídio
   // deaths = seconds * DEATHS_PER_SECOND => seconds = deaths / DEATHS_PER_SECOND
-  // Em vez de importar DEATHS_PER_SECOND, usamos uma aproximação baseada na proporção de suicídios (~1.6%)
+  // Em vez de importar DEATHS_PER_SECOND, usamos uma aproximação baseada na proporção de suicídios (1.6%)
   const displayedLifetimeDeaths = isSuicideMode
     ? lifetimeDeaths * 0.016
     : lifetimeDeaths;

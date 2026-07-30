@@ -133,7 +133,7 @@ export function ResourcesSection() {
                 <span className="text-sm text-slate-600 dark:text-ash-400 leading-relaxed">{res.description}</span>
               </div>
               <div className="mt-4 flex items-center justify-between border-t border-zinc-100 dark:border-carbon-800 pt-4">
-                <span className="text-xs font-mono tracking-widest uppercase text-slate-500 dark:text-ash-500 group-hover:text-crimson-500 transition-colors">
+                <span className="text-xs font-mono tracking-widest uppercase text-slate-600 dark:text-ash-400 group-hover:text-crimson-500 transition-colors">
                   {res.action}
                 </span>
                 <span className="text-slate-400 group-hover:text-crimson-500 transition-transform group-hover:translate-x-1">

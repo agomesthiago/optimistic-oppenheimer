@@ -1,3 +1,11 @@
+import {
+  TOTAL_MALE_DEATHS_PER_YEAR,
+  MALE_MORTALITY_RATE_PER_100K,
+  SUICIDE_DATA,
+  CAUSE_BREAKDOWN,
+  LIFE_EXPECTANCY_DATA
+} from '../utils/mortality';
+
 export interface FAQItem {
   id: string;
   question: string;
@@ -5,91 +13,94 @@ export interface FAQItem {
   category: 'Geral' | 'Estatísticas' | 'Longevidade' | 'Suicídio' | 'Causas' | 'Metodologia' | 'Apoio';
 }
 
+const getCauseEstimate = (id: string) => {
+  return CAUSE_BREAKDOWN.find(c => c.id === id)?.annualEstimate || 0;
+};
+
+const cardiovascularEstimate = getCauseEstimate('cardiovascular');
+const cardiovascularProportion = CAUSE_BREAKDOWN.find(c => c.id === 'cardiovascular')?.proportion || 0;
+
+const homicideEstimate = getCauseEstimate('homicide');
+const trafficEstimate = getCauseEstimate('traffic');
+
 export const FAQ_DATA: FAQItem[] = [
-  // Categoria: Geral (01 - 03)
   {
     id: 'faq-01',
     category: 'Geral',
     question: 'O que é o projeto Vidas Masculinas?',
-    answer: 'O Vidas Masculinas é uma iniciativa independente, open-source e sem fins lucrativos desenvolvida no formato Single-Page Knowledge Hub. Seu propósito é conscientizar a sociedade, educar a população e fornecer dados oficiais transparentes sobre a mortalidade masculina e a saúde mental no Brasil com base em estatísticas públicas do DATASUS/SIM e IBGE.'
+    answer: 'O Vidas Masculinas é uma iniciativa independente, open-source e sem fins lucrativos desenvolvida no formato Single-Page Knowledge Hub. Seu propósito é conscientizar a sociedade, educar a população e fornecer dados oficiais transparentes sobre a mortalidade masculina e a saúde mental no Brasil com base nos microdados públicos do SIM/DATASUS e PCDaS/Fiocruz.'
   },
   {
     id: 'faq-02',
     category: 'Geral',
     question: 'Por que focar especificamente na mortalidade masculina?',
-    answer: 'No Brasil, mais de 800.000 homens morrem a cada ano, representando aproximadamente 55% de todos os óbitos do país. Homens morrem proporcionalmente mais por homicídios (mais de 90% das vítimas), acidentes de trânsito (mais de 80%) e suicídio (77,8%), apresentando uma expectativa de vida em média 7 anos menor do que as mulheres por fatores epidemiológicos evitáveis.'
+    answer: `No Brasil, centenas de milhares de homens morrem a cada ano. Homens apresentam taxas severamente desproporcionais de mortalidade por causas externas (homicídios e acidentes) e suicídio, onde representam a ampla maioria das vítimas. Isso resulta em uma expectativa de vida inferior à das mulheres devido a fatores epidemiológicos muitas vezes evitáveis.`
   },
   {
     id: 'faq-03',
     category: 'Geral',
     question: 'Quais são os órgãos públicos oficiais utilizados como fonte?',
-    answer: 'Os dados compilados e calculados são extraídos exclusivamente de órgãos públicos federais de saúde e estatística do Brasil: DATASUS (Sistema de Informações sobre Mortalidade - SIM) do Ministério da Saúde, IBGE (Instituto Brasileiro de Geografia e Estatística), INCA (Instituto Nacional de Câncer) e IPEA (Atlas da Violência).'
+    answer: 'Os dados compilados e calculados são extraídos exclusivamente das bases de dados abertas do governo federal, especificamente do Sistema de Informações sobre Mortalidade (SIM), unificados via base PCDaS/Fiocruz, e do IBGE.'
   },
-
-  // Categoria: Estatísticas (04 - 08)
   {
     id: 'faq-04',
     category: 'Estatísticas',
     question: 'Quantos homens morrem por ano no Brasil por todas as causas?',
-    answer: 'Com base nas séries históricas do DATASUS/SIM do Ministério da Saúde e nas estimativas populacionais do IBGE, morrem anualmente no Brasil aproximadamente 780.000 a 800.000 homens por causas diversas, englobando patologias crônicas, causas externas e acidentes.'
+    answer: `Com base nas séries históricas mais recentes do SIM (PCDaS), morrem anualmente no Brasil, em média, ${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} homens por causas diversas, englobando patologias crônicas, causas externas e acidentes.`
   },
   {
     id: 'faq-05',
     category: 'Estatísticas',
     question: 'Qual é a taxa bruta de mortalidade masculina por 100 mil habitantes no Brasil?',
-    answer: 'A taxa bruta de mortalidade masculina no Brasil é de aproximadamente 757 óbitos a cada 100.000 homens por ano. Essa taxa varia conforme a faixa etária, concentrando maior letalidade por violência na juventude e por doenças crônicas na terceira idade.'
+    answer: `A taxa bruta calculada de mortalidade masculina no Brasil é de aproximadamente ${MALE_MORTALITY_RATE_PER_100K} óbitos a cada 100.000 homens por ano.`
   },
   {
     id: 'faq-06',
     category: 'Estatísticas',
     question: 'Qual é a maior causa de morte de homens no Brasil?',
-    answer: 'As doenças do aparelho circulatório (doenças cardiovasculares, como infarto agudo do miocárdio e acidente vascular cerebral - AVC) lideram as causas de morte masculina, respondendo por cerca de 25,4% do total de óbitos no país (~198.000 a 210.000 mortes/ano).'
+    answer: `As doenças cardiovasculares lideram as causas de morte masculina, respondendo por cerca de ${(cardiovascularProportion * 100).toFixed(1).replace('.', ',')}% do total de óbitos no país (em média ${cardiovascularEstimate.toLocaleString('pt-BR')} mortes anuais).`
   },
   {
     id: 'faq-07',
     category: 'Estatísticas',
     question: 'Quantos homens morrem por homicídios e violência no Brasil por ano?',
-    answer: 'De acordo com o Atlas da Violência do IPEA e o DATASUS/SIM, quase 40.000 homens são vítimas de homicídio anualmente no Brasil. Homens de 15 a 29 anos constituem mais de 91% de todas as vítimas de mortes violentas intencionais no país.'
+    answer: `De acordo com as consolidações do SIM, dezenas de milhares de homens são vítimas de homicídio anualmente no Brasil (em média ${homicideEstimate.toLocaleString('pt-BR')} óbitos). Homens constituem a imensa maioria de todas as vítimas de mortes violentas intencionais no país.`
   },
   {
     id: 'faq-08',
     category: 'Estatísticas',
     question: 'Quantos homens morrem em acidentes de trânsito no Brasil por ano?',
-    answer: 'Os acidentes de trânsito causam a morte de cerca de 26.000 a 30.000 homens por ano no Brasil (~3,4% do total de óbitos masculinos). Homens representam mais de 80% das vítimas fatais em sinistros de transporte terrestre (motocicletas, automóveis e atropelamentos).'
+    answer: `Os acidentes de trânsito causam a morte de milhares de homens por ano no Brasil (em média ${trafficEstimate.toLocaleString('pt-BR')} óbitos). Homens representam a vasta maioria das vítimas fatais em sinistros de transporte terrestre.`
   },
-
-  // Categoria: Longevidade (09 - 11)
   {
     id: 'faq-09',
     category: 'Longevidade',
     question: 'Qual é a expectativa de vida ao nascer dos homens no Brasil?',
-    answer: 'Segundo as Tábuas Completas de Mortalidade do IBGE (ano de referência 2022), a expectativa de vida ao nascer para a população masculina no Brasil é de 72,0 anos, enquanto para as mulheres é de 79,0 anos.'
+    answer: `Segundo o IBGE, a expectativa de vida ao nascer para a população masculina no Brasil é de ${LIFE_EXPECTANCY_DATA.male.toFixed(1).replace('.', ',')} anos, enquanto para as mulheres é de ${LIFE_EXPECTANCY_DATA.female.toFixed(1).replace('.', ',')} anos.`
   },
   {
     id: 'faq-10',
     category: 'Longevidade',
     question: 'Qual é a diferença na expectativa de vida entre homens e mulheres?',
-    answer: 'A diferença na expectativa de vida ao nascer é de 7,0 anos a menos para os homens no Brasil (72,0 anos masculinos versus 79,0 anos femininos). Esse indicador reflete fatores de mortalidade precoce por causas externas e menor procura preventiva por serviços de saúde.'
+    answer: `A diferença na expectativa de vida ao nascer é de ${LIFE_EXPECTANCY_DATA.gap.toFixed(1).replace('.', ',')} anos a menos para os homens no Brasil. Esse indicador reflete fatores de mortalidade precoce por causas externas e menor procura preventiva por serviços de saúde.`
   },
   {
     id: 'faq-11',
     category: 'Longevidade',
     question: 'Por que os homens vivem menos que as mulheres no Brasil?',
-    answer: 'A menor longevidade masculina resulta de uma combinação de fatores: sobremortalidade por causas externas (homicídios e acidentes), menor adesão a consultas médicas preventivas no SUS, diagnóstico tardio de doenças crônicas, maior exposição a riscos ocupacionais e fatores comportamentais como tabagismo e etilismo.'
+    answer: 'A menor longevidade masculina resulta de uma combinação de fatores: sobremortalidade por causas externas (homicídios e acidentes), menor adesão a consultas médicas preventivas no SUS, diagnóstico tardio de doenças crônicas, maior exposição a riscos ocupacionais e fatores comportamentais.'
   },
-
-  // Categoria: Suicídio (12 - 16)
   {
     id: 'faq-12',
     category: 'Suicídio',
     question: 'Qual a proporção de suicídios masculinos no Brasil?',
-    answer: 'Segundo os Boletins Epidemiológicos de Suicídio do Ministério da Saúde / SIM, 77,8% de todas as vítimas de suicídio registradas no Brasil são homens. Para cada mulher que morre por suicídio, aproximadamente 3,5 homens falecem pela mesma causa.'
+    answer: `Segundo os dados consolidados do SIM, ${SUICIDE_DATA.malePercentage.toFixed(1).replace('.', ',')}% de todas as vítimas de suicídio registradas no Brasil são homens. Para cada mulher que morre por suicídio, ${SUICIDE_DATA.ratioMaleToFemale.toFixed(1).replace('.', ',')} homens falecem pela mesma causa.`
   },
   {
     id: 'faq-13',
     category: 'Suicídio',
     question: 'Quantos homens morrem por suicídio a cada dia no Brasil?',
-    answer: 'Estimam-se entre 12.000 e 13.400 mortes masculinas por suicídio ao ano no Brasil, o que corresponde a uma média de aproximadamente 33 a 36 homens que falecem por essa causa diariamente no país.'
+    answer: `Com base nas séries históricas, ocorrem em média ${SUICIDE_DATA.male.toLocaleString('pt-BR')} mortes masculinas por suicídio ao ano no Brasil, o que corresponde a uma média de aproximadamente ${Math.round(SUICIDE_DATA.male / 365.25)} homens por dia.`
   },
   {
     id: 'faq-14',
@@ -101,16 +112,14 @@ export const FAQ_DATA: FAQItem[] = [
     id: 'faq-15',
     category: 'Suicídio',
     question: 'O que são os CAPS e como atuam na saúde mental?',
-    answer: 'Os Centros de Atenção Psicossocial (CAPS) são unidades públicas do SUS especializadas em saúde mental que oferecem atendimento gratuito, interdisciplinar e de porta aberta (sem necessidade de encaminhamento prévio) em todo o Brasil.'
+    answer: 'Os Centros de Atenção Psicossocial (CAPS) são unidades públicas do SUS especializadas em saúde mental que oferecem atendimento gratuito, interdisciplinar e de porta aberta em âmbito nacional.'
   },
   {
     id: 'faq-16',
     category: 'Suicídio',
     question: 'A depressão masculina apresenta sintomas específicos?',
-    answer: 'Sim. Em homens, a depressão frequentemente se manifesta por meio de irritabilidade extrema, comportamento de risco, consumo excessivo de álcool e sintomas somáticos (dores físicas sem causa orgânica aparente), além dos quadros convencionais de tristeza.'
+    answer: 'Sim. Em homens, a depressão frequentemente se manifesta por meio de irritabilidade extrema, comportamento de risco, consumo excessivo de álcool e sintomas somáticos, além dos quadros convencionais de tristeza.'
   },
-
-  // Categoria: Causas (17 - 20)
   {
     id: 'faq-17',
     category: 'Causas',
@@ -127,7 +136,7 @@ export const FAQ_DATA: FAQItem[] = [
     id: 'faq-19',
     category: 'Causas',
     question: 'Quais medidas reduzem as mortes de homens no trânsito?',
-    answer: 'Fiscalização ostensiva com foco em alcoolemia, uso obrigatório de equipamentos de proteção (como capacetes adequados), respeito aos limites de velocidade, manutenção preventiva de veículos e campanhas educativas focadas nos condutores masculinos.'
+    answer: 'Fiscalização ostensiva com foco em alcoolemia, uso obrigatório de equipamentos de proteção (como capacetes adequados), respeito aos limites de velocidade, manutenção preventiva de veículos e campanhas educativas.'
   },
   {
     id: 'faq-20',
@@ -135,22 +144,18 @@ export const FAQ_DATA: FAQItem[] = [
     question: 'O que são causas externas de mortalidade?',
     answer: 'Causas externas englobam lesões, envenenamentos, violência intencional e acidentes que resultam em óbito. Diferenciam-se de patologias biológicas por serem passíveis de prevenção por meio de políticas públicas e intervenções comportamentais.'
   },
-
-  // Categoria: Metodologia (21 - 22)
   {
     id: 'faq-21',
     category: 'Metodologia',
-    question: 'Como funciona o cálculo em tempo real do contador?',
-    answer: 'O contador calcula o tempo decorrido em segundos desde o início do ano corrente (ou do início da sessão) e aplica a taxa populacional fracionada de mortes por segundo, derivada das médias anuais oficiais do DATASUS e IBGE.'
+    question: 'Como funciona a contagem local?',
+    answer: 'O contador soma o tempo decorrido no ano civil e aplica uma taxa de distribuição média anualizada (derivada dos microdados do SIM) para exibir, em tempo real, o ritmo em que os óbitos masculinos ocorrem no Brasil.'
   },
   {
     id: 'faq-22',
     category: 'Metodologia',
     question: 'Quais são as limitações metodológicas do modelo?',
-    answer: 'O modelo utiliza médias estatísticas anualizadas e não contabiliza variações sazonais imediatas. Trata-se de um instrumento educativo e epidemiológico de aproximação estatística com finalidade de conscientização em saúde pública.'
+    answer: 'O modelo distribui as médias históricas do SIM de forma uniforme e não contabiliza variações sazonais imediatas diárias ou sazonais agudas. Trata-se de um instrumento construído sobre dados consolidados com foco em macro-tendências epidemiológicas.'
   },
-
-  // Categoria: Apoio (23 - 24)
   {
     id: 'faq-23',
     category: 'Apoio',

@@ -33,7 +33,7 @@ export interface CauseBreakdown {
   tickerVerb: string;
   /** Proporção do total de mortes masculinas (soma das proporções ≈ 1) */
   proportion: number;
-  /** Número absoluto anual estimado, para validação */
+  /** Número absoluto anual computado, para validação */
   annualEstimate: number;
   source: string;
   /** Categoria epidemiológica opcional (ex: "Causas Externas") */
@@ -76,7 +76,7 @@ export const LIFE_EXPECTANCY_DATA: LifeExpectancyData = {
 
 
 
-/** Taxa bruta estimada de óbitos masculinos por 100 mil homens no Brasil. */
+/** Taxa bruta calculada de óbitos masculinos por 100 mil homens no Brasil. */
 export const MALE_MORTALITY_RATE_PER_100K = 757;
 
 // ─── Fontes Oficiais ──────────────────────────────────────────────────────────
@@ -167,15 +167,15 @@ export const DEATHS_PER_SECOND = TOTAL_MALE_DEATHS_PER_YEAR / SECONDS_PER_YEAR;
 /** Intervalo médio entre mortes (segundos). */
 export const SECONDS_PER_DEATH = 1 / DEATHS_PER_SECOND;
 
-/** Mortes masculinas estimadas por dia. */
+/** Mortes masculinas computadas por dia. */
 export const DEATHS_PER_DAY = Math.round(DEATHS_PER_SECOND * 86_400);
 
 // Média de suicídios masculinos computada a partir da base do SIM
 const sumMaleSuicides = (simData && Array.isArray(simData.years))
-  ? simData.years.reduce((acc, y) => acc + (y.causeDeaths?.['suicide'] || y.causeDeaths?.suicide || y.maleSuicides || 0), 0)
+  ? simData.years.reduce((acc, y) => acc + (y.causeDeaths?.suicide || y.maleSuicides || 0), 0)
   : 0;
 
-/** Total estimado de suicídios masculinos por ano (unificado a partir da média do SIM ou proporção de fallback). */
+/** Total de suicídios masculinos por ano (unificado a partir da média do SIM ou proporção de fallback). */
 export const ESTIMATED_SUICIDES_PER_YEAR = (simData && Array.isArray(simData.years) && simData.years.length > 0)
   ? Math.round(sumMaleSuicides / simData.years.length)
   : Math.round(TOTAL_MALE_DEATHS_PER_YEAR * 0.016); // 12.491
@@ -185,7 +185,7 @@ const sumFemaleSuicides = (simData && Array.isArray(simData.years))
   ? simData.years.reduce((acc, y) => acc + (y.femaleSuicides || 0), 0)
   : 0;
 
-/** Total estimado de suicídios femininos por ano (unificado a partir da média do SIM). */
+/** Total de suicídios femininos por ano (unificado a partir da média do SIM). */
 export const ESTIMATED_FEMALE_SUICIDES_PER_YEAR = (simData && Array.isArray(simData.years) && simData.years.length > 0)
   ? Math.round(sumFemaleSuicides / simData.years.length)
   : Math.round(ESTIMATED_SUICIDES_PER_YEAR * 0.285); // fallback de 22% do total de suicídios
@@ -199,10 +199,10 @@ const suicideRatioMaleToFemale = ESTIMATED_FEMALE_SUICIDES_PER_YEAR > 0 ? ESTIMA
 const maleSuicideRatePer100k = (ESTIMATED_SUICIDES_PER_YEAR / MORTALITY_CONFIG.POPULATION.MALE) * 100000;
 const femaleSuicideRatePer100k = (ESTIMATED_FEMALE_SUICIDES_PER_YEAR / MORTALITY_CONFIG.POPULATION.FEMALE) * 100000;
 
-/** Média diária de suicídios masculinos estimados. */
+/** Média diária de suicídios masculinos computados. */
 export const ESTIMATED_SUICIDES_PER_DAY = Math.round(ESTIMATED_SUICIDES_PER_YEAR / 365.25); // 34
 
-/** Taxa de suicídios masculinos por segundo (derivada do valor estimado unificado). */
+/** Taxa de suicídios masculinos por segundo (derivada do valor consolidado). */
 export const SUICIDE_DEATHS_PER_SECOND = ESTIMATED_SUICIDES_PER_YEAR / SECONDS_PER_YEAR;
 
 export const SUICIDE_DATA: SuicideData = {
@@ -235,23 +235,27 @@ export const EPOCH_LABEL = getCounterStartDate().toLocaleDateString('pt-BR', {
  * A soma das proporções < 1 — o restante é "outras causas" não listadas.
  */
 export const CAUSE_BREAKDOWN: CauseBreakdown[] = MORTALITY_CONFIG.CAUSES.map(cause => {
-  if (cause.id === 'suicide') {
-    return {
-      id: 'suicide',
-      label: cause.label,
-      tickerVerb: cause.tickerVerb,
-      proportion: ESTIMATED_SUICIDES_PER_YEAR / TOTAL_MALE_DEATHS_PER_YEAR,
-      annualEstimate: ESTIMATED_SUICIDES_PER_YEAR,
-      source: cause.source,
-    };
+  let annualEstimate = Math.round(TOTAL_MALE_DEATHS_PER_YEAR * cause.proportion);
+  
+  if (simData && Array.isArray(simData.years) && simData.years.length > 0) {
+    const sumCause = simData.years.reduce((acc, y) => acc + (y.causeDeaths?.[cause.id as keyof NonNullable<typeof y.causeDeaths>] || y.causeDeaths?.[cause.id.toLowerCase() as keyof NonNullable<typeof y.causeDeaths>] || 0), 0);
+    // Para suicídio, o nome da chave na interface pode ser causeDeaths['suicide'] ou simplesmente maleSuicides.
+    // sync-sim-mortality.ts mapeia no objeto causeDeaths também.
+    const finalSum = cause.id === 'suicide' && sumCause === 0 
+      ? simData.years.reduce((acc, y) => acc + (y.maleSuicides || 0), 0) 
+      : sumCause;
+      
+    if (finalSum > 0) {
+      annualEstimate = Math.round(finalSum / simData.years.length);
+    }
   }
 
   return {
     id: cause.id,
     label: cause.label,
     tickerVerb: cause.tickerVerb,
-    proportion: cause.proportion,
-    annualEstimate: Math.round(TOTAL_MALE_DEATHS_PER_YEAR * cause.proportion),
+    proportion: annualEstimate / TOTAL_MALE_DEATHS_PER_YEAR,
+    annualEstimate: annualEstimate,
     source: cause.source,
   };
 });
@@ -270,12 +274,12 @@ export function getSecondsSinceYearStart(): number {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Mortes estimadas acumuladas num dado número de segundos. */
+/** Mortes acumuladas num dado número de segundos. */
 export function getAccumulatedDeaths(seconds: number): number {
   return seconds * DEATHS_PER_SECOND;
 }
 
-/** Mortes estimadas para uma causa num dado número de segundos. */
+/** Mortes para uma causa num dado número de segundos. */
 export function getCauseDeaths(cause: CauseBreakdown, seconds: number): number {
   return Math.floor(seconds * DEATHS_PER_SECOND * cause.proportion);
 }
@@ -295,9 +299,9 @@ export function getAccumulatedSuicides(seconds: number): number {
   return seconds * SUICIDE_DEATHS_PER_SECOND;
 }
 
-/** Descrição legível da taxa. Ex: "1 a cada ~37 segundos" */
+/** Descrição legível da taxa. Ex: "1 a cada 37 segundos" */
 export function getRateDescription(): string {
   const s = Math.round(SECONDS_PER_DEATH);
-  if (s < 60) return `1 a cada ~${s} segundos`;
-  return `1 a cada ~${Math.round(s / 60)} minutos`;
+  if (s < 60) return `1 a cada ${s} segundos`;
+  return `1 a cada ${Math.round(s / 60)} minutos`;
 }

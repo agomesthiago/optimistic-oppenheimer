@@ -94,7 +94,7 @@ export function useCounter(): CounterState {
     });
 
     rafRef.current = requestAnimationFrame(tick);
-  }, [firstVisitTime]);
+  }, [firstVisitTime, sessionStartTime]);
 
   // Auto-iniciar o contador (issue 5.5)
   useEffect(() => {

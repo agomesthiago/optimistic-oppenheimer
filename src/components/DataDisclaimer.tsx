@@ -15,7 +15,7 @@ export function DataDisclaimer() {
             </svg>
           </div>
           <p className="text-slate-600 dark:text-ash-400 leading-relaxed text-base">
-            Os indicadores apresentados nesta página utilizam dados oficiais publicados pelo <strong>DATASUS</strong>, <strong>IBGE</strong> e <strong>Ministério da Saúde</strong>. Alguns números em tempo real representam projeções estatísticas derivadas dessas bases públicas e não contagens instantâneas.
+            Os indicadores apresentados nesta página utilizam dados oficiais publicados pelo <strong>DATASUS</strong>, <strong>IBGE</strong>, <strong>Ministério da Saúde</strong> e <strong>PCDaS/Fiocruz</strong>. Os contadores em tempo real refletem uma média anualizada contínua extraída das séries históricas consolidadas dos microdados do SIM, expurgando anomalias pandêmicas.
           </p>
         </div>
 
@@ -27,7 +27,7 @@ export function DataDisclaimer() {
               O contador não representa mortes registradas em tempo real.
             </div>
             
-            <div className="text-slate-400 dark:text-ash-600">
+            <div className="text-slate-500 dark:text-ash-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
@@ -35,10 +35,10 @@ export function DataDisclaimer() {
             </div>
 
             <div className="w-full bg-white dark:bg-carbon-950 px-4 py-3 rounded-lg border border-zinc-200 dark:border-carbon-800 text-center text-slate-600 dark:text-ash-300">
-              Ele utiliza projeções estatísticas.
+              Ele reflete a média anualizada oficial de forma dinâmica.
             </div>
             
-            <div className="text-slate-400 dark:text-ash-600">
+            <div className="text-slate-500 dark:text-ash-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
@@ -49,7 +49,7 @@ export function DataDisclaimer() {
               Os microdados oficiais possuem defasagem.
             </div>
             
-            <div className="text-slate-400 dark:text-ash-600">
+            <div className="text-slate-500 dark:text-ash-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>

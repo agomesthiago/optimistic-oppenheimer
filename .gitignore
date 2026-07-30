@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test reports & temp directories
+playwright-report/
+test-results/
+lighthouse/
+scratch/
+blob-report/

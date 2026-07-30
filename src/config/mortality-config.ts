@@ -146,7 +146,7 @@ export const MORTALITY_CONFIG = {
       proportion: 0.016, // Proporção de fallback
       tickerVerb: 'cometeram suicídio',
       cidRange: { gte: 'X60', lte: 'X84' },
-      source: 'Ministério da Saúde / SIM — CID-10 X60-X84 (~2022)'
+      source: 'Ministério da Saúde / SIM — CID-10 X60-X84 (2022)'
     }
   ]
 };

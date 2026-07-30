@@ -137,7 +137,7 @@ export function SourcesSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-zinc-200/80 dark:border-carbon-800 flex items-center justify-between text-xs font-mono">
-                <span className="text-slate-400 dark:text-ash-600 text-[10px]">
+                <span className="text-slate-600 dark:text-ash-400 text-[10px]">
                   Acesso: {source.accessedDate}
                 </span>
                 <a

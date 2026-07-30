@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-
+import { createPortal } from 'react-dom';
 import { useAutoToggle } from '../hooks/useAutoToggle';
 import { useShare } from '../hooks/useShare';
-
 import { StoryCard } from './StoryCard';
 import {
   formatDeathCount,
@@ -36,15 +35,15 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
   const suicideDeaths = getAccumulatedSuicides(yearSeconds);
 
   const displayHeader = isSuicideMode
-    ? 'estimativa em tempo real — suicídios masculinos'
-    : 'estimativa em tempo real — todas as causas';
+    ? 'contador em tempo real — suicídios masculinos'
+    : 'contador em tempo real — todas as causas';
 
   const displayValue = isSuicideMode
     ? formatDeathCount(suicideDeaths)
     : formatDeathCount(deaths);
 
   const displayTagline = isSuicideMode
-    ? 'suicídios masculinos (77,8% do total)'
+    ? 'suicídios masculinos'
     : 'vidas interrompidas';
 
   // 3.4 aria-live funcional no contador: Região sr-only com cadência estável sem flooding
@@ -76,6 +75,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
   return (
     <section
       id="hero"
+      data-testid="hero-section"
       className="relative flex flex-col items-center justify-center min-h-dvh px-6 py-24 text-center overflow-hidden"
     >
       {/* Região sr-only com cadência estável sem flooding para leitores de tela (WCAG 4.1.3 / Padrão Institucional) */}
@@ -83,11 +83,14 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
         {srAnnouncement}
       </div>
 
-      <StoryCard
-        mode={mode}
-        deaths={deaths}
-        suicideDeaths={suicideDeaths}
-      />
+      {typeof document !== 'undefined' && createPortal(
+        <StoryCard
+          mode={mode}
+          deaths={deaths}
+          suicideDeaths={suicideDeaths}
+        />,
+        document.body
+      )}
 
 
 
@@ -137,7 +140,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
           <span>{displayTagline}</span>
           {!isSuicideMode && (
             <span className="text-[8px] sm:text-[9px] text-slate-400 dark:text-ash-500 tracking-wider">
-              Cálculo local estimado a partir de 1º de janeiro de {getCounterStartDate().getFullYear()}
+              Cálculo local a partir de 1º de janeiro de {getCounterStartDate().getFullYear()}
             </span>
           )}
         </p>
@@ -149,7 +152,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
               <span className="font-bold text-crimson-600 dark:text-crimson-400 tabular-nums">
                 {formatDeathCount(suicideDeaths)}
               </span>{' '}
-              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} (~{ESTIMATED_SUICIDES_PER_DAY} por dia).
+              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} ({ESTIMATED_SUICIDES_PER_DAY} por dia).
             </>
           ) : null}
         </p>
