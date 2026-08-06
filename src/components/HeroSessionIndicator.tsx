@@ -38,18 +38,18 @@ export function HeroSessionIndicator({
     : lifetimeDeaths;
 
   return (
-    <div className="fixed bottom-8 left-8 z-50 flex flex-col items-start gap-1 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500 dark:text-ash-400 text-left select-none transition-all duration-500">
+    <div className="fixed bottom-8 left-8 z-50 flex items-center gap-1 text-[9px] font-mono uppercase tracking-[0.3em] text-slate-500 dark:text-ash-400 select-none transition-all duration-500 [writing-mode:vertical-lr] rotate-180">
       {currentSessionSeconds > 0 && (
         <span className="tabular-nums transition-opacity duration-500">
           {msgIndex === 0 && `Sessão: ${formatSessionTime(currentSessionSeconds)}`}
           {msgIndex === 1 && (
             <span>
-              <span className="text-white font-bold">{formatDeathCount(displayedSessionDeaths)}</span> mortes ocorridas nesta sessão
+              <span className="text-white font-bold">{formatDeathCount(displayedSessionDeaths)}</span> mortes nesta sessão
             </span>
           )}
           {msgIndex === 2 && (
             <span>
-              <span className="text-white font-bold">{formatDeathCount(displayedLifetimeDeaths)}</span> mortes desde o seu primeiro acesso
+              <span className="text-white font-bold">{formatDeathCount(displayedLifetimeDeaths)}</span> mortes histórico
             </span>
           )}
         </span>
