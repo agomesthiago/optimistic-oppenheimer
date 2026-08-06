@@ -1,9 +1,11 @@
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import { SUICIDE_DATA, formatDecimal } from '../utils/mortality';
-import { useShare } from '../hooks/useShare';
 import { ShareButton } from './ShareButton';
 import { SuicideStoryCard } from './SuicideStoryCard';
+import { SharePreviewModal } from './SharePreviewModal';
+
 export function SuicideSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     total,
     male,
@@ -18,8 +20,6 @@ export function SuicideSection() {
     sourceUrl,
   } = SUICIDE_DATA;
 
-  const { isSharing, shareToStories } = useShare();
-
   return (
     <section
       id="suicidios"
@@ -28,10 +28,14 @@ export function SuicideSection() {
       className="relative py-24 px-6 border-t border-zinc-200 dark:border-carbon-700 bg-zinc-50 dark:bg-carbon-900/40"
     >
       <span id="suicidio" className="sr-only" />
-      {typeof document !== 'undefined' && createPortal(
-        <SuicideStoryCard />,
-        document.body
-      )}
+      <SharePreviewModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        exportElementId="suicidio-story-card-export"
+        renderCard={(props) => (
+          <SuicideStoryCard {...props} />
+        )}
+      />
 
       <div className="max-w-2xl mx-auto">
         <h2
@@ -155,8 +159,8 @@ export function SuicideSection() {
           </p>
 
           <ShareButton
-            onClick={() => shareToStories('suicidio-story-card-export')}
-            isSharing={isSharing}
+            onClick={() => setIsModalOpen(true)}
+            isSharing={false}
             className="shrink-0"
           />
         </div>

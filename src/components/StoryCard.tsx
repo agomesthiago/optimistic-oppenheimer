@@ -1,13 +1,18 @@
 import { formatDeathCount } from '../utils/mortality';
 import type { CounterMode } from '../hooks/useAutoToggle';
 
+import type { AspectRatio } from './CauseStoryCard';
+
 interface StoryCardProps {
   mode: CounterMode;
   deaths: number;
   suicideDeaths: number;
+  aspectRatio?: AspectRatio;
+  id?: string;
+  className?: string;
 }
 
-export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
+export function StoryCard({ mode, deaths, suicideDeaths, aspectRatio = '9:16', id = 'story-card-export', className = '' }: StoryCardProps) {
   const isSuicide = mode === 'suicide';
 
   const mainValue = isSuicide
@@ -27,14 +32,18 @@ export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
     ? '0 0 120px rgba(225,29,72,0.8), 0 0 40px rgba(255,255,255,0.4)'
     : '0 0 120px rgba(253,230,138,0.4), 0 0 40px rgba(255,255,255,0.3)';
 
+  const height = aspectRatio === '3:4' ? 1440 : 1920;
+  const paddingBottom = aspectRatio === '3:4' ? '50px' : '100px';
+  const bottomPos = aspectRatio === '3:4' ? '120px' : '280px';
+
   return (
     <div
       aria-hidden="true"
-      id="story-card-export"
-      className="fixed top-0 left-0 opacity-0 pointer-events-none -z-50 flex flex-col items-center text-center overflow-hidden p-20 select-none"
+      id={id}
+      className={`flex flex-col items-center text-center overflow-hidden p-10 md:p-20 select-none ${className}`}
       style={{
         width: '1080px',
-        height: '1920px',
+        height: `${height}px`,
         backgroundColor: '#09090b', // zinc-950
         color: '#f8fafc',
         fontFamily: "'Inter', system-ui, sans-serif"
@@ -52,7 +61,7 @@ export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
         style={{ background: 'radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 80%)' }}
       />
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full flex-grow px-16" style={{ paddingBottom: '100px' }}>
+      <div className="relative z-10 flex flex-col items-center justify-center w-full flex-grow px-16" style={{ paddingBottom }}>
         <div 
           className="font-mono font-bold tracking-tighter whitespace-nowrap text-white"
           style={{
@@ -75,7 +84,7 @@ export function StoryCard({ mode, deaths, suicideDeaths }: StoryCardProps) {
       </div>
       
       {/* Footer matching Hero branding - Moved up above bottom safe zone */}
-      <div className="absolute z-10 w-full flex flex-col items-center gap-6" style={{ bottom: '280px' }}>
+      <div className="absolute z-10 w-full flex flex-col items-center gap-6" style={{ bottom: bottomPos }}>
         <div className="w-16 h-px bg-zinc-700/50" />
         <p className="font-mono text-zinc-500 font-bold tracking-[0.4em] uppercase" style={{ fontSize: '2rem' }}>
           VIDAS MASCULINAS

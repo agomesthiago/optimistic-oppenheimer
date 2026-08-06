@@ -3,7 +3,8 @@ import { useState } from 'react';
 export function CitationBlock() {
   const [copied, setCopied] = useState(false);
   
-  const citationText = `Vidas Masculinas. (2026). Vidas Masculinas | Mortalidade Masculina no Brasil em Dados. Recuperado de https://vidasmasculinas.vercel.app/`;
+  const currentYear = new Date().getFullYear();
+  const citationText = `Vidas Masculinas. (${currentYear}). Vidas Masculinas | Mortalidade Masculina no Brasil em Dados. Recuperado de https://vidasmasculinas.vercel.app/`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(citationText);

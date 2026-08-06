@@ -12,7 +12,7 @@ function dataUrlToBlob(dataUrl: string): Blob {
 export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
 
-  const shareToStories = useCallback(async (elementId: string, deaths?: number) => {
+  const exportImage = useCallback(async (elementId: string, deaths?: number) => {
     if (isSharing) return;
     const node = document.getElementById(elementId);
     if (!node) return;
@@ -63,5 +63,5 @@ export function useShare() {
     }
   }, [isSharing]);
 
-  return { isSharing, shareToStories };
+  return { isSharing, exportImage };
 }

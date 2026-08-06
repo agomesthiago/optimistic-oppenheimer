@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
 import { useAutoToggle } from '../hooks/useAutoToggle';
-import { useShare } from '../hooks/useShare';
 import { StoryCard } from './StoryCard';
+import { SharePreviewModal } from './SharePreviewModal';
 import {
   formatDeathCount,
   getAccumulatedSuicides,
@@ -31,7 +30,6 @@ interface HeroProps {
 
 export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, lifetimeDeaths, yearSeconds, isRunning }: HeroProps) {
   const { mode, isSuicideMode, isDeathsMode, toggleMode, setModeExplicit } = useAutoToggle();
-  const { isSharing, shareToStories } = useShare();
   const suicideDeaths = getAccumulatedSuicides(yearSeconds);
 
   const displayHeader = isSuicideMode
@@ -50,7 +48,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
   const [isHydrated, setIsHydrated] = useState(false);
   const [srAnnouncement, setSrAnnouncement] = useState('');
   const [didTick, setDidTick] = useState(false);
-  const [shouldMountStoryCard, setShouldMountStoryCard] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -75,7 +73,7 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
       setSrAnnouncement(`Estatística atualizada: ${h} - ${v}.`);
     }, 15000);
     return () => clearInterval(id);
-  }, [isHydrated]);
+  }, [isHydrated, displayHeader, displayValue]);
 
   return (
     <section
@@ -88,14 +86,20 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
         {srAnnouncement}
       </div>
 
-      {shouldMountStoryCard && typeof document !== 'undefined' && createPortal(
-        <StoryCard
-          mode={mode}
-          deaths={deaths}
-          suicideDeaths={suicideDeaths}
-        />,
-        document.body
-      )}
+      <SharePreviewModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        exportElementId="story-card-export"
+        exportValue={isSuicideMode ? suicideDeaths : deaths}
+        renderCard={(props) => (
+          <StoryCard
+            mode={mode}
+            deaths={deaths}
+            suicideDeaths={suicideDeaths}
+            {...props}
+          />
+        )}
+      />
 
 
 
@@ -166,11 +170,8 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
       <div className="relative z-10 flex flex-col items-center">
         {/* Share button - Ação utilitária de compartilhamento */}
         <ShareButton
-          onClick={() => {
-            setShouldMountStoryCard(true);
-            setTimeout(() => shareToStories('story-card-export', isSuicideMode ? suicideDeaths : deaths), 50);
-          }}
-          isSharing={isSharing}
+          onClick={() => setIsModalOpen(true)}
+          isSharing={false}
           className="mt-10 mb-8"
         />
       </div>

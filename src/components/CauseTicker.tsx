@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import { CAUSE_BREAKDOWN, getCauseDeaths, formatDeathCount, formatDecimal, EPOCH_LABEL } from '../utils/mortality';
 import { CauseStoryCard } from './CauseStoryCard';
 import { ShareButton } from './ShareButton';
-import { useShare } from '../hooks/useShare';
-
+import { SharePreviewModal } from './SharePreviewModal';
+import { useCauseCarousel } from '../hooks/useCauseCarousel';
 
 const AUTO_SLIDE_MS = 7_000;
 
@@ -13,32 +12,19 @@ interface CauseTickerProps {
 }
 
 export function CauseTicker({ yearSeconds }: CauseTickerProps) {
-  const { isSharing, shareToStories } = useShare();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPausedByUser, setIsPausedByUser] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const isPaused = isPausedByUser || isHovered;
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % CAUSE_BREAKDOWN.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + CAUSE_BREAKDOWN.length) % CAUSE_BREAKDOWN.length);
-  }, []);
-
-  useEffect(() => {
-    if (isPaused) return;
-    timerRef.current = setTimeout(() => {
-      nextSlide();
-    }, AUTO_SLIDE_MS);
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [currentIndex, isPaused, nextSlide]);
+  const {
+    currentIndex,
+    setCurrentIndex,
+    isPausedByUser,
+    setIsPausedByUser,
+    isHovered,
+    setIsHovered,
+    isPaused,
+    nextSlide,
+    prevSlide,
+  } = useCauseCarousel({ totalItems: CAUSE_BREAKDOWN.length, autoSlideMs: AUTO_SLIDE_MS });
 
   const active = CAUSE_BREAKDOWN[currentIndex];
   const count = getCauseDeaths(active, yearSeconds);
@@ -51,16 +37,21 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
-      {/* Hidden Export Card for currently active cause (rendered in document.body via Portal to prevent layout overflow) */}
-      {typeof document !== 'undefined' && createPortal(
-        <CauseStoryCard
-          cause={active}
-          count={count}
-          currentIndex={currentIndex}
-          totalCauses={CAUSE_BREAKDOWN.length}
-        />,
-        document.body
-      )}
+      <SharePreviewModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        exportElementId="cause-story-card-export"
+        exportValue={count}
+        renderCard={(props) => (
+          <CauseStoryCard
+            cause={active}
+            count={count}
+            currentIndex={currentIndex}
+            totalCauses={CAUSE_BREAKDOWN.length}
+            {...props}
+          />
+        )}
+      />
 
       {/* 1. Primeiro Controle Focalizável do Componente - Mecanismo Explícito de Pausa/Parada (WCAG 2.2.2) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 px-2">
@@ -163,8 +154,8 @@ export function CauseTicker({ yearSeconds }: CauseTickerProps) {
 
             {/* Share Cause Button */}
             <ShareButton
-              onClick={() => shareToStories('cause-story-card-export', count)}
-              isSharing={isSharing}
+              onClick={() => setIsModalOpen(true)}
+              isSharing={false}
               className="mt-6 md:mt-0"
             />
           </div>

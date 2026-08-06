@@ -4,7 +4,7 @@ import { Hero } from './components/Hero';
 import { DataDisclaimer } from './components/DataDisclaimer';
 import { StatsSection } from './components/StatsSection';
 import { Header } from './components/Header';
-import { GlobalScrollIndicator } from './components/GlobalScrollIndicator';
+
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
@@ -149,8 +149,7 @@ export default function App() {
           </Suspense>
         </footer>
 
-        {/* Global Scroll Indicator with Parallax */}
-        <GlobalScrollIndicator />
+
       </div>
     </>
   );

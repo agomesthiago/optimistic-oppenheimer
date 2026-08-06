@@ -1,7 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  --color-carbon-950: #050505;
+  --color-carbon-900: #0a0a0a;
+  --color-carbon-800: #111111;
+  --color-carbon-700: #1a1a1a;
+  --color-carbon-600: #222222;
+
+  --color-ash-100: #f5f5f5;
+  --color-ash-200: #e0e0e0;
+  --color-ash-300: #d4d4d4;
+  --color-ash-400: #9a9a9a;
+  --color-ash-500: #737373;
+  --color-ash-600: #555555;
+
+  --color-crimson-400: #ef4444;
+  --color-crimson-500: #dc2626;
+  --color-crimson-600: #b91c1c;
+}
 @layer base {
   * {
     box-sizing: border-box;
@@ -61,8 +80,8 @@
 }
 
 @keyframes modeSwitch {
-  0% { transform: translateY(20px); opacity: 0; filter: blur(8px); }
-  100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .animate-mode-switch {
