@@ -15,9 +15,12 @@ Para garantir que o usuário consiga compartilhar o status atual dos óbitos (qu
 2. O DOM Node alvo deve estar fisicamente renderizado e acessível (mesmo que com `opacity-0` e `pointer-events-none`) para que o `html-to-image` consiga desenhar o canvas corretamente.
 
 ### `SharePreviewModal` (Padrão de Render Props)
-Foi implementado um componente genérico `SharePreviewModal` para encapsular a lógica de pré-visualização, seleção de formato e conversão final.
+Foi implementado um componente genérico `SharePreviewModal` (renderizado via `React Portal`) para encapsular a lógica de pré-visualização, seleção de formato e conversão final.
 
-- **Render Prop Pattern (`renderCard`)**: Em vez de codificar múltiplos cards dentro do modal, o `SharePreviewModal` recebe uma função `renderCard(props)` injetando propriedades como o `aspectRatio` ('9:16' ou '3:4') no card a ser exportado.
+- **Render Prop Pattern (`renderCard`)**: Em vez de codificar múltiplos cards dentro do modal, o `SharePreviewModal` recebe uma função `renderCard(props)` injetando propriedades chave no card a ser exportado:
+  - `aspectRatio` ('9:16' ou '3:4'): para ajustar o layout do card e as posições dos elementos internos.
+  - `id`: para vincular o `exportElementId` esperado pela biblioteca de captura ao DOM.
+  - `className`: possibilita a técnica de **Dual Rendering**, onde o modal invoca o `renderCard` duas vezes: uma instância em tamanho real (invisível via classes utilitárias) exclusiva para a captura do `html-to-image`, e uma segunda instância estilizada e escalonada para exibição no preview do usuário.
 - Isso permite que a mesma infraestrutura seja reaproveitada para:
   - `StoryCard` (Seção Hero)
   - `CauseStoryCard` (Seção de Causas de Morte)
