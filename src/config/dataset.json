@@ -1,11 +1,20 @@
 {
-  "version": "v2026.07",
-  "name": "Dataset v2026.07",
+  "version": "v2026.08",
+  "name": "Dataset v2026.08",
   "datePublished": "2026-07-01",
-  "dateModified": "2026-07-29",
-  "lastUpdateBR": "29/07/2026",
+  "dateModified": "2026-08-06",
+  "lastUpdateBR": "06/08/2026",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "changelog": [
+    {
+      "version": "v2026.08",
+      "date": "06/08/2026",
+      "changes": [
+        "Implementação de compartilhamento com exportação dinâmica em múltiplos formatos",
+        "Upgrade para Tailwind CSS v4 e limpeza de dependências",
+        "Correções de UI e texto vertical no indicador de sessão"
+      ]
+    },
     {
       "version": "v2026.07",
       "date": "29/07/2026",

@@ -1,0 +1,7 @@
+- [x] Atualização da documentação (Docs Update)
+  - [x] Revisar e atualizar o `README.md`
+    - [x] Atualizar a Stack Tecnológica (remover Tailwind antigo, adicionar v4)
+    - [x] Adicionar documentação sobre o funcionamento do `SharePreviewModal` (exportação 9:16 e 3:4)
+  - [x] Criar / Atualizar `ARCHITECTURE.md`
+    - [x] Documentar o fluxo de dados dos StoryCards
+    - [x] Documentar o uso do `html-to-image` e portais/modais.

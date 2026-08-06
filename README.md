@@ -34,6 +34,7 @@ Mais de **800.000 homens** morrem por ano no Brasil por diversas causas, represe
 * **Mortalidade por Suicídio & Prevenção**: No Brasil, **77,8% das vítimas de suicídio são homens** (com uma razão de 3,5 mortes masculinas para cada feminina). O projeto dedica uma seção exclusiva e um modo de contador em tempo real para dar visibilidade a essa epidemia silenciosa, promovendo o acolhimento gratuito e sigiloso do **CVV 188** e da rede **CAPS/SUS**.
 * **Desigualdade na Expectativa de Vida**: Exibição da disparidade de longevidade ao nascer entre homens (**72,0 anos**) e mulheres (**79,0 anos**), registrando um fosso de **7,0 anos a menos para a população masculina** no país (IBGE 2022).
 * **Contador em Tempo Real**: Projeção matemática em tempo real com alternância entre óbitos por todas as causas, horário local e suicídios masculinos.
+* **Exportação Dinâmica**: Sistema flexível de compartilhamento (SharePreviewModal) permitindo a geração em tempo real de cards informativos otimizados para múltiplas redes sociais (Stories 9:16 e Feed 3:4).
 * **Ecossistema de Widgets Incorporáveis**: Distribuição livre de widgets leves (Web Components nativos, Scripts de Embed e API JSON estática) para que portais de notícias, blogs, ONGs e sites institucionais possam incorporar os contadores em suas próprias páginas.
 * **Design Premium & Acessibilidade**: Interface minimalista com tema dinâmico (escuro/claro), animações fluidas via GSAP e suporte de acessibilidade.
 
@@ -45,7 +46,7 @@ O projeto utiliza uma pilha tecnológica moderna e otimizada para web rápida:
 
 * **React 19** & **TypeScript**: Construção de componentes tipados e reativos.
 * **Vite**: Bundler ultra-rápido para o ambiente de desenvolvimento e build.
-* **Tailwind CSS**: Estilização responsiva e ágil com foco em performance visual.
+* **Tailwind CSS v4**: Motor CSS moderno, zero-config e otimizado para a máxima performance visual.
 * **GSAP (GreenSock Animation Platform)**: Micro-animações e transições de interface elegantes.
 * **Oxlint**: Linter de altíssima performance para garantir a qualidade estática do código.
 
