@@ -66,8 +66,8 @@ export function ResourcesSection() {
             O que podemos fazer
           </h2>
           <p className="text-slate-600 dark:text-ash-300 text-lg md:text-xl text-center mb-16 leading-relaxed max-w-2xl mx-auto font-light">
-            O primeiro passo é <strong className="font-semibold text-slate-800 dark:text-ash-100">quebrar o silêncio</strong>. 
-            O acolhimento e a conversa sem julgamentos salvam vidas todos os dias.
+            Não é preciso ter as palavras certas.
+            Basta <strong className="font-semibold text-slate-800 dark:text-ash-100">estar presente</strong> e perguntar como a pessoa está.
           </p>
         </div>
 

@@ -14,10 +14,10 @@ export function EditorialSection() {
             Análise e Conhecimento
           </h2>
           <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-ash-100 tracking-tight mb-4">
-            O que os números não mostram?
+            Por que tantos homens morrem antes do tempo?
           </h3>
           <p className="text-sm sm:text-base text-slate-600 dark:text-ash-300 leading-relaxed max-w-3xl">
-            A estatística revela <em>quantos</em> homens morrem, mas a ciência epidemiológica e a sociologia nos ajudam a entender <em>por que</em>. Abaixo, exploramos o comportamento estrutural por trás do silêncio dos dados.
+            Os dados mostram <em>quantos</em> homens morrem. A ciência explica <em>por quê</em>. Quatro padrões estruturais que amplificam a mortalidade masculina no Brasil.
           </p>
         </header>
 
@@ -34,7 +34,7 @@ export function EditorialSection() {
               Por que os homens vivem menos?
             </h4>
             <p className="text-sm text-slate-600 dark:text-ash-400 leading-relaxed">
-              A resposta não se resume apenas à biologia. Fatores comportamentais, como a socialização masculina para reprimir dor e a exposição a trabalhos de alto risco, criam um padrão de morte prematura. A masculinidade tóxica, frequentemente, atua como um determinante de saúde, distanciando o homem do cuidado de si mesmo.
+              Não é só biologia. Homens são socializados para reprimir dor, evitar médicos e se expor a trabalhos de alto risco. Esse padrão tem um custo: morte prematura. A ausência do cuidado não é uma escolha — é o resultado de uma cultura que confunde resistência com descaso consigo mesmo.
             </p>
           </article>
 
@@ -50,7 +50,7 @@ export function EditorialSection() {
               O paradoxo da procura tardia
             </h4>
             <p className="text-sm text-slate-600 dark:text-ash-400 leading-relaxed">
-              Pesquisas indicam que homens buscam serviços de atenção primária no SUS com muito menos frequência que as mulheres. Como resultado, doenças perfeitamente tratáveis como hipertensão são diagnosticadas já na sala de emergência com quadros de infarto ou AVC.
+              Homens procuram médico muito menos que mulheres. O resultado: doenças como hipertensão — que têm tratamento simples — só aparecem quando já viraram infarto ou AVC na sala de emergência.
             </p>
           </article>
 
@@ -85,7 +85,7 @@ export function EditorialSection() {
               Como interpretar as estatísticas
             </h4>
             <p className="text-sm text-slate-600 dark:text-ash-400 leading-relaxed">
-              O número frio anestesia. Para compreender a magnitude da perda, deve-se observar a mortalidade proporcional. Quando 90% das vítimas de letalidade violenta são masculinas, o dado deixa de ser um número genérico de segurança pública e se torna uma grave falha sistêmica na proteção sociossanitária da juventude.
+              Quando 90% das vítimas de violência são homens, o dado deixa de ser uma estatística de segurança pública e se torna uma falha grave de proteção social. Número frio anestesia. Proporção revela.
             </p>
           </article>
 

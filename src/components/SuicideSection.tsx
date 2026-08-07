@@ -46,14 +46,14 @@ export function SuicideSection() {
         </h2>
 
         <p id="dado-suicidio" className="text-slate-700 dark:text-ash-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
-          {typeof year === 'string' && year.startsWith('Média') ? `${year}` : `Em ${year}`}, o Brasil registrou uma média anual de <strong className="text-slate-900 dark:text-ash-100 font-bold">{Math.round(total).toLocaleString('pt-BR')} suicídios</strong>. Quase 4 em cada 5 vítimas foram homens.
+          {typeof year === 'string' && year.startsWith('Média') ? `${year}` : `Em ${year}`}, o Brasil registrou uma média anual de <strong className="text-slate-900 dark:text-ash-100 font-bold">{Math.round(total).toLocaleString('pt-BR')} suicídios</strong>. De cada 5 vidas perdidas, 4 eram de homens — uma disparidade que persiste há décadas.
         </p>
 
         {/* Highlight Main Number */}
         <div className="p-8 bg-white dark:bg-carbon-950 rounded-2xl border border-zinc-200 dark:border-carbon-800 mb-10 shadow-sm flex flex-col md:flex-row items-baseline justify-between gap-6">
           <div className="flex flex-col gap-1">
             <span className="text-xs font-mono uppercase tracking-widest text-slate-600 dark:text-ash-400">
-              Participação Masculina
+              De cada 100 suicídios
             </span>
             <span
               className="font-mono font-bold text-crimson-600 dark:text-crimson-400 tabular-nums leading-none"
@@ -132,7 +132,7 @@ export function SuicideSection() {
 
         {/* Prevention Notice */}
         <div className="p-5 bg-zinc-100/70 dark:bg-carbon-800/40 rounded-xl border border-zinc-200/80 dark:border-carbon-700/60 mb-8 flex items-center justify-between gap-4 text-xs font-mono text-slate-600 dark:text-ash-300">
-          <span>Se você ou alguém que você conhece precisa de apoio emocional:</span>
+          <span>Você ou alguém que você conhece está sofrendo? Há apoio gratuito e sigiloso disponível agora.</span>
           <a
             href="https://cvv.org.br/chat/"
             target="_blank"

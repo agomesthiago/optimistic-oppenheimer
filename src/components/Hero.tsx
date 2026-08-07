@@ -33,15 +33,15 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
   const suicideDeaths = getAccumulatedSuicides(yearSeconds);
 
   const displayHeader = isSuicideMode
-    ? 'contador em tempo real — suicídios masculinos'
-    : 'contador em tempo real — todas as causas';
+    ? 'suicídios masculinos em 2024'
+    : 'mortes masculinas este ano';
 
   const displayValue = isSuicideMode
     ? formatDeathCount(suicideDeaths)
     : formatDeathCount(deaths);
 
   const displayTagline = isSuicideMode
-    ? 'suicídios masculinos'
+    ? 'homens. cada um tinha um nome.'
     : 'vidas interrompidas';
 
   // 3.4 aria-live funcional no contador: Região sr-only com cadência estável sem flooding
@@ -157,11 +157,12 @@ export function Hero({ deaths, currentSessionSeconds, currentSessionDeaths, life
         <p id="mortalidade-geral" className="mt-4 max-w-md text-base leading-relaxed text-slate-600 dark:text-ash-300 font-medium">
           {isSuicideMode ? (
             <>
-              Até agora, cerca de{' '}
+              Desde {EPOCH_LABEL},{' '}
               <span className="font-bold text-crimson-600 dark:text-crimson-400 tabular-nums">
                 {formatDeathCount(suicideDeaths)}
               </span>{' '}
-              homens cometeram suicídio no Brasil desde {EPOCH_LABEL} ({ESTIMATED_SUICIDES_PER_DAY} por dia).
+              homens tiraram a própria vida no Brasil — uma média de{' '}
+              <span className="font-bold">{ESTIMATED_SUICIDES_PER_DAY} por dia</span>.
             </>
           ) : null}
         </p>

@@ -13,32 +13,32 @@ import { Abbr } from './Abbr';
 const STEPS = [
   {
     step: '01',
-    title: 'Fontes de Dados Oficiais',
+    title: 'De onde vêm os dados?',
     body: (
       <>
-        Sistema de Informações sobre Mortalidade (<Abbr title="Sistema de Informações sobre Mortalidade">SIM</Abbr>/<Abbr title="Departamento de Informática do Sistema Único de Saúde">DATASUS</Abbr> - Ministério da Saúde via PCDaS/Fiocruz) e Tábuas Completas de Mortalidade do <Abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</Abbr>. Os dados baseiam-se numa média anualizada das séries históricas dos microdados, expurgando anomalias pandêmicas.
+        Do Ministério da Saúde: o Sistema de Informações sobre Mortalidade (<Abbr title="Sistema de Informações sobre Mortalidade">SIM</Abbr>/<Abbr title="Departamento de Informática do Sistema Único de Saúde">DATASUS</Abbr>), acessado via PCDaS/Fiocruz. E das tábuas de mortalidade do <Abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</Abbr>. Usamos médias históricas, descartando os anos atípicos da pandemia.
       </>
     ),
   },
   {
     step: '02',
-    title: 'Cálculo Anualizado Contínuo',
-    body: `${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} óbitos masculinos/ano ÷ ${SECONDS_PER_YEAR.toLocaleString('pt-BR')} s/ano = 1 morte a cada ${Math.round(SECONDS_PER_DEATH)} segundos (${DEATHS_PER_DAY.toLocaleString('pt-BR')}/dia).`,
+    title: 'Como o contador funciona?',
+    body: `${TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')} mortes por ano ÷ ${SECONDS_PER_YEAR.toLocaleString('pt-BR')} segundos = 1 morte a cada ${Math.round(SECONDS_PER_DEATH)} segundos (${DEATHS_PER_DAY.toLocaleString('pt-BR')} por dia). O contador aplica essa taxa sobre o tempo já decorrido no ano.`,
   },
   {
     step: '03',
-    title: 'Taxas Populacionais & Comparação por Sexo',
-    body: `Taxa bruta de mortalidade masculina: ${MALE_MORTALITY_RATE_PER_100K} óbitos por 100 mil homens. Mortalidade por suicídio: ${formatDecimal(SUICIDE_DATA.maleRatePer100k)} por 100k homens (vs ${formatDecimal(SUICIDE_DATA.femaleRatePer100k)} por 100k mulheres, razão ${formatDecimal(SUICIDE_DATA.ratioMaleToFemale)}:1). Longevidade ao nascer: ${formatDecimal(LIFE_EXPECTANCY_DATA.male)} anos (H) vs ${formatDecimal(LIFE_EXPECTANCY_DATA.female)} anos (M).`,
+    title: 'Homens x Mulheres: como comparamos?',
+    body: `Taxa de mortalidade masculina: ${MALE_MORTALITY_RATE_PER_100K} mortes por 100 mil homens. Suicídio: ${formatDecimal(SUICIDE_DATA.maleRatePer100k)} por 100k homens (vs ${formatDecimal(SUICIDE_DATA.femaleRatePer100k)} por 100k mulheres — uma razão de ${formatDecimal(SUICIDE_DATA.ratioMaleToFemale)}:1). Expectativa de vida: ${formatDecimal(LIFE_EXPECTANCY_DATA.male)} anos (H) vs ${formatDecimal(LIFE_EXPECTANCY_DATA.female)} anos (M).`,
   },
   {
     step: '04',
-    title: 'Âncora Temporal',
-    body: `01 jan ${new Date().getFullYear()} 00:00 BRT. O contador reinicia dinamicamente a cada virada de ano sem necessidade de intervenção manual no código.`,
+    title: 'Quando o contador reinicia?',
+    body: `Em 1º de janeiro de cada ano, à meia-noite (horário de Brasília). O reinicio é automático — nenhuma intervenção manual no código é necessária.`,
   },
   {
     step: '05',
-    title: 'Limitações & Transparência',
-    body: 'Os dados refletem o volume médio histórico anualizado. Os microdados oficiais têm latência natural de publicação.',
+    title: 'O que este contador não mede?',
+    body: 'Os números são médias históricas distribuídas uniformemente ao longo do ano. Variações sazonais não são consideradas. Os dados oficiais também têm uma defasagem natural de 1 a 2 anos para publicação.',
   },
 ];
 

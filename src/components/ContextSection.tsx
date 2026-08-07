@@ -28,16 +28,16 @@ export function ContextSection() {
         </h2>
 
         <p className="text-slate-600 dark:text-ash-300 text-base leading-relaxed mb-12">
-          Os dados apresentados baseiam-se em estatísticas consolidadas de órgãos oficiais, como o{' '}
+          Os números desta página vêm de duas fontes do governo federal:{' '}
           {uniqueInstitutions.map((inst, i) => (
             <span key={inst}>
               <strong className="text-slate-900 dark:text-ash-100 font-semibold">{inst}</strong>
               {i < uniqueInstitutions.length - 1 ? ' e o ' : ''}
             </span>
           ))}
-          . O escopo engloba todas as causas de óbito registradas no Brasil, representando uma média histórica de{' '}
-          <strong className="text-slate-900 dark:text-ash-100 font-semibold">{TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')}</strong> mortes masculinas anualmente 
-          (aproximadamente <strong className="text-slate-900 dark:text-ash-100 font-semibold">{DEATHS_PER_DAY.toLocaleString('pt-BR')}</strong> por dia).
+          . Em média, são{' '}
+          <strong className="text-slate-900 dark:text-ash-100 font-semibold">{TOTAL_MALE_DEATHS_PER_YEAR.toLocaleString('pt-BR')}</strong> mortes masculinas por ano —
+          o equivalente a <strong className="text-slate-900 dark:text-ash-100 font-semibold">{DEATHS_PER_DAY.toLocaleString('pt-BR')}</strong> vidas interrompidas todo dia.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">

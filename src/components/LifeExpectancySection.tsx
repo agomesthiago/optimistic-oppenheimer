@@ -19,7 +19,7 @@ export function LifeExpectancySection() {
         </h2>
 
         <p className="text-slate-700 dark:text-ash-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
-          Os homens brasileiros vivem, em média, <strong className="text-crimson-600 dark:text-crimson-400 font-bold">{formatDecimal(gap)} anos a menos</strong> que as mulheres no país.
+          Um homem brasileiro vive, em média, <strong className="text-crimson-600 dark:text-crimson-400 font-bold">{formatDecimal(gap)} anos a menos</strong> do que uma mulher. Esses anos não se perdem por acaso.
         </p>
 
         {/* Big numbers side-by-side comparison */}
